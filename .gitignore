@@ -1,0 +1,9 @@
+#  Gradle & Android Studio
+local.properties
+.gradle
+.idea/
+*.iml
+
+# release apks
+*.apk
+
