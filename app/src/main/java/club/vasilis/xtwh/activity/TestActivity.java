@@ -1,5 +1,6 @@
 package club.vasilis.xtwh.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,12 +32,12 @@ public class TestActivity extends BaseActivity {
                         Intent intent = new Intent(getApplicationContext(), NetWorkBroadcastActivity.class);
                         startActivity(intent);
                         break;
-                    }
+                    }*/
                     case 1: {
-                        Intent intent = new Intent(getApplicationContext(), MyBroadcastSendActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
                         startActivity(intent);
                         break;
-                    }
+                    }/*
                     case 2: {
                         Intent intent = new Intent(getApplicationContext(), LocalBroadcastActivity.class);
                         startActivity(intent);
