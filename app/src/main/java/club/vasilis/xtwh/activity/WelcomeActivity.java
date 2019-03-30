@@ -1,4 +1,4 @@
-package club.vasilis.xtwh;
+package club.vasilis.xtwh.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,8 +11,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 
 
-import club.vasilis.xtwh.activity.GuideActivity;
-import club.vasilis.xtwh.activity.MainActivity;
+import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.utils.CacheUtils;
 
 public class WelcomeActivity extends Activity {
