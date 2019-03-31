@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import club.vasilis.xtwh.ActivityCollector;
+import club.vasilis.xtwh.domain.User;
 
 public class BaseActivity extends AppCompatActivity {
+
+    public static User myUser = new User("demo","demo","demo");
+
     private ForceOfflineReceiver receiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
