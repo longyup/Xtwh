@@ -12,8 +12,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
+import club.vasilis.xtwh.domain.Phrase;
 import club.vasilis.xtwh.domain.User;
 import club.vasilis.xtwh.utils.Util;
 
@@ -49,7 +51,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Community community = communityList.get(i);
+        final Community community = communityList.get(i);
         //获取发表动态的用户
         User user = Util.getUser(community.getUUID(), userList);
         // 头像应该从网上下载
@@ -62,9 +64,23 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         }else{
             viewHolder.ivPhrase.setBackgroundResource(R.drawable.unphrase);
         }
-        viewHolder.tvPhrase.setText(community.getPhraseNum());
+        //viewHolder.tvPhrase.setText(community.isPhrase() ? community.getPhraseNum() :"点赞");
 
-
+        viewHolder.phrase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String year = Util.getNowYear();
+                String date = Util.getNowDate();
+                String time = Util.getNowTime();
+                StringBuilder sb = new StringBuilder();
+                sb.append(year)
+                        .append("-")
+                        .append(date)
+                        .append(" ")
+                        .append(time);
+                Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getUuid(), community.getId());
+            }
+        });
     }
 
 
@@ -72,6 +88,14 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     @Override
     public int getItemCount() {
         return communityList.size();
+    }
+    public void update(List<Community> communityList) {
+        this.communityList = communityList;
+        notifyDataSetChanged();
+        // 重新获取数据
+        /*communityList
+        size = studentList.size();
+        notifyDataSetChanged();*/
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -96,9 +120,6 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             comment = itemView.findViewById(R.id.community_item_comment);
             tvPhrase = itemView.findViewById(R.id.community_item_tv_phrase);
             ivPhrase = itemView.findViewById(R.id.community_item_iv_phrase);
-
-
-
         }
     }
 }
