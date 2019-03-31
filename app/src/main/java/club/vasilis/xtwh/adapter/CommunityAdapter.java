@@ -62,7 +62,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         }else{
             viewHolder.ivPhrase.setBackgroundResource(R.drawable.unphrase);
         }
-        viewHolder.tvPhrase.setText(community.getPhraseNum());
+        //viewHolder.tvPhrase.setText(community.getPhraseNum());
 
 
     }

@@ -1,12 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_msg_all_content_person"
+    <LinearLayout
+        android:id="@+id/my_msg_personage_account_msg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/msg_account"
+            android:layout_marginStart="20dp" />
+        <LinearLayout
+            android:id="@+id/my_msg_personage_account_msg_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/my_msg_personage_account_content"
+                android:gravity="center_vertical"
+                android:layout_width="400dp"
+                android:layout_weight="5"
+                android:layout_height="60dp"
+                android:text="@string/account_id"
+                android:textSize="20sp"
+                android:layout_marginLeft="20sp"
+                android:textColor="#000"
+                android:layout_marginStart="20sp" />
+            <TextView
+                android:id="@+id/my_msg_personage_account_id"
+                android:layout_width="120dp"
+                android:layout_weight="1"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:text="2017002442"
+                android:layout_marginEnd="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#DBDBDB"/>
+
+    <LinearLayout
+        android:id="@+id/my_msg_personage_user_msg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_msg_personage_user_rv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#DBDBDB"/>
+
+    <LinearLayout
+        android:id="@+id/my_msg_personage_login"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:gravity="center"
+            android:background="#ff0000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/exit_account"
+            android:textSize="30sp"
+            android:textColor="#fff"/>
+    </LinearLayout>
 </LinearLayout>
