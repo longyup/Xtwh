@@ -11,15 +11,20 @@ import club.vasilis.xtwh.domain.User;
  * @date 2019/3/29 * 13:04
  */
 public class Util {
-    public static int getNowDate(){
+    public static String getNowDate(){
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMdd");
-        return Integer.parseInt(simpleDateFormat.format(date));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd");
+        return simpleDateFormat.format(date);
     }
-    public static int getNowYear(){
+    public static String getNowYear(){
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
-        return Integer.parseInt(simpleDateFormat.format(date));
+        return simpleDateFormat.format(date);
+    }
+    public static String getNowTime(){
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+        return simpleDateFormat.format(date);
     }
     public static User getUser(String uuid,List<User> userList){
         for (User user : userList) {
