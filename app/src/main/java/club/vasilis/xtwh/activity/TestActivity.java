@@ -15,7 +15,7 @@ import club.vasilis.xtwh.R;
  * 界面测试时均加入此集合后进行单独测试。
  */
 public class TestActivity extends BaseActivity {
-    private String[] name = {"首页", "社区","活动","个人信息"};
+    private String[] name = {"首页", "社区","活动","组织","个人信息"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,21 +28,26 @@ public class TestActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
-                   /* case 0: {
-                        Intent intent = new Intent(getApplicationContext(), NetWorkBroadcastActivity.class);
+                   case 0: {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         break;
-                    }*/
+                    }
                     case 1: {
                         Intent intent = new Intent(getApplicationContext(), CommunityActivity.class);
                         startActivity(intent);
                         break;
-                    }/*
-                    case 2: {
-                        Intent intent = new Intent(getApplicationContext(), LocalBroadcastActivity.class);
+                    }
+                    case 2:{
+                        Intent intent = new Intent(getApplicationContext(), RecruitActivity.class);
                         startActivity(intent);
                         break;
-                    }*/
+                    }
+                    case 3: {
+                        Intent intent = new Intent(getApplicationContext(), OrganizationActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
                     default:
                         break;
                 }

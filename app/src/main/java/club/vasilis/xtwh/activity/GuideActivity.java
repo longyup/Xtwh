@@ -1,12 +1,11 @@
 package club.vasilis.xtwh.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -15,13 +14,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
 
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.utils.CacheUtils;
 import club.vasilis.xtwh.utils.DensityUtil;
-
-
-import java.util.ArrayList;
 
 public class GuideActivity extends AppCompatActivity {
 
@@ -52,7 +49,7 @@ public class GuideActivity extends AppCompatActivity {
                 //1.保存曾经进入过的主页面
                 CacheUtils.putBoolean(GuideActivity.this,WelcomeActivity.START_MAIN,true);
                 //2.跳转到主页面
-                Intent intent = new Intent(GuideActivity.this,MainActivity.class);
+                Intent intent = new Intent(GuideActivity.this,TestActivity.class);
                 startActivity(intent);
                 //3.关闭引导页
                 finish();

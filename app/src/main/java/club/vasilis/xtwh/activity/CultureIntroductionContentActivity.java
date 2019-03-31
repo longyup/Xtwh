@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import club.vasilis.xtwh.Fragment.CultureIntroductionContentFragment;
+import club.vasilis.xtwh.fragment.CultureIntroductionContentFragment;
 import club.vasilis.xtwh.R;
 
 public class CultureIntroductionContentActivity extends AppCompatActivity {
@@ -20,7 +20,6 @@ public class CultureIntroductionContentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //设置内容布局
         setContentView(R.layout.activity_culture_introduction_content);
         //用string来获取传入的标题
