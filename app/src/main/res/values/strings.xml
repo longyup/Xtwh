@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">乡土文化教育</string>
+    <string name="app_name">Xtwh</string>
+    <string name="demo">Demo</string>
+    <string name="account_id">账号id</string>
+    <string name="msg_account">账号信息</string>
+    <string name="exit_account">退出当前账号</string>
 </resources>

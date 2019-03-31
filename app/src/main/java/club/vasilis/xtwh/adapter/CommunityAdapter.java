@@ -120,6 +120,9 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             comment = itemView.findViewById(R.id.community_item_comment);
             tvPhrase = itemView.findViewById(R.id.community_item_tv_phrase);
             ivPhrase = itemView.findViewById(R.id.community_item_iv_phrase);
+
+
+
         }
     }
 }
