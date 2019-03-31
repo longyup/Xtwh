@@ -5,18 +5,27 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import club.vasilis.xtwh.Fragment.CultureIntroductionTitleFragment;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.domain.CultureIntroduction;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -27,19 +36,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout ll_joinClub;
     private LinearLayout ll_aroundThePublic;
     private LinearLayout ll_cultureIntroduction;
-    private LinearLayout ll_introduction;
+
+
+    private CultureIntroductionTitleFragment cFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        cFragment = (CultureIntroductionTitleFragment) getSupportFragmentManager().findFragmentById(R.id.culture_introduction_title_fragment);
+
+
+
         vp_main = findViewById(R.id.vp_main);
         ll_creatAcity = findViewById(R.id.ll_creatAcity);
         ll_joinClub = findViewById(R.id.ll_joinClub);
         ll_aroundThePublic = findViewById(R.id.ll_aroundThePublic);
         ll_cultureIntroduction = findViewById(R.id.ll_cultureIntroduction);
-        ll_introduction = findViewById(R.id.ll_introduction);
         ll_creatAcity.setOnClickListener(this);
         ll_joinClub.setOnClickListener(this);
         ll_aroundThePublic.setOnClickListener(this);
@@ -52,9 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //准备数据
         int[] ids = new int[]{
-                R.drawable.guide_1,
-                R.drawable.guide_2,
-                R.drawable.guide_3
+                R.drawable.main1,
+                R.drawable.main2,
+                R.drawable.main3
         };
 
         imageViews = new ArrayList<>();
@@ -75,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
     @Override
     public void onClick(View v) {
             switch (v.getId()){
@@ -88,7 +105,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "身边公益", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.ll_cultureIntroduction:
-                    ll_introduction.setVisibility(View.VISIBLE);
                     Toast.makeText(this, "文化介绍", Toast.LENGTH_SHORT).show();
                     break;
             }
@@ -151,5 +167,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mHandler.sendEmptyMessageDelayed(0, 1000*2);    //第一个参数随便写；第二个参数表示每两秒刷新一次
         }
     };
+
 
 }
