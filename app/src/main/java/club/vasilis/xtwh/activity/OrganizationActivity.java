@@ -15,13 +15,11 @@ import java.util.List;
 
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.AddOrganizationAdapter;
+import club.vasilis.xtwh.domain.Organization;
 
-public class OrganizationActivity extends AppCompatActivity {
+public class OrganizationActivity extends BaseActivity{
     private RecyclerView recyclerView;
-    private List<String> mDatas;
-    private List<String> regionDatas;
-    private List<String> HourDatas;
-    private List<String> PeoplenumberDatas;
+    private List<Organization> Datas = new ArrayList<>();
     private AddOrganizationAdapter recycleAdapter;
     private ImageView back;
 
@@ -41,14 +39,9 @@ public class OrganizationActivity extends AppCompatActivity {
 
             }
         });
-
+        initdata();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_add_activity );
-
-        initData();
-        initRegionData();
-        initHourData();
-        initpeoplenumberData();
-        recycleAdapter= new AddOrganizationAdapter(this,mDatas,regionDatas,HourDatas,PeoplenumberDatas);
+        recycleAdapter= new AddOrganizationAdapter(this,Datas);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         //设置布局管理器
         recyclerView.setLayoutManager(layoutManager);
@@ -61,34 +54,12 @@ public class OrganizationActivity extends AppCompatActivity {
 
     }
 
-    private void initData() {
-        mDatas = new ArrayList<String>();
-        for ( int i=0; i < 40; i++) {
-            mDatas.add( "志愿余杭");
+    private void initdata(){
+        Organization organization = new Organization(0,R.drawable.pic,"志愿余杭","浙江省， 杭州市， 富阳区","信用时数","组织人数");
+
+        for (int i=0;i<20;i++){
+            Datas.add(organization);
         }
     }
 
-    private void initRegionData(){
-        regionDatas = new ArrayList<String>();
-
-        for ( int i=0; i < 40; i++) {
-            regionDatas.add( "浙江省， 杭州市， 富阳区");
-        }
-    }
-
-    private void initHourData(){
-        HourDatas = new ArrayList<String>();
-
-        for ( int i=0; i < 40; i++) {
-            HourDatas.add( "信用时数");
-        }
-    }
-
-    private void initpeoplenumberData(){
-        PeoplenumberDatas = new ArrayList<String>();
-
-        for ( int i=0; i < 40; i++) {
-            PeoplenumberDatas.add( "组织人数");
-        }
-    }
 }

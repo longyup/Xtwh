@@ -1,7 +1,6 @@
 package club.vasilis.xtwh.adapter;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -11,52 +10,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.domain.Organization;
+import club.vasilis.xtwh.domain.Recruit;
 
-public class AddOrganizationAdapter extends RecyclerView.Adapter<AddOrganizationAdapter.ViewHolder> {
+public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivityAdapter.ViewHolder> {
 
-
-    private List<Organization> mDatas;
+    private List<Recruit> Datas;
+//    private List<String> distanceDatas;
+//    private List<String> regionActivityDatas;
+//    private List<String> numberDatas;
     private Context mContext;
     private LayoutInflater inflater;
 
-    public AddOrganizationAdapter(Context context, List<Organization> datas){
-        this. mContext=context;
-        this. mDatas=datas;
+    public RecruitActivityAdapter(List<Recruit> Datas, Context mContext) {
+        this.Datas = Datas;
+//        this.distanceDatas = distanceDatas;
+//        this.regionActivityDatas = regionActivityDatas;
+//        this.numberDatas = numberDatas;
+        this.mContext = mContext;
         inflater=LayoutInflater. from(mContext);
-    }
-
-    @Override
-    public int getItemCount() {
-
-        return mDatas.size();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.add_activity_item,viewGroup,false);
-        ViewHolder holder= new ViewHolder(view);
-
-        //点击事件
-
+        View view = LayoutInflater.from(mContext).inflate(R.layout.recruit_activity_item,viewGroup,false);
+        ViewHolder holder = new ViewHolder(view);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showNormalDialog();
             }
         });
-
-
-
-
-
-
         return holder;
     }
 
@@ -69,7 +57,7 @@ public class AddOrganizationAdapter extends RecyclerView.Adapter<AddOrganization
         final AlertDialog.Builder normalDialog =
                 new AlertDialog.Builder(mContext);
         normalDialog.setIcon(R.drawable.back);
-        normalDialog.setTitle("志愿余杭");
+        normalDialog.setTitle("志愿活动");
         normalDialog.setMessage("是否查看？");
         normalDialog.setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
@@ -91,32 +79,36 @@ public class AddOrganizationAdapter extends RecyclerView.Adapter<AddOrganization
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Organization organization = mDatas.get(i);
+    Recruit recruit = Datas.get(i);
+    viewHolder.titletv.setText(recruit.getTitleTv());
+    viewHolder.regiontv.setText(recruit.getRegionTv());
+    viewHolder.distancetv.setText(recruit.getDistanceTv());
+    viewHolder.numbertv.setText(recruit.getNumberTv());
+    viewHolder.resuritIv.setImageResource(recruit.getImgId());
 
 
-        viewHolder.Titletv.setText( organization.getAddTitleTv());
-        viewHolder.addIv.setImageResource(organization.getImgId());
-        viewHolder.regiontv.setText(organization.getAddRegionTv());
-        viewHolder.hourtv.setText(organization.getAddHourTv());
-        viewHolder.peoplenumbertv.setText(organization.getAddnumberTv());
     }
 
-
+    @Override
+    public int getItemCount() {
+        return Datas.size();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView Titletv;
-        ImageView addIv;
+        ImageView resuritIv;
+        TextView titletv;
+        TextView distancetv;
         TextView regiontv;
-        TextView hourtv;
-        TextView peoplenumbertv;
+        TextView numbertv;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Titletv = itemView.findViewById(R.id.add_activity_title_tv);
-            addIv = itemView.findViewById(R.id.add_activity_iv);
-            regiontv = itemView.findViewById(R.id.add_activity_regiontv);
-            hourtv = itemView.findViewById(R.id.add_activity_hourtv);
-            peoplenumbertv = itemView.findViewById(R.id.add_activity_peplenumbertv);
+            titletv = itemView.findViewById(R.id.recruit_title);
+            distancetv = itemView.findViewById(R.id.recurit_distance_tv);
+            regiontv = itemView.findViewById(R.id.recurit_region_tv);
+            numbertv = itemView.findViewById(R.id.recurit_peoplenumber_tv);
+            resuritIv = itemView.findViewById(R.id.recurit_iv);
         }
     }
 }
