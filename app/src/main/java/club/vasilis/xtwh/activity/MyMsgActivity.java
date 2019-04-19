@@ -24,29 +24,29 @@ public class MyMsgActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_msg);
 
-        //进入个人信息更改界面
-        findViewById(R.id.my_msg_person).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MyMsgActivity.this, MyMsgPersonageActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //其他内容
-        initOther();//初始化其他内容数据
-        RecyclerView rv_other = findViewById(R.id.my_msg_other_rv_content);
-        rv_other.setLayoutManager(new LinearLayoutManager(this));
-        MyMsgOtherAdapter otherAdapter = new MyMsgOtherAdapter(otherList);
-        rv_other.setAdapter(otherAdapter);
+//        //进入个人信息更改界面
+//        findViewById(R.id.my_msg_person).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MyMsgActivity.this, MyMsgPersonageActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        //其他内容
+//        initOther();//初始化其他内容数据
+//        RecyclerView rv_other = findViewById(R.id.my_msg_other_rv_content);
+//        rv_other.setLayoutManager(new LinearLayoutManager(this));
+//        MyMsgOtherAdapter otherAdapter = new MyMsgOtherAdapter(otherList);
+//        rv_other.setAdapter(otherAdapter);
     }
 
     //初始化其他内容
-    private void initOther() {
-        int len = otherName.length;
-        for (int i = 0; i < len; i++){
-            MyMsgOther other = new MyMsgOther(otherName[i],R.drawable.main_listitem_arrow);
-            otherList.add(other);
-        }
-    }
+//    private void initOther() {
+//        int len = otherName.length;
+//        for (int i = 0; i < len; i++){
+//            MyMsgOther other = new MyMsgOther(otherName[i],R.drawable.main_listitem_arrow);
+//            otherList.add(other);
+//        }
+//    }
 }

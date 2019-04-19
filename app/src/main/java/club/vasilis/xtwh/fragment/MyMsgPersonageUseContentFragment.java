@@ -18,6 +18,9 @@ import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.adapter.MyMsgPersonageUserAdapter;
 import club.vasilis.xtwh.domain.MyMsgUserContent;
 
+/*
+我的信息-->个人基本信息
+ */
 public class MyMsgPersonageUseContentFragment extends Fragment {
 
     private String[] userContextName = {"头像","昵称","性别","手机号","电子邮件","生日","个性签名","个人简介","常驻居住地"};

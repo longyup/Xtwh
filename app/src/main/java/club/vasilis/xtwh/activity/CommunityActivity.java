@@ -91,7 +91,7 @@ public class CommunityActivity extends BaseActivity {
         });
 
     }
-    private void testInit() {
+    private void testInit(){
 
         User admin = new User("admin", "admin", "admin");
         userList.add(admin);
