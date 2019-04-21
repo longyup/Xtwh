@@ -103,8 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, "活动招募", Toast.LENGTH_SHORT).show();
                     break ;
                 case R.id.ll_joinClub:
-                    Intent show = new Intent(this,OrganizationFragment.class);
-                    startActivity(show);
+                  
 
 
 //                    Toast.makeText(this, "加入组织", Toast.LENGTH_SHORT).show();
