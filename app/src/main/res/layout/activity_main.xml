@@ -102,12 +102,21 @@
 
 
 
-            <fragment
-                android:id="@+id/culture_introduction_title_fragment"
-                android:name="club.vasilis.xtwh.Fragment.CultureIntroductionTitleFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
+            <!--<fragment-->
+                <!--android:id="@+id/culture_introduction_title_fragment"-->
+                <!--android:name="club.vasilis.xtwh.Fragment.CultureIntroductionTitleFragment"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
+            <!--<fragment-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/organization_add_fragment"-->
+                <!--android:name="club.vasilis.xtwh.activity.OrganizationFragment"/>-->
+            <!--<fragment-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:id="@+id/recuit_fragment"-->
+                <!--android:name="club.vasilis.xtwh.activity.RecruitFragment"/>-->
 
         </LinearLayout>
     </ScrollView>

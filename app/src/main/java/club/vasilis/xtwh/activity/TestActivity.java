@@ -39,12 +39,12 @@ public class TestActivity extends BaseActivity {
                         break;
                     }
                     case 2:{
-                        Intent intent = new Intent(getApplicationContext(), RecruitActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), RecruitFragment.class);
                         startActivity(intent);
                         break;
                     }
                     case 3: {
-                        Intent intent = new Intent(getApplicationContext(), OrganizationActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), OrganizationFragment.class);
                         startActivity(intent);
                         break;
                     }

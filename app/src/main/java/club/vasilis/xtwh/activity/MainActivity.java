@@ -1,10 +1,13 @@
 package club.vasilis.xtwh.activity;
 
+import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -15,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,8 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        cFragment = (CultureIntroductionTitleFragment) getSupportFragmentManager().findFragmentById(R.id.culture_introduction_title_fragment);
-
+       // cFragment = (CultureIntroductionTitleFragment) getSupportFragmentManager().findFragmentById(R.id.culture_introduction_title_fragment);
 
 
         vp_main = findViewById(R.id.vp_main);
@@ -96,10 +99,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
             switch (v.getId()){
                 case R.id.ll_creatAcity:
+
                     Toast.makeText(this, "活动招募", Toast.LENGTH_SHORT).show();
                     break ;
                 case R.id.ll_joinClub:
-                    Toast.makeText(this, "加入组织", Toast.LENGTH_SHORT).show();
+                    Intent show = new Intent(this,OrganizationFragment.class);
+                    startActivity(show);
+
+
+//                    Toast.makeText(this, "加入组织", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.ll_aroundThePublic:
                     Toast.makeText(this, "身边公益", Toast.LENGTH_SHORT).show();
