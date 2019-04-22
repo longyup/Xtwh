@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -30,22 +29,17 @@ import java.util.List;
 
 import club.vasilis.xtwh.Fragment.CultureIntroductionTitleFragment;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.adapter.MyFragmentPagerAdapter;
 import club.vasilis.xtwh.domain.CultureIntroduction;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ViewPager vp_main;
     private ArrayList<ImageView> imageViews;
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
-    private MyFragmentPagerAdapter myFragmentPagerAdapter;
-
-    private TabLayout.Tab one;
-    private TabLayout.Tab two;
-    private TabLayout.Tab three;
-    private TabLayout.Tab four;
+    private LinearLayout ll_creatAcity;
+    private LinearLayout ll_joinClub;
+    private LinearLayout ll_aroundThePublic;
+    private LinearLayout ll_cultureIntroduction;
 
 
     private CultureIntroductionTitleFragment cFragment;
@@ -54,19 +48,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();//隐藏掉整个ActionBar
-        setContentView(R.layout.activity_main);
-
-        //初始化视图
-        initViews();
 
 
-        //cFragment = (CultureIntroductionTitleFragment) getSupportFragmentManager().findFragmentById(R.id.culture_introduction_title_fragment);
+
+        cFragment = (CultureIntroductionTitleFragment) getSupportFragmentManager().findFragmentById(R.id.culture_introduction_content_fragment);
 
 
 
         vp_main = findViewById(R.id.vp_main);
-
+        ll_creatAcity = findViewById(R.id.ll_creatAcity);
+        ll_joinClub = findViewById(R.id.ll_joinClub);
+        ll_aroundThePublic = findViewById(R.id.ll_aroundThePublic);
+        ll_cultureIntroduction = findViewById(R.id.ll_cultureIntroduction);
+        ll_creatAcity.setOnClickListener(this);
+        ll_joinClub.setOnClickListener(this);
+        ll_aroundThePublic.setOnClickListener(this);
+        ll_cultureIntroduction.setOnClickListener(this);
 
 
 
@@ -97,35 +94,26 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
-    private void initViews() {
-
-        //使用适配器将ViewPager与Fragment绑定在一起
-        mViewPager= (ViewPager) findViewById(R.id.viewPager);
-        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(myFragmentPagerAdapter);
-
-        //将TabLayout与ViewPager绑定在一起
-        mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        mTabLayout.setupWithViewPager(mViewPager);
-
-        //指定Tab的位置
-        one = mTabLayout.getTabAt(0);
-        two = mTabLayout.getTabAt(1);
-        three = mTabLayout.getTabAt(2);
-        four = mTabLayout.getTabAt(3);
-
-        //设置Tab的图标，假如不需要则把下面的代码删去
-        one.setIcon(R.mipmap.ic_launcher);
-        two.setIcon(R.mipmap.ic_launcher);
-        three.setIcon(R.mipmap.ic_launcher);
-        four.setIcon(R.mipmap.ic_launcher);
 
 
+    @Override
+    public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.ll_creatAcity:
 
+                    Toast.makeText(this, "活动招募", Toast.LENGTH_SHORT).show();
+                    break ;
+                case R.id.ll_joinClub:
+                    Toast.makeText(this, "加入组织", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.ll_aroundThePublic:
+                    Toast.makeText(this, "身边公益", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.ll_cultureIntroduction:
+                    Toast.makeText(this, "文化介绍", Toast.LENGTH_SHORT).show();
+                    break;
+            }
     }
-
-
-
 
     //vp_main适配器
     class MyPagerAdapter extends PagerAdapter {
