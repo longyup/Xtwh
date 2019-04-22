@@ -94,11 +94,11 @@ public class AddOrganizationAdapter extends RecyclerView.Adapter<AddOrganization
         Organization organization = mDatas.get(i);
 
 
-        viewHolder.Titletv.setText( organization.getAddTitleTv());
+        viewHolder.Titletv.setText( organization.getTitle());
         viewHolder.addIv.setImageResource(organization.getImgId());
-        viewHolder.regiontv.setText(organization.getAddRegionTv());
-        viewHolder.hourtv.setText(organization.getAddHourTv());
-        viewHolder.peoplenumbertv.setText(organization.getAddnumberTv());
+        viewHolder.regiontv.setText(organization.getRegion());
+        viewHolder.hourtv.setText(organization.getHour());
+        viewHolder.peoplenumbertv.setText(organization.getNumber());
     }
 
 

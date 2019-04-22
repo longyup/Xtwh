@@ -4,21 +4,21 @@ public class Organization {
 
     private int id;
     private int imgId;
-    private String addTitleTv;
-    private String addRegionTv;
-    private String addHourTv;
-    private String addnumberTv;
+    private String title;
+    private String region;
+    private String hour;
+    private String number;
 
     public Organization() {
     }
 
-    public Organization(int id, int imgId, String addTitleTv, String addRegionTv, String addHourTv, String addnumberTv) {
+    public Organization(int id, int imgId, String title, String region, String hour, String number) {
         this.id = id;
         this.imgId = imgId;
-        this.addTitleTv = addTitleTv;
-        this.addRegionTv = addRegionTv;
-        this.addHourTv = addHourTv;
-        this.addnumberTv = addnumberTv;
+        this.title = title;
+        this.region = region;
+        this.hour = hour;
+        this.number = number;
     }
 
     public int getId() {
@@ -37,36 +37,36 @@ public class Organization {
         this.imgId = imgId;
     }
 
-    public String getAddTitleTv() {
-        return addTitleTv;
+    public String getTitle() {
+        return title;
     }
 
-    public void setAddTitleTv(String addTitleTv) {
-        this.addTitleTv = addTitleTv;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getAddRegionTv() {
-        return addRegionTv;
+    public String getRegion() {
+        return region;
     }
 
-    public void setAddRegionTv(String addRegionTv) {
-        this.addRegionTv = addRegionTv;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public String getAddHourTv() {
-        return addHourTv;
+    public String getHour() {
+        return hour;
     }
 
-    public void setAddHourTv(String addHourTv) {
-        this.addHourTv = addHourTv;
+    public void setHour(String hour) {
+        this.hour = hour;
     }
 
-    public String getAddnumberTv() {
-        return addnumberTv;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAddnumberTv(String addnumberTv) {
-        this.addnumberTv = addnumberTv;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     @Override
@@ -74,10 +74,10 @@ public class Organization {
         return "Organization{" +
                 "id=" + id +
                 ", imgId=" + imgId +
-                ", addTitleTv='" + addTitleTv + '\'' +
-                ", addRegionTv='" + addRegionTv + '\'' +
-                ", addHourTv='" + addHourTv + '\'' +
-                ", addnumberTv='" + addnumberTv + '\'' +
+                ", title='" + title + '\'' +
+                ", region='" + region + '\'' +
+                ", hour='" + hour + '\'' +
+                ", number='" + number + '\'' +
                 '}';
     }
 }

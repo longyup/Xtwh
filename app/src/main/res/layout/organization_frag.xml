@@ -12,15 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="#35e7a3">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:id="@+id/btn_add_activity_back"
-            android:layout_marginRight="130dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/back"/>
+        android:gravity="center"
+        android:background="#A0A5A3">
+
 
 
         <TextView

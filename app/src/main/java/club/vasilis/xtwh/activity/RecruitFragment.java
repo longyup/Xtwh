@@ -43,16 +43,6 @@ public class RecruitFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recuit_frag,container,false);
         recuritRecyclerView = view.findViewById(R.id.recycler_view_Recruit_activity);
-        recuritBack = view.findViewById(R.id.btn_recruit_back);
-        recuritBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //返回点击
-
-
-            }
-        });
 
         initDatas();
         recruitActivityAdapter= new RecruitActivityAdapter(Datas,getContext());

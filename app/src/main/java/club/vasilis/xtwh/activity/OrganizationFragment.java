@@ -39,17 +39,7 @@ public class OrganizationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.organization_frag,container,false);
 
-        back = view.findViewById(R.id.btn_add_activity_back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                //返回按键
-
-
-
-            }
-        });
         initdata();
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_add_activity );
         recycleAdapter= new AddOrganizationAdapter(getContext(),Datas);

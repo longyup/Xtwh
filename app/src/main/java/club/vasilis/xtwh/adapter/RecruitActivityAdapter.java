@@ -80,10 +80,10 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
     Recruit recruit = Datas.get(i);
-    viewHolder.titletv.setText(recruit.getTitleTv());
-    viewHolder.regiontv.setText(recruit.getRegionTv());
-    viewHolder.distancetv.setText(recruit.getDistanceTv());
-    viewHolder.numbertv.setText(recruit.getNumberTv());
+    viewHolder.titletv.setText(recruit.getTitle());
+    viewHolder.regiontv.setText(recruit.getRegion());
+    viewHolder.distancetv.setText(recruit.getDistance());
+    viewHolder.numbertv.setText(recruit.getNumber());
     viewHolder.resuritIv.setImageResource(recruit.getImgId());
 
 

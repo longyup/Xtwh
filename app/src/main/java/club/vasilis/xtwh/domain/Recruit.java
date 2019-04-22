@@ -4,21 +4,21 @@ public class Recruit {
 
     private int id;
     private int ImgId;
-    private String titleTv;
-    private String distanceTv;
-    private String regionTv;
-    private String numberTv;
+    private String title;
+    private String distance;
+    private String region;
+    private String number;
 
     public Recruit() {
     }
 
-    public Recruit(int id, int imgId, String titleTv, String distanceTv, String regionTv, String numberTv) {
+    public Recruit(int id, int imgId, String title, String distance, String region, String number) {
         this.id = id;
         ImgId = imgId;
-        this.titleTv = titleTv;
-        this.distanceTv = distanceTv;
-        this.regionTv = regionTv;
-        this.numberTv = numberTv;
+        this.title = title;
+        this.distance = distance;
+        this.region = region;
+        this.number = number;
     }
 
     public int getId() {
@@ -37,36 +37,36 @@ public class Recruit {
         ImgId = imgId;
     }
 
-    public String getTitleTv() {
-        return titleTv;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitleTv(String titleTv) {
-        this.titleTv = titleTv;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDistanceTv() {
-        return distanceTv;
+    public String getDistance() {
+        return distance;
     }
 
-    public void setDistanceTv(String distanceTv) {
-        this.distanceTv = distanceTv;
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 
-    public String getRegionTv() {
-        return regionTv;
+    public String getRegion() {
+        return region;
     }
 
-    public void setRegionTv(String regionTv) {
-        this.regionTv = regionTv;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
-    public String getNumberTv() {
-        return numberTv;
+    public String getNumber() {
+        return number;
     }
 
-    public void setNumberTv(String numberTv) {
-        this.numberTv = numberTv;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     @Override
@@ -74,10 +74,10 @@ public class Recruit {
         return "Recruit{" +
                 "id=" + id +
                 ", ImgId=" + ImgId +
-                ", titleTv='" + titleTv + '\'' +
-                ", distanceTv='" + distanceTv + '\'' +
-                ", regionTv='" + regionTv + '\'' +
-                ", numberTv='" + numberTv + '\'' +
+                ", title='" + title + '\'' +
+                ", distance='" + distance + '\'' +
+                ", region='" + region + '\'' +
+                ", number='" + number + '\'' +
                 '}';
     }
 }
