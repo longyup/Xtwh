@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +42,20 @@ public class CommunityFragment extends Fragment {
 
     private Button btnSendCommunity;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     private CommunityAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community,container,false);
-        // 初始化数据
+        // 初始化数据,后期会换成网络
         testInit();
+        // 对每项的动态进行判断是否点赞，放在json数据解析后
+        setIsPhrase();
         // 初始化控件
-        RecyclerView recyclerView = view.findViewById(R.id.community_rv);
+
+        final RecyclerView recyclerView = view.findViewById(R.id.community_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         // 评论功能暂未实现
@@ -65,7 +72,45 @@ public class CommunityFragment extends Fragment {
             }
         });
 
+
+        swipeRefreshLayout = view.findViewById(R.id.community_swipe_refresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
+
         return view;
+    }
+
+    /**
+     * 下拉刷新
+     */
+    private void refresh(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //应该进行网络请求
+                    Thread.sleep(200);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //回到主线程刷新
+                swipeRefreshLayout.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        testInit();
+                        adapter.notifyDataSetChanged();
+                        Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+
+            }
+        }).start();
     }
     private void showDialog(){
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_send_community,null,false);
@@ -102,7 +147,7 @@ public class CommunityFragment extends Fragment {
 
     }
     private void testInit(){
-
+        communityList.clear();
         User admin = new User("admin", "admin", "admin");
         userList.add(admin);
         userList.add(BaseActivity.myUser);

@@ -50,8 +50,9 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Community community = communityList.get(i);
+
         //获取发表动态的用户
         User user = Util.getUser(community.getUUID(), userList);
         // 头像应该从网上下载
@@ -64,21 +65,41 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         }else{
             viewHolder.ivPhrase.setBackgroundResource(R.drawable.unphrase);
         }
-        //viewHolder.tvPhrase.setText(community.isPhrase() ? community.getPhraseNum() :"点赞");
+
+        if (community.isPhrase()){
+            viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
+            viewHolder.tvPhrase.setText(community.getPhraseNum());
+        }else{
+            viewHolder.ivPhrase.setImageResource(R.drawable.unphrase);
+            viewHolder.tvPhrase.setText("点赞");
+        }
+
 
         viewHolder.phrase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String year = Util.getNowYear();
-                String date = Util.getNowDate();
-                String time = Util.getNowTime();
-                StringBuilder sb = new StringBuilder();
-                sb.append(year)
-                        .append("-")
-                        .append(date)
-                        .append(" ")
-                        .append(time);
-                Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getUuid(), community.getId());
+                if (community.isPhrase()){
+                    //从表中删除
+                    viewHolder.ivPhrase.setImageResource(R.drawable.unphrase);
+                    viewHolder.tvPhrase.setText("点赞");
+                    community.setPhrase(false);
+
+                }else {
+                    String year = Util.getNowYear();
+                    String date = Util.getNowDate();
+                    String time = Util.getNowTime();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(year)
+                            .append("-")
+                            .append(date)
+                            .append(" ")
+                            .append(time);
+                    Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getUuid(), community.getId());
+                    viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
+                    viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()+1));
+                    community.setPhrase(true);
+
+                }
             }
         });
     }
