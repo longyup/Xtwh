@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.Fragment;
+package club.vasilis.xtwh.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import club.vasilis.xtwh.R;
 
+/**
+ * 文化详情页
+ */
 public class CultureIntroductionContentFragment extends Fragment {
 
     private View view;

@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.Fragment;
+package club.vasilis.xtwh.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,9 +24,11 @@ import java.util.Random;
 
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.activity.CultureIntroductionContentActivity;
-import club.vasilis.xtwh.activity.MainActivity;
 import club.vasilis.xtwh.domain.CultureIntroduction;
 
+/**
+ * 首页
+ */
 public class CultureIntroductionTitleFragment extends Fragment implements View.OnClickListener {
 
     private ViewPager vp_main;
@@ -45,9 +46,6 @@ public class CultureIntroductionTitleFragment extends Fragment implements View.O
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
-
         //垂直滚动
         View view = inflater.inflate(R.layout.culture_introduction_title_frag, container, false);
         cultureIntroductionTitleRecyclerView = view.findViewById(R.id.rv_culture_introduction_title);

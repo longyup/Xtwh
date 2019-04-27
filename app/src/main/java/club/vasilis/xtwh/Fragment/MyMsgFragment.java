@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.MyMsgActivity;
 import club.vasilis.xtwh.activity.MyMsgPersonageActivity;
 import club.vasilis.xtwh.adapter.MyMsgOtherAdapter;
 import club.vasilis.xtwh.domain.MyMsgOther;
