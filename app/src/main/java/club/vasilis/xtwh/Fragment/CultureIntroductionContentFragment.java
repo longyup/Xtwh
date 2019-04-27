@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
