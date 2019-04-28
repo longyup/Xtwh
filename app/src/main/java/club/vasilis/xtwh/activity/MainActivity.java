@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         // TabLayout设置关联viewpager后，会清空所有tab栏，所以在此后重新
         mainTab.getTabAt(0).setText("首页").setIcon(R.drawable.home);
-        mainTab.getTabAt(1).setText("首页").setIcon(R.drawable.home);
+        mainTab.getTabAt(1).setText("活动").setIcon(R.drawable.home);
         mainTab.getTabAt(2).setText("社区").setIcon(R.drawable.community);
         mainTab.getTabAt(3).setText("我的").setIcon(R.drawable.mine);
 
