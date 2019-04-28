@@ -11,7 +11,7 @@
         android:layout_gravity="center_vertical">
         <TextView
             android:id="@+id/my_msg_personage_user_title"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="60dp"
             android:textSize="20sp"
@@ -22,34 +22,34 @@
             android:layout_marginStart="20dp" />
 
         <FrameLayout
-            android:layout_weight="1"
-            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_width="50dp"
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/my_msg_personage_user_frame_user_msg"
                 android:text="张三"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp" />
             <ImageView
                 android:id="@+id/my_msg_personage_user_frame_head_img"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/head"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_vertical|right"
                 android:visibility="invisible"/>
         </FrameLayout>
 
         <ImageView
-        android:id="@+id/my_msg_personage_user_icon"
-        android:layout_width="20dp"
-        android:layout_weight="1"
-        android:layout_height="20dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginRight="10dp"
-        android:scaleType=""
-        android:background="@drawable/main_listitem_arrow"
+            android:id="@+id/my_msg_personage_user_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:scaleType="center"
+            android:background="@drawable/main_listitem_arrow"
             android:layout_marginEnd="10dp" />
 
 

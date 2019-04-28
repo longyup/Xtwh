@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/my_msg_other_tv_name"
+            android:id="@+id/my_msg_other_tv_title"
             android:layout_width="400dp"
             android:layout_weight="5"
             android:layout_height="60dp"
@@ -17,7 +17,7 @@
             android:textColor="#000"
             android:layout_marginLeft="20dp"/>
         <ImageView
-            android:id="@+id/my_msg_other_iv_image"
+            android:id="@+id/my_msg_other_iv_icon"
             android:layout_width="20dp"
             android:layout_weight="1"
             android:layout_height="20dp"
