@@ -28,7 +28,7 @@ public class Util {
     }
     public static User getUser(String uuid,List<User> userList){
         for (User user : userList) {
-            if(user.getUuid().equals(uuid)){
+            if(user.getNickName().equals(uuid)){
                 return user;
             }
         }

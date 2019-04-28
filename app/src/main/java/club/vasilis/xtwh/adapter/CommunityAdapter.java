@@ -57,7 +57,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         User user = Util.getUser(community.getUUID(), userList);
         // 头像应该从网上下载
         //viewHolder.ivHead.setImageBitmap();
-        viewHolder.tvName.setText(user.getName());
+       // viewHolder.tvName.setText(user.getName());
         viewHolder.tvDate.setText(community.getDate());
         viewHolder.tvContent.setText(community.getContent());
         if (community.isPhrase()){
@@ -94,7 +94,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                             .append(date)
                             .append(" ")
                             .append(time);
-                    Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getUuid(), community.getId());
+                    Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getNickName(), community.getId());
                     viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
                     viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()+1));
                     community.setPhrase(true);
