@@ -23,7 +23,7 @@ import club.vasilis.xtwh.domain.MyMsgUserContent;
  */
 public class MyMsgPersonageUseContentFragment extends Fragment {
 
-    private String[] userContextName = {"头像","昵称","性别","手机号","电子邮件","生日","个性签名","个人简介","常驻居住地"};
+    private String[] userContextTitle = {"头像","昵称","姓名","性别","手机号","电子邮件","生日","个性签名","个人简介","常驻居住地"};
 
     private View view;
     @Nullable
@@ -37,14 +37,14 @@ public class MyMsgPersonageUseContentFragment extends Fragment {
         return view;
     }
 
-    private List<MyMsgUserContent> getUserContent(){
-        List<MyMsgUserContent> userContentList = new ArrayList<>();
-        int len = userContextName.length;
-        for (int i = 0; i < len; i++){
-            MyMsgUserContent userContent = new MyMsgUserContent(userContextName[i],R.drawable.main_listitem_arrow);
-            userContentList.add(userContent);
-        }
+        private List<MyMsgUserContent> getUserContent(){
+            List<MyMsgUserContent> userContentList = new ArrayList<>();
+            int len = userContextTitle.length;
+            for (int i = 0; i < len; i++){
+                MyMsgUserContent userContent = new MyMsgUserContent(userContextTitle[i],R.drawable.main_listitem_arrow);
+                userContentList.add(userContent);
+            }
 
-        return userContentList;
+            return userContentList;
     }
 }

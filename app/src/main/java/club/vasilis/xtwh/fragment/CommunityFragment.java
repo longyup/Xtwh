@@ -136,7 +136,7 @@ public class CommunityFragment extends Fragment {
                 community.setDate(sb.toString());
                 community.setId(2);
                 community.setPhraseNum(0);
-                community.setUUID(BaseActivity.myUser.getUuid());
+                community.setUUID(BaseActivity.myUser.getNickName());
                 communityList.add(community);
                 adapter.update(communityList);
                 // 关闭对话框
@@ -148,7 +148,7 @@ public class CommunityFragment extends Fragment {
     }
     private void testInit(){
         communityList.clear();
-        User admin = new User("admin", "admin", "admin");
+        User admin = new User(123456789, "admin", "admin");
         userList.add(admin);
         userList.add(BaseActivity.myUser);
         Community community = new Community();
@@ -176,7 +176,7 @@ public class CommunityFragment extends Fragment {
         for (Community community : communityList) {
             for (Phrase phrase : phraseList) {
                 if (phrase.getCommunityId() == community.getId()) {
-                    if (phrase.getUuid().equals(BaseActivity.myUser.getUuid())) {
+                    if (phrase.getUuid().equals(BaseActivity.myUser.getNickName())) {
                         community.setPhrase(true);
                     } else {
                         community.setPhrase(false);

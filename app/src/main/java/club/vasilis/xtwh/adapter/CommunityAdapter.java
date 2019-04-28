@@ -94,7 +94,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                             .append(date)
                             .append(" ")
                             .append(time);
-                    Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getUuid(), community.getId());
+                    Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getNickName(), community.getId());
                     viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
                     viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()+1));
                     community.setPhrase(true);
