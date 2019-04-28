@@ -12,9 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.RecruitContentActivity"></activity>
+
         <activity android:name=".activity.MyMsgPersonageActivity" />
-        <activity android:name=".activity.MyMsgActivity"></activity>
         <activity android:name=".activity.WelcomeActivity" />
         <activity android:name=".activity.GuideActivity" />
         <activity android:name=".activity.MainActivity">

@@ -42,7 +42,6 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
 
                 final Context context = v.getContext();
                 final int position = holder.getAdapterPosition();
-//                final MyMsgUserContent myMsgUserContent = mUserContentList.get(i);
                 //测试
                 Log.e(TAG, "onClick: "+"You have clicked view"+userContextTitle[position]);
                 Toast.makeText(context,"You have clicked view"+userContextTitle[position],Toast.LENGTH_SHORT).show();

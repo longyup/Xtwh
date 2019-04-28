@@ -23,7 +23,7 @@ public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.Vi
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_msg_other_content_item,viewGroup,false);
         final ViewHolder holder = new ViewHolder(view);
         //点击事件
-        holder.tv_otherTitle.setOnClickListener(new View.OnClickListener() {
+        holder.otherView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
@@ -32,15 +32,6 @@ public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.Vi
             }
         });
 
-//        holder.iv_otherImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int position = holder.getAdapterPosition();
-//                MyMsgOther other = mOtherList.get(position);
-//                Log.e(TAG, "onClick: "+"You have clicked view"+other.getImageId() );
-//                Toast.makeText(v.getContext(),"You have clicked view"+other.getImageId(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
         return holder;
     }
 
