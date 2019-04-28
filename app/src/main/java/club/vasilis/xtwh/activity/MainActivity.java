@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import club.vasilis.xtwh.Fragment.CommunityFragment;
-import club.vasilis.xtwh.Fragment.RecruitFragment;
+//import club.vasilis.xtwh.Fragment.RecruitFragment;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.fragment.CultureIntroductionTitleFragment;
 import club.vasilis.xtwh.fragment.MyMsgFragment;

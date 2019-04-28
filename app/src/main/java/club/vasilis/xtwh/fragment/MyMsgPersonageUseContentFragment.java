@@ -36,14 +36,4 @@ public class MyMsgPersonageUseContentFragment extends Fragment {
         return view;
     }
 
-//        private List<MyMsgUserContent> getUserContent(){
-//            List<MyMsgUserContent> userContentList = new ArrayList<>();
-//            int len = userContextTitle.length;
-//            for (int i = 0; i < len; i++){
-//                MyMsgUserContent userContent = new MyMsgUserContent(userContextTitle[i],R.drawable.main_listitem_arrow);
-//                userContentList.add(userContent);
-//            }
-//
-//            return userContentList;
-//    }
 }

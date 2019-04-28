@@ -10,16 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.activity.MyMsgPersonageActivity;
 import club.vasilis.xtwh.adapter.MyMsgOtherAdapter;
-import club.vasilis.xtwh.domain.MyMsgOther;
+
 /*
 展示我的信息界面
  */
@@ -52,12 +47,4 @@ public class MyMsgFragment extends Fragment {
         return view;
     }
 
-//    //初始化其他内容
-//    private void initOther() {
-//        int len = otherName.length;
-//        for (int i = 0; i < len; i++){
-//            MyMsgOther other = new MyMsgOther(otherName[i], R.drawable.main_listitem_arrow);
-//            otherList.add(other);
-//        }
-//    }
 }
