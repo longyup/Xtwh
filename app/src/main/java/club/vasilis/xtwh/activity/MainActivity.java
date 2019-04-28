@@ -73,11 +73,11 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-//                    case R.id.nav_mine:{
-//                        Intent intent = new Intent(MainActivity.this, MyMsgPersonageActivity.class);
-//                        startActivity(intent);
-//                        break;
-//                    }
+                    case R.id.nav_mine:{
+                        Intent intent = new Intent(MainActivity.this, MyMsgPersonageActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
                     default:
                 }
 
@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         fragmentList.add(new RecruitFragment());
         fragmentList.add(new CommunityFragment());
         fragmentList.add(new MyMsgFragment());
-//
-//        drawerLayout = findViewById(R.id.main_drawer_layout);
-//
-//        navigationView = findViewById(R.id.main_navigation_view);
+
+        drawerLayout = findViewById(R.id.main_drawer_layout);
+
+        navigationView = findViewById(R.id.main_navigation_view);
     }
 
 
