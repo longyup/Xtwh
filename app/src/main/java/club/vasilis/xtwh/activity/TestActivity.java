@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import club.vasilis.xtwh.Fragment.RecruitFragment;
 import club.vasilis.xtwh.R;
 
 /**
@@ -44,8 +45,7 @@ public class TestActivity extends BaseActivity {
                         break;
                     }
                     case 3: {
-                        Intent intent = new Intent(getApplicationContext(), OrganizationFragment.class);
-                        startActivity(intent);
+
                         break;
                     }
                     default:

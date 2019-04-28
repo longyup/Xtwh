@@ -5,6 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="club.vasilis.xtwh.Fragment.RecruitFragment"
+        android:id="@+id/recruit_fragment"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -13,18 +18,12 @@
                 android:name="club.vasilis.xtwh.Fragment.CultureIntroductionTitleFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-            <!--<fragment-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:id="@+id/organization_add_fragment"-->
-                <!--android:name="club.vasilis.xtwh.activity.OrganizationFragment"/>-->
-            <!--<fragment-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:id="@+id/recuit_fragment"-->
-                <!--android:name="club.vasilis.xtwh.activity.RecruitFragment"/>-->
+
+
 
     </ScrollView>
+
+
 
 
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +25,16 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
 //    private List<String> numberDatas;
     private Context mContext;
     private LayoutInflater inflater;
+    private FragmentManager fragmentManager;
 
-    public RecruitActivityAdapter(List<Recruit> Datas, Context mContext) {
+    public RecruitActivityAdapter(List<Recruit> Datas, Context mContext,FragmentManager fragmentManager) {
         this.Datas = Datas;
 //        this.distanceDatas = distanceDatas;
 //        this.regionActivityDatas = regionActivityDatas;
 //        this.numberDatas = numberDatas;
         this.mContext = mContext;
         inflater=LayoutInflater. from(mContext);
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -63,7 +66,7 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //...To-do
+                        DailsDialog.getInstance().show(fragmentManager,"活动详情");
                     }
                 });
         normalDialog.setNegativeButton("关闭",
