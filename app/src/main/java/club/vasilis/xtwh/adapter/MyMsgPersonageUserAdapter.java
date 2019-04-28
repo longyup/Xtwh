@@ -17,43 +17,95 @@ import android.widget.Toast;
 import java.util.List;
 
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.domain.MyMsgUserContent;
+import club.vasilis.xtwh.domain.User;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 
+  //  public static User myUser = new User(2017002442,"null_demo","demo","demo","男","17326080001",
+     //       "17326080001@163.com","1998-1-1","个性签名demo","个性简历demo","杭州");
     private static final String TAG = "MyMsgPersonageUserAdapt";
-    private List<MyMsgUserContent> mUserContentList ;
+//    private List<MyMsgUserContent> mUserContentList ;
 
-    public MyMsgPersonageUserAdapter(List<MyMsgUserContent> userContents) {
-        this.mUserContentList = userContents;
+     private String[] userContextTitle;
+
+    public MyMsgPersonageUserAdapter(String[] userContextTitle) {
+        this.userContextTitle = userContextTitle;
+
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,final int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_msg_personage_use_content_item,viewGroup,false);
         final ViewHolder holder = new ViewHolder(view);
         //点击事件
-        holder.tv_userName.setOnClickListener(new View.OnClickListener() {
+//        holder.tv_userTitle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                final Context context = v.getContext();
+//                final MyMsgUserContent userContent = mUserContentList;
+//
+//                //测试
+//                Log.e(TAG, "onClick: "+"You have clicked view"+userContent.getName());
+//                Toast.makeText(context,"You have clicked view"+userContent.getName(),Toast.LENGTH_SHORT).show();
+//
+//                //修改数据
+//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                builder.setTitle("设置"+ userContextTitle[i]);
+//                builder.setCancelable(false);
+//                builder.setView(new EditText(v.getContext()));
+//                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(context,"设置"+userContent.getName()+"成功!",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//
+//                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//                builder.show();
+//            }
+//        });
+//
+//        holder.iv_userIcon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int position = holder.getAdapterPosition();
+//                MyMsgUserContent userContent = mUserContentList.get(position);
+//                Log.e(TAG, "onClick: "+"You have clicked view"+userContent.getName());
+//                Toast.makeText(v.getContext(),"You have clicked view"+userContent.getName(),Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        holder.userView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                final Context context = v.getContext();
-                final MyMsgUserContent userContent = mUserContentList.get(position);
 
+                final Context context = v.getContext();
+                int position = holder.getAdapterPosition();
+//                final MyMsgUserContent myMsgUserContent = mUserContentList.get(i);
                 //测试
-                Log.e(TAG, "onClick: "+"You have clicked view"+userContent.getName());
-                Toast.makeText(context,"You have clicked view"+userContent.getName(),Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onClick: "+"You have clicked view"+userContextTitle[i]);
+                Toast.makeText(context,"You have clicked view"+userContextTitle[i],Toast.LENGTH_SHORT).show();
 
                 //修改数据
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("设置"+userContent.getName());
+                builder.setTitle("设置"+ userContextTitle[i]);
                 builder.setCancelable(false);
                 builder.setView(new EditText(v.getContext()));
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context,"设置"+userContent.getName()+"成功!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"设置"+userContextTitle[i]+"成功!",Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -67,44 +119,73 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 builder.show();
             }
         });
-
-        holder.iv_userImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                MyMsgUserContent userContent = mUserContentList.get(position);
-                Log.e(TAG, "onClick: "+"You have clicked view"+userContent.getName());
-                Toast.makeText(v.getContext(),"You have clicked view"+userContent.getName(),Toast.LENGTH_SHORT).show();
-            }
-        });
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-        MyMsgUserContent userContent = mUserContentList.get(i);
-        viewHolder.tv_userName.setText(userContent.getName());
-        viewHolder.iv_userImg.setImageResource(userContent.getImgId());
+        //个人信息
+        switch (i){
+            case 0:
+                viewHolder.iv_userIcon.setVisibility(View.VISIBLE);//显示头像
+                viewHolder.tv_userMsg.setVisibility(View.INVISIBLE);//隐藏tv
+                break;
+
+            case 1:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getNickName());
+                break;
+            case 2:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getName());
+                break;
+            case 3:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getSex());
+                break;
+            case 4:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getPhoneNumber());
+                break;
+            case 5:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getE_mail());
+            break;case 6:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getBirthday());
+            break;case 7:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getSignature());
+                break;
+            case 8:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getProfile());
+            break;case 9:
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getLocalPalace());
+                break;
+        }
+
+        //个人信息标题
+        viewHolder.tv_userTitle.setText(userContextTitle[i]);
+//        viewHolder.iv_userIcon.setImageResource(myMsgUserContent.getImgId());
     }
 
     @Override
     public int getItemCount() {
-        return mUserContentList.size();
+        return userContextTitle.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         View userView;
         View vLine;
-        TextView tv_userName;
-        ImageView iv_userImg;
+        //用户个人信息
+        TextView tv_userMsg;
+        ImageView iv_userHead;
+        //用户个人界面标题
+        TextView tv_userTitle;
+        ImageView iv_userIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userView = itemView;
-            tv_userName = itemView.findViewById(R.id.my_msg_personage_user_content);
-            iv_userImg = itemView.findViewById(R.id.my_msg_personage_user_img);
+            tv_userMsg = itemView.findViewById(R.id.my_msg_personage_user_frame_user_msg);
+            iv_userHead = itemView.findViewById(R.id.my_msg_personage_user_frame_head_img);
+            tv_userTitle = itemView.findViewById(R.id.my_msg_personage_user_title);
+            iv_userIcon = itemView.findViewById(R.id.my_msg_personage_user_icon);
             vLine = itemView.findViewById(R.id.my_msg_user_view_line);
         }
     }
