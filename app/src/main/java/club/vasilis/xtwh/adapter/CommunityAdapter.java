@@ -51,7 +51,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-        final Community community = communityList.get(i);
+        final Community community = communityList.get(communityList.size()-i-1);
 
         //获取发表动态的用户
         User user = Util.getUser(community.getUUID(), userList);

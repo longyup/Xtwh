@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.Fragment;
+package club.vasilis.xtwh.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -29,6 +29,7 @@ import club.vasilis.xtwh.utils.Util;
 
 /**
  * 社区页的fragment
+ *
  * @author Vasilis
  * @date 2019/4/25 * 12:49
  */
@@ -45,12 +46,13 @@ public class CommunityFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private CommunityAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_community,container,false);
+        View view = inflater.inflate(R.layout.fragment_community, container, false);
         // 初始化数据,后期会换成网络
-     //   testInit();
+        testInit();
         // 对每项的动态进行判断是否点赞，放在json数据解析后
         setIsPhrase();
         // 初始化控件
@@ -87,7 +89,7 @@ public class CommunityFragment extends Fragment {
     /**
      * 下拉刷新
      */
-    private void refresh(){
+    private void refresh() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -112,8 +114,9 @@ public class CommunityFragment extends Fragment {
             }
         }).start();
     }
-    private void showDialog(){
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_send_community,null,false);
+
+    private void showDialog() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_send_community, null, false);
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);
         final AlertDialog dialog = builder.create();
@@ -146,7 +149,8 @@ public class CommunityFragment extends Fragment {
         });
 
     }
-    private void testInit(){
+
+    private void testInit() {
         communityList.clear();
         User admin = new User(123456789, "admin", "admin");
         userList.add(admin);
@@ -158,6 +162,7 @@ public class CommunityFragment extends Fragment {
         community.setPhraseNum(2);
         community.setUUID("admin");
         communityList.add(community);
+
         community = new Community();
         community.setContent("1111测试测试啊实打实的");
         community.setDate("03.30 13:56");
@@ -166,11 +171,27 @@ public class CommunityFragment extends Fragment {
         community.setUUID("demo");
         communityList.add(community);
 
+        community = new Community();
+        community.setContent("1111测试测1试啊实打实的");
+        community.setDate("04.01 13:56");
+        community.setId(2);
+        community.setPhraseNum(0);
+        community.setUUID("demo");
+        communityList.add(community);
+
+        community = new Community();
+        community.setContent("1111测试测1试啊实打实的");
+        community.setDate("04.10 13:56");
+        community.setId(2);
+        community.setPhraseNum(0);
+        community.setUUID("demo");
+        communityList.add(community);
+
+
     }
 
     /**
      * 对每项的动态进行判断是否点赞
-     *
      */
     private void setIsPhrase() {
         for (Community community : communityList) {

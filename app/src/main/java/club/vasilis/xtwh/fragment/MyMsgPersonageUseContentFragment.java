@@ -10,13 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.adapter.MyMsgPersonageUserAdapter;
-import club.vasilis.xtwh.domain.MyMsgUserContent;
 
 /*
 我的信息-->个人基本信息

@@ -1,10 +1,7 @@
 package club.vasilis.xtwh.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import club.vasilis.xtwh.Fragment.RecruitDailsFragment;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.RecruitContentActivity;
 import club.vasilis.xtwh.domain.Recruit;
 
 public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivityAdapter.ViewHolder> {
@@ -46,7 +41,7 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
             @Override
             public void onClick(View v) {
                 Recruit recruit = Datas.get(holder.getAdapterPosition());
-                RecruitContentActivity.actionStart(mContext,recruit.getImgId(),recruit.getTitle(),recruit.getDistance(),recruit.getRegion(),recruit.getNumber());
+                //RecruitContentActivity.actionStart(mContext,recruit.getImgId(),recruit.getTitle(),recruit.getDistance(),recruit.getRegion(),recruit.getNumber());
 
 //                showNormalDialog();
             }
