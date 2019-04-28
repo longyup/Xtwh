@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.Fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;

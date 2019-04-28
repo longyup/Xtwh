@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import club.vasilis.xtwh.Fragment.RecruitDailsFragment;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.activity.RecruitContentActivity;
 import club.vasilis.xtwh.domain.Recruit;
 
 public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivityAdapter.ViewHolder> {
@@ -38,43 +41,17 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.recruit_activity_item,viewGroup,false);
-        ViewHolder holder = new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showNormalDialog();
+                Recruit recruit = Datas.get(holder.getAdapterPosition());
+                RecruitContentActivity.actionStart(mContext,recruit.getImgId(),recruit.getTitle(),recruit.getDistance(),recruit.getRegion(),recruit.getNumber());
+
+//                showNormalDialog();
             }
         });
         return holder;
-    }
-
-    private void showNormalDialog(){
-        /* @setIcon 设置对话框图标
-         * @setTitle 设置对话框标题
-         * @setMessage 设置对话框消息提示
-         * setXXX方法返回Dialog对象，因此可以链式设置属性
-         */
-        final AlertDialog.Builder normalDialog =
-                new AlertDialog.Builder(mContext);
-        normalDialog.setIcon(R.drawable.back);
-        normalDialog.setTitle("志愿活动");
-        normalDialog.setMessage("是否查看？");
-        normalDialog.setPositiveButton("确定",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //...To-do
-                    }
-                });
-        normalDialog.setNegativeButton("关闭",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-        // 显示
-        normalDialog.show();
     }
 
     @Override
