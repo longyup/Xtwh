@@ -50,7 +50,7 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community,container,false);
         // 初始化数据,后期会换成网络
-        testInit();
+     //   testInit();
         // 对每项的动态进行判断是否点赞，放在json数据解析后
         setIsPhrase();
         // 初始化控件

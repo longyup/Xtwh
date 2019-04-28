@@ -57,7 +57,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         User user = Util.getUser(community.getUUID(), userList);
         // 头像应该从网上下载
         //viewHolder.ivHead.setImageBitmap();
-        viewHolder.tvName.setText(user.getName());
+       // viewHolder.tvName.setText(user.getName());
         viewHolder.tvDate.setText(community.getDate());
         viewHolder.tvContent.setText(community.getContent());
         if (community.isPhrase()){
