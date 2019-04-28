@@ -1,11 +1,16 @@
 package club.vasilis.xtwh.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +20,7 @@ import club.vasilis.xtwh.fragment.RecruitFragment;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.fragment.CultureIntroductionTitleFragment;
 import club.vasilis.xtwh.fragment.MyMsgFragment;
+import club.vasilis.xtwh.fragment.RecruitFragment;
 
 
 /**
@@ -27,10 +33,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     private ViewPager viewPager;
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     private List<Fragment> fragmentList;
 
-    // private CultureIntroductionTitleFragment cFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +69,24 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         mainTab.getTabAt(2).setText("社区").setIcon(R.drawable.community);
         mainTab.getTabAt(3).setText("我的").setIcon(R.drawable.mine);
 
+        //侧滑栏的监听事件
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.nav_mine:{
+                        Intent intent = new Intent(MainActivity.this, MyMsgPersonageActivity.class);
+                        startActivity(intent);
+                        break;
+                    }
+                    default:
+                }
+
+                drawerLayout.closeDrawers();
+                return false;
+            }
+        });
+
     }
 
 
@@ -81,10 +107,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         fragmentList.add(new CommunityFragment());
         fragmentList.add(new MyMsgFragment());
 
+        drawerLayout = findViewById(R.id.main_drawer_layout);
+
+        navigationView = findViewById(R.id.main_navigation_view);
     }
-
-
-
 
 
     @Override
