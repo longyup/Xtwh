@@ -22,8 +22,7 @@ import club.vasilis.xtwh.domain.MyMsgUserContent;
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 
     private static final String TAG = "MyMsgPersonageUserAdapt";
-    private List<MyMsgUserContent> mUserContentList = null;
-    private Context context;
+    private List<MyMsgUserContent> mUserContentList ;
 
     public MyMsgPersonageUserAdapter(List<MyMsgUserContent> userContents) {
         this.mUserContentList = userContents;
@@ -33,23 +32,24 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_msg_personage_use_content_item,viewGroup,false);
-        final MyMsgPersonageUserAdapter.ViewHolder holder = new MyMsgPersonageUserAdapter.ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
         //点击事件
         holder.tv_userName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
+                final Context context = v.getContext();
                 final MyMsgUserContent userContent = mUserContentList.get(position);
 
                 //测试
                 Log.e(TAG, "onClick: "+"You have clicked view"+userContent.getName());
-                Toast.makeText(v.getContext(),"You have clicked view"+userContent.getName(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"You have clicked view"+userContent.getName(),Toast.LENGTH_SHORT).show();
 
                 //修改数据
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("设置"+userContent.getName());
                 builder.setCancelable(false);
-                builder.setView(new EditText(context));
+                builder.setView(new EditText(v.getContext()));
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -20,6 +20,9 @@ import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.utils.CacheUtils;
 import club.vasilis.xtwh.utils.DensityUtil;
 
+/**
+ * 引导页
+ */
 public class GuideActivity extends AppCompatActivity {
 
     private ViewPager viewpager;

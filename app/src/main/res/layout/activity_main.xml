@@ -2,26 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <fragment
+
+    <club.vasilis.xtwh.view.CustomViewPager
+        android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="club.vasilis.xtwh.Fragment.RecruitFragment"
-        android:id="@+id/recruit_fragment"/>
-    <ScrollView
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </club.vasilis.xtwh.view.CustomViewPager>
+
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/main_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-            <fragment
-                android:id="@+id/culture_introduction_title_fragment"
-                android:name="club.vasilis.xtwh.Fragment.CultureIntroductionTitleFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-
-
-    </ScrollView>
+        android:layout_height="wrap_content"/>
 
 
 

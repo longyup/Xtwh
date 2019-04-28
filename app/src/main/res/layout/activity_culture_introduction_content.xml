@@ -5,7 +5,7 @@
     android:orientation="vertical">
     <fragment
         android:id="@+id/culture_introduction_content_fragment"
-        android:name="club.vasilis.xtwh.Fragment.CultureIntroductionContentFragment"
+        android:name="club.vasilis.xtwh.fragment.CultureIntroductionContentFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

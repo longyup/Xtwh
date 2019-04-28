@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import club.vasilis.xtwh.Fragment.CultureIntroductionContentFragment;
+import club.vasilis.xtwh.fragment.CultureIntroductionContentFragment;
 import club.vasilis.xtwh.R;
 
 public class CultureIntroductionContentActivity extends AppCompatActivity {
