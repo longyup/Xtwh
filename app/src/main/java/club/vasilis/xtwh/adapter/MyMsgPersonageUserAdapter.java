@@ -17,19 +17,22 @@ import android.widget.Toast;
 import java.util.List;
 
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.domain.MyMsgUserContent;
 import club.vasilis.xtwh.domain.User;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 
-    public static User myUser = new User(2017002442,"null_demo","demo","demo","男","17326080001",
-            "17326080001@163.com","1998-1-1","个性签名demo","个性简历demo","杭州");
+  //  public static User myUser = new User(2017002442,"null_demo","demo","demo","男","17326080001",
+     //       "17326080001@163.com","1998-1-1","个性签名demo","个性简历demo","杭州");
     private static final String TAG = "MyMsgPersonageUserAdapt";
-    private List<MyMsgUserContent> mUserContentList ;
-    private String[] userContextTitle = {"头像","昵称","姓名","性别","手机号","电子邮件","生日","个性签名","个人简介","常驻居住地"};
+//    private List<MyMsgUserContent> mUserContentList ;
 
-    public MyMsgPersonageUserAdapter(List<MyMsgUserContent> userContentList) {
-        this.mUserContentList = userContentList;
+     private String[] userContextTitle;
+
+    public MyMsgPersonageUserAdapter(String[] userContextTitle) {
+        this.userContextTitle = userContextTitle;
+
     }
 
     @NonNull
@@ -89,10 +92,10 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
 
                 final Context context = v.getContext();
                 int position = holder.getAdapterPosition();
-                final MyMsgUserContent myMsgUserContent = mUserContentList.get(i);
+//                final MyMsgUserContent myMsgUserContent = mUserContentList.get(i);
                 //测试
-                Log.e(TAG, "onClick: "+"You have clicked view"+myMsgUserContent.getName());
-                Toast.makeText(context,"You have clicked view"+myMsgUserContent.getName(),Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onClick: "+"You have clicked view"+userContextTitle[i]);
+                Toast.makeText(context,"You have clicked view"+userContextTitle[i],Toast.LENGTH_SHORT).show();
 
                 //修改数据
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -102,7 +105,7 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context,"设置"+myMsgUserContent.getName()+"成功!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context,"设置"+userContextTitle[i]+"成功!",Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -125,45 +128,44 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
         //个人信息
         switch (i){
             case 0:
-                viewHolder.iv_userIcon.setVisibility(View.VISIBLE);
-                viewHolder.tv_userMsg.setVisibility(View.INVISIBLE);
+                viewHolder.iv_userIcon.setVisibility(View.VISIBLE);//显示头像
+                viewHolder.tv_userMsg.setVisibility(View.INVISIBLE);//隐藏tv
                 break;
 
             case 1:
-                viewHolder.tv_userMsg.setText(myUser.getNickName());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getNickName());
                 break;
             case 2:
-                viewHolder.tv_userMsg.setText(myUser.getName());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getName());
                 break;
             case 3:
-                viewHolder.tv_userMsg.setText(myUser.getSex());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getSex());
                 break;
             case 4:
-                viewHolder.tv_userMsg.setText(myUser.getPhoneNumber());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getPhoneNumber());
                 break;
             case 5:
-                viewHolder.tv_userMsg.setText(myUser.getE_mail());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getE_mail());
             break;case 6:
-                viewHolder.tv_userMsg.setText(myUser.getBirthday());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getBirthday());
             break;case 7:
-                viewHolder.tv_userMsg.setText(myUser.getSignature());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getSignature());
                 break;
             case 8:
-                viewHolder.tv_userMsg.setText(myUser.getProfile());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getProfile());
             break;case 9:
-                viewHolder.tv_userMsg.setText(myUser.getLocalPalace());
+                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getLocalPalace());
                 break;
         }
 
         //个人信息标题
-        MyMsgUserContent myMsgUserContent = mUserContentList.get(i);
-        viewHolder.tv_userTitle.setText(myMsgUserContent.getName());
-        viewHolder.iv_userIcon.setImageResource(myMsgUserContent.getImgId());
+        viewHolder.tv_userTitle.setText(userContextTitle[i]);
+//        viewHolder.iv_userIcon.setImageResource(myMsgUserContent.getImgId());
     }
 
     @Override
     public int getItemCount() {
-        return mUserContentList.size();
+        return userContextTitle.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

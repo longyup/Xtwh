@@ -32,19 +32,19 @@ public class MyMsgPersonageUseContentFragment extends Fragment {
         view = inflater.inflate(R.layout.my_msg_personage_user_frag,container,false);
         RecyclerView rv_userContent = view.findViewById(R.id.my_msg_personage_user_rv_content);
         rv_userContent.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MyMsgPersonageUserAdapter userAdapter = new MyMsgPersonageUserAdapter(getUserContent());
+        MyMsgPersonageUserAdapter userAdapter = new MyMsgPersonageUserAdapter(userContextTitle);
         rv_userContent.setAdapter(userAdapter);
         return view;
     }
 
-        private List<MyMsgUserContent> getUserContent(){
-            List<MyMsgUserContent> userContentList = new ArrayList<>();
-            int len = userContextTitle.length;
-            for (int i = 0; i < len; i++){
-                MyMsgUserContent userContent = new MyMsgUserContent(userContextTitle[i],R.drawable.main_listitem_arrow);
-                userContentList.add(userContent);
-            }
-
-            return userContentList;
-    }
+//        private List<MyMsgUserContent> getUserContent(){
+//            List<MyMsgUserContent> userContentList = new ArrayList<>();
+//            int len = userContextTitle.length;
+//            for (int i = 0; i < len; i++){
+//                MyMsgUserContent userContent = new MyMsgUserContent(userContextTitle[i],R.drawable.main_listitem_arrow);
+//                userContentList.add(userContent);
+//            }
+//
+//            return userContentList;
+//    }
 }
