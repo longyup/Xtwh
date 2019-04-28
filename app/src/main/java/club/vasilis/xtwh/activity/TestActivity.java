@@ -9,6 +9,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.fragment.OrganizationFragment;
+import club.vasilis.xtwh.fragment.RecruitFragment;
 
 /**
  * 测试用的MainActiity
