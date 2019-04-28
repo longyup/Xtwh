@@ -48,9 +48,8 @@
         android:layout_height="20dp"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="10dp"
-        android:scaleType=""
-        android:background="@drawable/main_listitem_arrow"
-            android:layout_marginEnd="10dp" />
+        android:scaleType="center"
+        android:background="@drawable/main_listitem_arrow" android:layout_marginEnd="10dp" />
 
 
     </LinearLayout>

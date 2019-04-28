@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import club.vasilis.xtwh.Fragment.RecruitFragment;
+import club.vasilis.xtwh.fragment.RecruitFragment;
 import club.vasilis.xtwh.R;
 
 /**
