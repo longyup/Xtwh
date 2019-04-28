@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.MyMsgPersonageUserAdapter;
@@ -19,12 +20,15 @@ import club.vasilis.xtwh.adapter.MyMsgPersonageUserAdapter;
 public class MyMsgPersonageUseContentFragment extends Fragment {
 
     private String[] userContextTitle = {"头像","昵称","姓名","性别","手机号","电子邮件","生日","个性签名","个人简介","常驻居住地"};
+    private TextView tv_accountId = null;
 
     private View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.my_msg_personage_user_frag,container,false);
+//        tv_accountId = view.findViewById(R.id.my_msg_personage_account_id);
+//        tv_accountId.setText(BaseActivity.myUser.getAccount());//显示账户信息
         RecyclerView rv_userContent = view.findViewById(R.id.my_msg_personage_user_rv_content);
         rv_userContent.setLayoutManager(new LinearLayoutManager(getActivity()));
         MyMsgPersonageUserAdapter userAdapter = new MyMsgPersonageUserAdapter(userContextTitle);
@@ -32,14 +36,4 @@ public class MyMsgPersonageUseContentFragment extends Fragment {
         return view;
     }
 
-//        private List<MyMsgUserContent> getUserContent(){
-//            List<MyMsgUserContent> userContentList = new ArrayList<>();
-//            int len = userContextTitle.length;
-//            for (int i = 0; i < len; i++){
-//                MyMsgUserContent userContent = new MyMsgUserContent(userContextTitle[i],R.drawable.main_listitem_arrow);
-//                userContentList.add(userContent);
-//            }
-//
-//            return userContentList;
-//    }
 }
