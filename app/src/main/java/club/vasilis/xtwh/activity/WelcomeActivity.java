@@ -72,14 +72,14 @@ public class WelcomeActivity extends Activity {
                 Intent intent;
                 if (isStartMain){
                     //如果进入过主页面，直接进入主页面
-                    intent = new Intent(WelcomeActivity.this, TestActivity.class);
+
                 }else {
                     //如果没有，进入引导页面
                     intent = new Intent(WelcomeActivity.this,GuideActivity.class);
 
                 }
 
-                startActivity(intent);
+
                 //关闭Welcome页面
                 finish();
 

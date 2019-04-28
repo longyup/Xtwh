@@ -52,8 +52,8 @@ public class GuideActivity extends AppCompatActivity {
                 //1.保存曾经进入过的主页面
                 CacheUtils.putBoolean(GuideActivity.this,WelcomeActivity.START_MAIN,true);
                 //2.跳转到主页面
-                Intent intent = new Intent(GuideActivity.this,TestActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(GuideActivity.this,TestActivity.class);
+//                startActivity(intent);
                 //3.关闭引导页
                 finish();
             }
