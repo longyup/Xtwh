@@ -18,7 +18,7 @@
                 android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:id="@+id/recurit_iv"
-                android:background="@drawable/th"/>
+                android:scaleType="centerCrop"/>
 
         </LinearLayout>
 

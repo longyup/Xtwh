@@ -10,8 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import club.vasilis.xtwh.Fragment.CommunityFragment;
+import club.vasilis.xtwh.Fragment.RecruitFragment;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.fragment.CommunityFragment;
 import club.vasilis.xtwh.fragment.CultureIntroductionTitleFragment;
 import club.vasilis.xtwh.fragment.MyMsgFragment;
 
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         // 对tablayout增加控件
         mainTab = findViewById(R.id.main_tab);
         mainTab.addTab(mainTab.newTab().setText("首页").setIcon(R.drawable.home));
-        mainTab.addTab(mainTab.newTab().setText("首页").setIcon(R.drawable.home));
+        mainTab.addTab(mainTab.newTab().setText("活动").setIcon(R.drawable.home));
         mainTab.addTab(mainTab.newTab().setText("社区").setIcon(R.drawable.community));
         mainTab.addTab(mainTab.newTab().setText("我的").setIcon(R.drawable.mine));
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new CultureIntroductionTitleFragment());
-        fragmentList.add(new CultureIntroductionTitleFragment());
+        fragmentList.add(new RecruitFragment());
         fragmentList.add(new CommunityFragment());
         fragmentList.add(new MyMsgFragment());
 
