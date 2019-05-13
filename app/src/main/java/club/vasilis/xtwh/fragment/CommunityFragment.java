@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,7 +42,7 @@ public class CommunityFragment extends Fragment {
     private List<Phrase> phraseList = new ArrayList<>();
     private List<Comment> commentList = new ArrayList<>();
 
-    private Button btnSendCommunity;
+    private FloatingActionButton fabSend;
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -51,6 +52,8 @@ public class CommunityFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
+
+
         // 初始化数据,后期会换成网络
         testInit();
         // 对每项的动态进行判断是否点赞，放在json数据解析后
@@ -64,24 +67,31 @@ public class CommunityFragment extends Fragment {
         adapter = new CommunityAdapter(communityList, userList);
         recyclerView.setAdapter(adapter);
 
-
-        btnSendCommunity = view.findViewById(R.id.community_btn_send);
-        // 点击按钮弹出对话框
-        btnSendCommunity.setOnClickListener(new View.OnClickListener() {
+        fabSend = view.findViewById(R.id.community_fab_send);
+        fabSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
 
+        /*//btnSendCommunity = view.findViewById(R.id.community_btn_send);
+        // 点击按钮弹出对话框
+        btnSendCommunity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });*/
 
-        swipeRefreshLayout = view.findViewById(R.id.community_swipe_refresh);
+
+       /* swipeRefreshLayout = view.findViewById(R.id.community_swipe_refresh);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refresh();
             }
-        });
+        });*/
 
         return view;
     }
@@ -186,6 +196,49 @@ public class CommunityFragment extends Fragment {
         community.setPhraseNum(0);
         community.setUUID("demo");
         communityList.add(community);
+
+
+        community = new Community();
+        community.setContent("22测试测试啊实打实的");
+        community.setDate("04.11 13:56");
+        community.setId(2);
+        community.setPhraseNum(0);
+        community.setUUID("demo");
+        communityList.add(community);
+
+        community = new Community();
+        community.setContent("33测试测试啊实打实的");
+        community.setDate("04.14 13:56");
+        community.setId(2);
+        community.setPhraseNum(0);
+        community.setUUID("demo");
+        communityList.add(community);
+
+
+        community = new Community();
+        community.setContent("55测试测试啊实打实的");
+        community.setDate("04.21 13:56");
+        community.setId(2);
+        community.setPhraseNum(0);
+        community.setUUID("demo");
+        communityList.add(community);
+
+        community = new Community();
+        community.setContent("66测试测试啊实打实的");
+        community.setDate("04.25 13:56");
+        community.setId(2);
+        community.setPhraseNum(0);
+        community.setUUID("demo");
+        communityList.add(community);
+
+        community = new Community();
+        community.setContent("20测试测试啊实打实的");
+        community.setDate("04.27 13:56");
+        community.setId(2);
+        community.setPhraseNum(0);
+        community.setUUID("demo");
+        communityList.add(community);
+
 
 
     }

@@ -18,17 +18,11 @@ import club.vasilis.xtwh.domain.Recruit;
 public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivityAdapter.ViewHolder> {
 
     private List<Recruit> Datas;
-//    private List<String> distanceDatas;
-//    private List<String> regionActivityDatas;
-//    private List<String> numberDatas;
     private Context mContext;
     private LayoutInflater inflater;
 
     public RecruitActivityAdapter(List<Recruit> Datas, Context mContext) {
         this.Datas = Datas;
-//        this.distanceDatas = distanceDatas;
-//        this.regionActivityDatas = regionActivityDatas;
-//        this.numberDatas = numberDatas;
         this.mContext = mContext;
         inflater=LayoutInflater. from(mContext);
     }

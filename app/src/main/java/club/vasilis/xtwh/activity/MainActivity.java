@@ -10,7 +10,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ import club.vasilis.xtwh.fragment.RecruitFragment;
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
     private TabLayout mainTab;
+    private TextView tvTitleBar;
 
     private ViewPager viewPager;
 
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     private List<Fragment> fragmentList;
 
-
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                        startActivity(intent);
                         break;
                    }
+                    case R.id.nav_mine_acitity:{
+                        mainTab.getTabAt(1).select();
+                        break;
+                    }
+                    case R.id.nav_setting:{
+                        mainTab.getTabAt(3).select();
+                        break;
+                    }
                     default:
                 }
 
@@ -97,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         mainTab.addTab(mainTab.newTab().setText("社区").setIcon(R.drawable.community));
         mainTab.addTab(mainTab.newTab().setText("我的").setIcon(R.drawable.mine));
 
+        mainTab.addOnTabSelectedListener(this);
+
         viewPager = findViewById(R.id.main_viewpager);
         //
 
@@ -105,16 +118,39 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         fragmentList.add(new RecruitFragment());
         fragmentList.add(new CommunityFragment());
         fragmentList.add(new MyMsgFragment());
-//
-//        drawerLayout = findViewById(R.id.main_drawer_layout);
-//
-//        navigationView = findViewById(R.id.main_navigation_view);
+
+        drawerLayout = findViewById(R.id.main_drawer_layout);
+
+        navigationView = findViewById(R.id.main_navigation_view);
+
+        tvTitleBar = findViewById(R.id.main_titlebar);
     }
 
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         //添加选中Tab的逻辑
+        Log.e(TAG, "onTabSelected: "+tab.getPosition() );
+        switch (tab.getPosition()){
+            case 0:{
+                tvTitleBar.setText("文化信息");
+                break;
+            }
+            case 1:{
+                tvTitleBar.setText("活动一览");
+                break;
+            }
+            case 2:{
+                tvTitleBar.setText("社区交流");
+                break;
+            }
+            case 3:{
+                tvTitleBar.setText("个人中心");
+                break;
+            }
+            default:
+        }
+
     }
 
     @Override
