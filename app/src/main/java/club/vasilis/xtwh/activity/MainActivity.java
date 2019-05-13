@@ -74,10 +74,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.nav_mine:{
-                        Intent intent = new Intent(MainActivity.this, MyMsgPersonageActivity.class);
-                        startActivity(intent);
+                       Intent intent = new Intent(MainActivity.this, MyMsgPersonageActivity.class);
+                       startActivity(intent);
                         break;
-                    }
+                   }
                     default:
                 }
 
