@@ -28,6 +28,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     private List<Community> communityList;
     private List<User> userList;
     private List<Comment> commentList;
+    private int size;
 
 
     public CommunityAdapter(List<Community> communityList, List<User> userList, List<Comment> commentList) {
@@ -39,37 +40,38 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     public CommunityAdapter(List<Community> communityList, List<User> userList) {
         this.communityList = communityList;
         this.userList = userList;
+        size = communityList.size();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.community_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.community_item, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-        final Community community = communityList.get(communityList.size()-i-1);
+        final Community community = communityList.get(size - i - 1);
 
         //获取发表动态的用户
         User user = Util.getUser(community.getUUID(), userList);
         // 头像应该从网上下载
         //viewHolder.ivHead.setImageBitmap();
-       // viewHolder.tvName.setText(user.getName());
+        // viewHolder.tvName.setText(user.getName());
         viewHolder.tvDate.setText(community.getDate());
         viewHolder.tvContent.setText(community.getContent());
-        if (community.isPhrase()){
+        if (community.isPhrase()) {
             viewHolder.ivPhrase.setBackgroundResource(R.drawable.phrase);
-        }else{
+        } else {
             viewHolder.ivPhrase.setBackgroundResource(R.drawable.unphrase);
         }
 
-        if (community.isPhrase()){
+        if (community.isPhrase()) {
             viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
-            viewHolder.tvPhrase.setText(community.getPhraseNum());
-        }else{
+            viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()));
+        } else {
             viewHolder.ivPhrase.setImageResource(R.drawable.unphrase);
             viewHolder.tvPhrase.setText("点赞");
         }
@@ -78,13 +80,14 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         viewHolder.phrase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (community.isPhrase()){
+                if (community.isPhrase()) {
                     //从表中删除
                     viewHolder.ivPhrase.setImageResource(R.drawable.unphrase);
                     viewHolder.tvPhrase.setText("点赞");
+                    community.setPhraseNum(community.getPhraseNum() - 1);
                     community.setPhrase(false);
 
-                }else {
+                } else {
                     String year = Util.getNowYear();
                     String date = Util.getNowDate();
                     String time = Util.getNowTime();
@@ -96,26 +99,27 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                             .append(time);
                     Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getNickName(), community.getId());
                     viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
-                    viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()+1));
+                    community.setPhraseNum(community.getPhraseNum() + 1);
+                    viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()));
                     community.setPhrase(true);
-
                 }
             }
         });
     }
 
 
-
     @Override
     public int getItemCount() {
-        return communityList.size();
+        return size;
     }
-    public void update(List<Community> communityList) {
-        this.communityList = communityList;
+
+    public void update(Community community) {
+        this.communityList.add(community);
+        size = communityList.size();
         notifyDataSetChanged();
         // 重新获取数据
         /*communityList
-        size = studentList.size();
+
         notifyDataSetChanged();*/
     }
 
@@ -141,7 +145,6 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
             comment = itemView.findViewById(R.id.community_item_comment);
             tvPhrase = itemView.findViewById(R.id.community_item_tv_phrase);
             ivPhrase = itemView.findViewById(R.id.community_item_iv_phrase);
-
 
 
         }

@@ -2,11 +2,8 @@ package club.vasilis.xtwh.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ import club.vasilis.xtwh.utils.Util;
  * @author Vasilis
  * @date 2019/4/25 * 12:49
  */
-public class CommunityFragment extends Fragment {
+public class CommunityFragment extends Fragment implements OnRefreshListener,OnLoadMoreListener {
 
 
     private List<User> userList = new ArrayList<>();
@@ -44,13 +47,13 @@ public class CommunityFragment extends Fragment {
 
     private FloatingActionButton fabSend;
 
-    private SwipeRefreshLayout swipeRefreshLayout;
+    private RefreshLayout refreshLayout;
 
     private CommunityAdapter adapter;
 
-    @Nullable
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
 
 
@@ -59,14 +62,14 @@ public class CommunityFragment extends Fragment {
         // 对每项的动态进行判断是否点赞，放在json数据解析后
         setIsPhrase();
         // 初始化控件
-
-        final RecyclerView recyclerView = view.findViewById(R.id.community_rv);
+        RecyclerView recyclerView = view.findViewById(R.id.community_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
         // 评论功能暂未实现
         adapter = new CommunityAdapter(communityList, userList);
         recyclerView.setAdapter(adapter);
-
+        // 发送按钮
         fabSend = view.findViewById(R.id.community_fab_send);
         fabSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,55 +78,14 @@ public class CommunityFragment extends Fragment {
             }
         });
 
-        /*//btnSendCommunity = view.findViewById(R.id.community_btn_send);
-        // 点击按钮弹出对话框
-        btnSendCommunity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });*/
-
-
-       /* swipeRefreshLayout = view.findViewById(R.id.community_swipe_refresh);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refresh();
-            }
-        });*/
+        refreshLayout = view.findViewById(R.id.community_refreshLayout);
+        refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
 
         return view;
     }
 
-    /**
-     * 下拉刷新
-     */
-    private void refresh() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //应该进行网络请求
-                    Thread.sleep(200);
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //回到主线程刷新
-                swipeRefreshLayout.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        testInit();
-                        adapter.notifyDataSetChanged();
-                        Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                });
-
-            }
-        }).start();
-    }
 
     private void showDialog() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_send_community, null, false);
@@ -148,10 +110,10 @@ public class CommunityFragment extends Fragment {
                         .append(time);
                 community.setDate(sb.toString());
                 community.setId(2);
+                community.setPhrase(false);
                 community.setPhraseNum(0);
                 community.setUUID(BaseActivity.myUser.getNickName());
-                communityList.add(community);
-                adapter.update(communityList);
+                adapter.update(community);
                 // 关闭对话框
                 dialog.cancel();
 
@@ -184,7 +146,7 @@ public class CommunityFragment extends Fragment {
         community = new Community();
         community.setContent("1111测试测1试啊实打实的");
         community.setDate("04.01 13:56");
-        community.setId(2);
+        community.setId(3);
         community.setPhraseNum(0);
         community.setUUID("demo");
         communityList.add(community);
@@ -192,7 +154,7 @@ public class CommunityFragment extends Fragment {
         community = new Community();
         community.setContent("1111测试测1试啊实打实的");
         community.setDate("04.10 13:56");
-        community.setId(2);
+        community.setId(4);
         community.setPhraseNum(0);
         community.setUUID("demo");
         communityList.add(community);
@@ -201,7 +163,7 @@ public class CommunityFragment extends Fragment {
         community = new Community();
         community.setContent("22测试测试啊实打实的");
         community.setDate("04.11 13:56");
-        community.setId(2);
+        community.setId(5);
         community.setPhraseNum(0);
         community.setUUID("demo");
         communityList.add(community);
@@ -209,7 +171,7 @@ public class CommunityFragment extends Fragment {
         community = new Community();
         community.setContent("33测试测试啊实打实的");
         community.setDate("04.14 13:56");
-        community.setId(2);
+        community.setId(6);
         community.setPhraseNum(0);
         community.setUUID("demo");
         communityList.add(community);
@@ -218,7 +180,7 @@ public class CommunityFragment extends Fragment {
         community = new Community();
         community.setContent("55测试测试啊实打实的");
         community.setDate("04.21 13:56");
-        community.setId(2);
+        community.setId(7);
         community.setPhraseNum(0);
         community.setUUID("demo");
         communityList.add(community);
@@ -226,19 +188,18 @@ public class CommunityFragment extends Fragment {
         community = new Community();
         community.setContent("66测试测试啊实打实的");
         community.setDate("04.25 13:56");
-        community.setId(2);
-        community.setPhraseNum(0);
+        community.setId(8);
+        community.setPhraseNum(11);
         community.setUUID("demo");
         communityList.add(community);
 
         community = new Community();
         community.setContent("20测试测试啊实打实的");
         community.setDate("04.27 13:56");
-        community.setId(2);
-        community.setPhraseNum(0);
+        community.setId(9);
+        community.setPhraseNum(6);
         community.setUUID("demo");
         communityList.add(community);
-
 
 
     }
@@ -259,5 +220,24 @@ public class CommunityFragment extends Fragment {
                 }
             }
         }
+    }
+
+    /**
+     * 下拉刷新
+     * @param refreshLayout
+     */
+    @Override
+    public void onRefresh(RefreshLayout refreshLayout) {
+        refreshLayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+    }
+
+    /**
+     * 上拉加载
+     * @param refreshLayout
+     */
+    @Override
+    public void onLoadMore(RefreshLayout refreshLayout) {
+        refreshLayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+
     }
 }
