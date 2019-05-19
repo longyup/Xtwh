@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import club.vasilis.xtwh.R;
@@ -22,8 +23,7 @@ import club.vasilis.xtwh.web.ShowActivityDails;
 
 public class RecruitDailsFragment extends Fragment {
 
-
-    private View view;
+    View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,9 +32,18 @@ public class RecruitDailsFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R2.id.btn_recruit_back)
-    public void onClick(){
-
+    @OnClick({R2.id.btn_recruit_back,R2.id.btnDelete})
+    public void onClick(Button button){
+        switch (button.getId()){
+            case R.id.btn_recruit_back:
+                break;
+            case R.id.btnDelete:
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ShowActivityDails.class);
+                startActivity(intent);
+                break;
+                default:
+        }
     }
 
     public void refresh(int ivDailsId,String tvDailsTitleText,String tvDailsDistanceText,String tvDailsRegionText,String tvDailsNumberText){
@@ -44,16 +53,6 @@ public class RecruitDailsFragment extends Fragment {
         TextView tvDailsRegion = view.findViewById(R.id.tv_region_recruit_dails);
         TextView tvDailsNumber = view.findViewById(R.id.tv_number_recruit_dails);
 
-        Button btnDelete = view.findViewById(R.id.btnDelete);
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent();
-                intent.setClass(getContext(), ShowActivityDails.class);
-                startActivity(intent);
-            }
-        });
 
         //刷新内容
         ivDails.setImageResource(ivDailsId);
