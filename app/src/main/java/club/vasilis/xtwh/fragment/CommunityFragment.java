@@ -2,16 +2,18 @@ package club.vasilis.xtwh.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -22,6 +24,9 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.adapter.CommunityAdapter;
@@ -37,7 +42,7 @@ import club.vasilis.xtwh.utils.Util;
  * @author Vasilis
  * @date 2019/4/25 * 12:49
  */
-public class CommunityFragment extends Fragment implements OnRefreshListener,OnLoadMoreListener {
+public class CommunityFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
 
 
     private List<User> userList = new ArrayList<>();
@@ -45,17 +50,19 @@ public class CommunityFragment extends Fragment implements OnRefreshListener,OnL
     private List<Phrase> phraseList = new ArrayList<>();
     private List<Comment> commentList = new ArrayList<>();
 
-    private FloatingActionButton fabSend;
+    @BindView(R.id.community_fab_send)
+    FloatingActionButton fabSend;
 
-    private RefreshLayout refreshLayout;
+    @BindView(R.id.community_refreshLayout)
+    RefreshLayout refreshLayout;
 
     private CommunityAdapter adapter;
-
+    private Unbinder unbinder;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
-
+        unbinder = ButterKnife.bind(this, view);
 
         // 初始化数据,后期会换成网络
         testInit();
@@ -70,7 +77,6 @@ public class CommunityFragment extends Fragment implements OnRefreshListener,OnL
         adapter = new CommunityAdapter(communityList, userList);
         recyclerView.setAdapter(adapter);
         // 发送按钮
-        fabSend = view.findViewById(R.id.community_fab_send);
         fabSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,13 +84,11 @@ public class CommunityFragment extends Fragment implements OnRefreshListener,OnL
             }
         });
 
-        refreshLayout = view.findViewById(R.id.community_refreshLayout);
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
 
         return view;
     }
-
 
 
     private void showDialog() {
@@ -224,20 +228,28 @@ public class CommunityFragment extends Fragment implements OnRefreshListener,OnL
 
     /**
      * 下拉刷新
+     *
      * @param refreshLayout
      */
     @Override
-    public void onRefresh(RefreshLayout refreshLayout) {
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         refreshLayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
     }
 
     /**
      * 上拉加载
+     *
      * @param refreshLayout
      */
     @Override
-    public void onLoadMore(RefreshLayout refreshLayout) {
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         refreshLayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 }

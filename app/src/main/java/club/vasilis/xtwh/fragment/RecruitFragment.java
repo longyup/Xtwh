@@ -1,15 +1,15 @@
 package club.vasilis.xtwh.fragment;
 
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,6 +137,50 @@ public class RecruitFragment extends Fragment {
         recruit.setNumber("9/20");
         Datas.add(recruit);
 
+        recruit = new Recruit();
+        recruit.setId(1);;
+        recruit.setTitle("园区安全巡查");
+        recruit.setImgId(R.drawable.recruit05);
+        recruit.setDistance("30km");
+        recruit.setRegion("西湖区");
+        recruit.setNumber("1/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(2);;
+        recruit.setTitle("浙商国际中心区园区安全消防巡查");
+        recruit.setImgId(R.drawable.recruit01);
+        recruit.setDistance("40km");
+        recruit.setRegion("富阳区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(3);;
+        recruit.setTitle("5.1无痕杭州");
+        recruit.setImgId(R.drawable.recruit02);
+        recruit.setDistance("60km");
+        recruit.setRegion("西湖区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(4);;
+        recruit.setTitle("临安站点义剪+敬老活动");
+        recruit.setImgId(R.drawable.recruit03);
+        recruit.setDistance("30km");
+        recruit.setRegion("临安区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(5);;
+        recruit.setTitle("兰园销控安全参观");
+        recruit.setImgId(R.drawable.recruit04);
+        recruit.setDistance("70km");
+        recruit.setRegion("市辖区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
     }
 
 

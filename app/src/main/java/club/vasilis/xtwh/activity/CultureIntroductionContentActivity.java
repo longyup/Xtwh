@@ -2,11 +2,12 @@ package club.vasilis.xtwh.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import club.vasilis.xtwh.fragment.CultureIntroductionContentFragment;
+import androidx.appcompat.app.AppCompatActivity;
+
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.fragment.CultureIntroductionContentFragment;
 
 public class CultureIntroductionContentActivity extends AppCompatActivity {
 

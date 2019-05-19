@@ -2,13 +2,15 @@ package club.vasilis.xtwh.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
-import club.vasilis.xtwh.fragment.RecruitDailsFragment;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.fragment.RecruitDailsFragment;
 
 public class RecruitContentActivity extends AppCompatActivity {
+
+
 
     public static void actionStart(Context context,int ivDailsId,String tvDailsTitleText,String tvDailsDistanceText,String tvDailsRegionText,String tvDailsNumberText){
         Intent intent = new Intent(context,RecruitContentActivity.class);
@@ -31,8 +33,9 @@ public class RecruitContentActivity extends AppCompatActivity {
         String tvDailsRegionText = getIntent().getStringExtra("tv_dailsRegion");
         String tvDailsNumberText = getIntent().getStringExtra("tv_dailsNumber");
 
-        RecruitDailsFragment fragment = (RecruitDailsFragment) getSupportFragmentManager().findFragmentById(R.id.recurit_dails_fragment);
-        fragment.refresh(ivDailsId,tvDailsTitleText,tvDailsDistanceText,tvDailsRegionText,tvDailsNumberText);
+
+        RecruitDailsFragment recruitDailsFragment = (RecruitDailsFragment) getSupportFragmentManager().findFragmentById(R.id.recurit_dails_fragment);
+        recruitDailsFragment.refresh(ivDailsId,tvDailsTitleText,tvDailsDistanceText,tvDailsRegionText,tvDailsNumberText);
 
     }
 

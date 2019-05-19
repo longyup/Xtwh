@@ -1,7 +1,5 @@
 package club.vasilis.xtwh.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +7,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.domain.Comment;
@@ -80,6 +83,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         viewHolder.phrase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (community.isPhrase()) {
                     //从表中删除
                     viewHolder.ivPhrase.setImageResource(R.drawable.unphrase);
@@ -123,30 +127,37 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         notifyDataSetChanged();*/
     }
 
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.community_item_iv_head)
         ImageView ivHead;
+        @BindView(R.id.community_item_tv_name)
         TextView tvName;
+        @BindView(R.id.community_item_tv_date)
         TextView tvDate;
+        @BindView(R.id.community_item_tv_content)
         TextView tvContent;
-        LinearLayout phrase;
-        TextView tvPhrase;
+        @BindView(R.id.community_item_image_group)
+        LinearLayout imageGroup;
+        @BindView(R.id.community_item_iv_phrase)
         ImageView ivPhrase;
-        LinearLayout comment;
+        @BindView(R.id.community_item_tv_phrase)
+        TextView tvPhrase;
+        @BindView(R.id.community_item_phrase)
+        LinearLayout phrase;
+        @BindView(R.id.community_item_iv_comment)
         ImageView ivComment;
+        @BindView(R.id.community_item_tv_comment)
         TextView tvComment;
+        @BindView(R.id.community_item_comment)
+        LinearLayout comment;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivHead = itemView.findViewById(R.id.community_item_iv_head);
-            tvName = itemView.findViewById(R.id.community_item_tv_name);
-            tvDate = itemView.findViewById(R.id.community_item_tv_date);
-            tvContent = itemView.findViewById(R.id.community_item_tv_content);
-            phrase = itemView.findViewById(R.id.community_item_phrase);
-            comment = itemView.findViewById(R.id.community_item_comment);
-            tvPhrase = itemView.findViewById(R.id.community_item_tv_phrase);
-            ivPhrase = itemView.findViewById(R.id.community_item_iv_phrase);
-
+            ButterKnife.bind(this, itemView);
 
         }
     }
+
 }
