@@ -1,19 +1,25 @@
 package club.vasilis.xtwh.fragment;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.R2;
+import club.vasilis.xtwh.web.ShowActivityDails;
+
 public class RecruitDailsFragment extends Fragment {
 
 
@@ -22,21 +28,16 @@ public class RecruitDailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.recruit_dails_fragment,container,false);
-        ImageView btnBack = view.findViewById(R.id.btn_recruit_back);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
+        ButterKnife.bind(this,view);
         return view;
     }
 
+    @OnClick(R2.id.btn_recruit_back)
+    public void onClick(){
+
+    }
+
     public void refresh(int ivDailsId,String tvDailsTitleText,String tvDailsDistanceText,String tvDailsRegionText,String tvDailsNumberText){
-
-
         ImageView ivDails = view.findViewById(R.id.iv_recruit_dails);
         TextView tvDailsTitle = view.findViewById(R.id.tv_title_recruit_dails);
         TextView tvDailsDistance = view.findViewById(R.id.tv_distance_recruit_dails);
@@ -48,7 +49,9 @@ public class RecruitDailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getContext(), "加入活动", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(getContext(), ShowActivityDails.class);
+                startActivity(intent);
             }
         });
 

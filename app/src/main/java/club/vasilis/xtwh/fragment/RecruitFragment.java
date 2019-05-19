@@ -1,15 +1,15 @@
 package club.vasilis.xtwh.fragment;
 
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +19,18 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.R2;
 import club.vasilis.xtwh.adapter.RecruitActivityAdapter;
 import club.vasilis.xtwh.domain.Recruit;
 
 public class RecruitFragment extends Fragment {
     private List<Recruit> Datas = new ArrayList<>();
-    private RecyclerView recuritRecyclerView;
+    @BindView(R2.id.recycler_view_Recruit_activity)
+    RecyclerView recuritRecyclerView;
+
     private ImageView recuritBack;
     private RecruitActivityAdapter recruitActivityAdapter;
     private SwipeRefreshLayout refreshLayout;
@@ -34,7 +39,7 @@ public class RecruitFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recuit_frag,container,false);
-        recuritRecyclerView = view.findViewById(R.id.recycler_view_Recruit_activity);
+        ButterKnife.bind(this,view);
 
         initDatas();
         recruitActivityAdapter= new RecruitActivityAdapter(Datas,getContext());
@@ -44,7 +49,7 @@ public class RecruitFragment extends Fragment {
         //设置布局管理器
         recuritRecyclerView.setLayoutManager(layoutManager);
         //设置为垂直布局，这也是默认的
-        layoutManager.setOrientation(OrientationHelper.VERTICAL);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         //设置Adapter
         recuritRecyclerView.setAdapter( recruitActivityAdapter);
         //设置增加或删除条目的动画
