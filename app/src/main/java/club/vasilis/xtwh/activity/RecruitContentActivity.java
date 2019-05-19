@@ -2,11 +2,11 @@ package club.vasilis.xtwh.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
 
-import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.fragment.RecruitDailsFragment;
+import club.vasilis.xtwh.R;
 
 public class RecruitContentActivity extends AppCompatActivity {
 

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 
 public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.ViewHolder> {
@@ -48,16 +50,23 @@ public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         View otherView;
+
+        @BindView(R.id.my_msg_other_view_line)
         View vLine;
+
+        @BindView(R.id.my_msg_other_tv_title)
         TextView tv_otherTitle;
+
+        @BindView(R.id.my_msg_other_iv_icon)
         ImageView iv_otherImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this,itemView);
             otherView = itemView;
-            tv_otherTitle = itemView.findViewById(R.id.my_msg_other_tv_title);
-            iv_otherImg = itemView.findViewById(R.id.my_msg_other_iv_icon);
-            vLine = itemView.findViewById(R.id.my_msg_other_view_line);
+//            tv_otherTitle = itemView.findViewById(R.id.my_msg_other_tv_title);
+//            iv_otherImg = itemView.findViewById(R.id.my_msg_other_iv_icon);
+//            vLine = itemView.findViewById(R.id.my_msg_other_view_line);
         }
     }
 
