@@ -1,7 +1,7 @@
 package club.vasilis.xtwh.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import butterknife.BindView;
 import club.vasilis.xtwh.R;
 
 public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.ViewHolder> {
@@ -48,16 +49,23 @@ public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         View otherView;
+
+        @BindView(R.id.my_msg_other_view_line)
         View vLine;
+
+        @BindView(R.id.my_msg_other_tv_title)
         TextView tv_otherTitle;
+
+        @BindView(R.id.my_msg_other_iv_icon)
         ImageView iv_otherImg;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             otherView = itemView;
-            tv_otherTitle = itemView.findViewById(R.id.my_msg_other_tv_title);
-            iv_otherImg = itemView.findViewById(R.id.my_msg_other_iv_icon);
-            vLine = itemView.findViewById(R.id.my_msg_other_view_line);
+//            tv_otherTitle = itemView.findViewById(R.id.my_msg_other_tv_title);
+//            iv_otherImg = itemView.findViewById(R.id.my_msg_other_iv_icon);
+//            vLine = itemView.findViewById(R.id.my_msg_other_view_line);
         }
     }
 

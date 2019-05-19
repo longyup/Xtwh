@@ -3,8 +3,8 @@ package club.vasilis.xtwh.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import butterknife.BindView;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.activity.BaseActivity;
 
@@ -121,22 +122,32 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         View userView;
+
+        @BindView(R.id.my_msg_user_view_line)
         View vLine;
+
         //用户个人信息
+        @BindView(R.id.my_msg_personage_user_frame_user_msg)
         TextView tv_userMsg;
+
+        @BindView(R.id.my_msg_personage_user_frame_head_img)
         ImageView iv_userHead;
+
         //用户个人界面标题
+        @BindView(R.id.my_msg_personage_user_title)
         TextView tv_userTitle;
+
+        @BindView(R.id.my_msg_personage_user_icon)
         ImageView iv_userIcon;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userView = itemView;
-            tv_userMsg = itemView.findViewById(R.id.my_msg_personage_user_frame_user_msg);
-            iv_userHead = itemView.findViewById(R.id.my_msg_personage_user_frame_head_img);
-            tv_userTitle = itemView.findViewById(R.id.my_msg_personage_user_title);
-            iv_userIcon = itemView.findViewById(R.id.my_msg_personage_user_icon);
-            vLine = itemView.findViewById(R.id.my_msg_user_view_line);
+//            tv_userMsg = itemView.findViewById(R.id.my_msg_personage_user_frame_user_msg);
+//            iv_userHead = itemView.findViewById(R.id.my_msg_personage_user_frame_head_img);
+//            tv_userTitle = itemView.findViewById(R.id.my_msg_personage_user_title);
+//            iv_userIcon = itemView.findViewById(R.id.my_msg_personage_user_icon);
+//            vLine = itemView.findViewById(R.id.my_msg_user_view_line);
         }
     }
 }
