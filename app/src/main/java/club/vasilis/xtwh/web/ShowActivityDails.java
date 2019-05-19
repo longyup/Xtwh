@@ -164,15 +164,16 @@ public class ShowActivityDails extends AppCompatActivity{
          }
 
          public class Holder extends RecyclerView.ViewHolder {
+             @BindView(R2.id.activity_json_name)
              TextView tvName;
+             @BindView(R2.id.activity_json_info)
              TextView tvInfo;
+             @BindView(R2.id.activity_json_launchTime)
              TextView tvLaunchTime;
 
              public Holder(View view) {
                  super(view);
-                 tvName = view.findViewById(R.id.activity_json_name);
-                 tvInfo = view.findViewById(R.id.activity_json_info);
-                 tvLaunchTime = view.findViewById(R.id.activity_json_launchTime);
+                 ButterKnife.bind(this,view);
 
 
              }
