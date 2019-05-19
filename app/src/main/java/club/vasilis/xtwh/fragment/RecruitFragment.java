@@ -22,13 +22,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.R2;
 import club.vasilis.xtwh.adapter.RecruitActivityAdapter;
 import club.vasilis.xtwh.domain.Recruit;
 
 public class RecruitFragment extends Fragment {
     private List<Recruit> Datas = new ArrayList<>();
-    @BindView(R2.id.recycler_view_Recruit_activity)
+    @BindView(R.id.recycler_view_Recruit_activity)
     RecyclerView recuritRecyclerView;
 
     private ImageView recuritBack;

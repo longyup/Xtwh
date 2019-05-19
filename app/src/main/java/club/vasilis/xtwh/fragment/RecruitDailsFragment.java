@@ -18,11 +18,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.R2;
 import club.vasilis.xtwh.web.ShowActivityDails;
 
 public class RecruitDailsFragment extends Fragment {
-
+    @BindView(R.id.iv_recruit_dails)
+    ImageView ivDails;
+    @BindView(R.id.tv_title_recruit_dails)
+    TextView tvDailsTitle;
+    @BindView(R.id.tv_distance_recruit_dails)
+    TextView tvDailsDistance;
+    @BindView(R.id.tv_region_recruit_dails)
+    TextView tvDailsRegion;
+    @BindView(R.id.tv_number_recruit_dails)
+    TextView tvDailsNumber;
     View view;
     @Nullable
     @Override
@@ -32,7 +40,7 @@ public class RecruitDailsFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R2.id.btn_recruit_back,R2.id.btnDelete})
+    @OnClick({R.id.btn_recruit_back,R.id.btnDelete})
     public void onClick(Button button){
         switch (button.getId()){
             case R.id.btn_recruit_back:
@@ -47,11 +55,7 @@ public class RecruitDailsFragment extends Fragment {
     }
 
     public void refresh(int ivDailsId,String tvDailsTitleText,String tvDailsDistanceText,String tvDailsRegionText,String tvDailsNumberText){
-        ImageView ivDails = view.findViewById(R.id.iv_recruit_dails);
-        TextView tvDailsTitle = view.findViewById(R.id.tv_title_recruit_dails);
-        TextView tvDailsDistance = view.findViewById(R.id.tv_distance_recruit_dails);
-        TextView tvDailsRegion = view.findViewById(R.id.tv_region_recruit_dails);
-        TextView tvDailsNumber = view.findViewById(R.id.tv_number_recruit_dails);
+
 
 
         //刷新内容

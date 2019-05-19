@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import club.vasilis.xtwh.BuildConfig;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.R2;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -44,7 +43,7 @@ public class ShowActivityDails extends AppCompatActivity{
 
 
     //黄油刀
-    @BindView(R2.id.rv_show_activity)
+    @BindView(R.id.rv_show_activity)
     RecyclerView rv;
 
     private ActivityAdapter activityAdapter;
@@ -60,7 +59,7 @@ public class ShowActivityDails extends AppCompatActivity{
 
     }
 
-    @OnClick(R2.id.btn_get_activity_data)
+    @OnClick(R.id.btn_get_activity_data)
     public void onClick() {
         inntData();
     }
@@ -164,11 +163,11 @@ public class ShowActivityDails extends AppCompatActivity{
          }
 
          public class Holder extends RecyclerView.ViewHolder {
-             @BindView(R2.id.activity_json_name)
+             @BindView(R.id.activity_json_name)
              TextView tvName;
-             @BindView(R2.id.activity_json_info)
+             @BindView(R.id.activity_json_info)
              TextView tvInfo;
-             @BindView(R2.id.activity_json_launchTime)
+             @BindView(R.id.activity_json_launchTime)
              TextView tvLaunchTime;
 
              public Holder(View view) {

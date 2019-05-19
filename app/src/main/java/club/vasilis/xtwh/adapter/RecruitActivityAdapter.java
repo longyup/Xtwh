@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.R2;
+
 import club.vasilis.xtwh.activity.RecruitContentActivity;
 import club.vasilis.xtwh.domain.Recruit;
 
@@ -69,13 +69,13 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.recurit_iv)
         ImageView resuritIv;
-        @BindView(R2.id.recruit_title)
+        @BindView(R.id.recruit_title)
         TextView titletv;
-        @BindView(R2.id.recurit_distance_tv)
+        @BindView(R.id.recurit_distance_tv)
         TextView distancetv;
-        @BindView(R2.id.recurit_region_tv)
+        @BindView(R.id.recurit_region_tv)
         TextView regiontv;
-        @BindView(R2.id.recurit_peoplenumber_tv)
+        @BindView(R.id.recurit_peoplenumber_tv)
         TextView numbertv;
 
 
