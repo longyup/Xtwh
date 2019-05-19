@@ -19,13 +19,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.RecruitActivityAdapter;
 import club.vasilis.xtwh.domain.Recruit;
 
 public class RecruitFragment extends Fragment {
     private List<Recruit> Datas = new ArrayList<>();
-    private RecyclerView recuritRecyclerView;
+    @BindView(R.id.recycler_view_Recruit_activity)
+    RecyclerView recuritRecyclerView;
+
     private ImageView recuritBack;
     private RecruitActivityAdapter recruitActivityAdapter;
     private SwipeRefreshLayout refreshLayout;
@@ -34,7 +38,7 @@ public class RecruitFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recuit_frag,container,false);
-        recuritRecyclerView = view.findViewById(R.id.recycler_view_Recruit_activity);
+        ButterKnife.bind(this,view);
 
         initDatas();
         recruitActivityAdapter= new RecruitActivityAdapter(Datas,getContext());
@@ -44,7 +48,7 @@ public class RecruitFragment extends Fragment {
         //设置布局管理器
         recuritRecyclerView.setLayoutManager(layoutManager);
         //设置为垂直布局，这也是默认的
-        layoutManager.setOrientation(OrientationHelper.VERTICAL);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
         //设置Adapter
         recuritRecyclerView.setAdapter( recruitActivityAdapter);
         //设置增加或删除条目的动画
@@ -137,6 +141,50 @@ public class RecruitFragment extends Fragment {
         recruit.setNumber("9/20");
         Datas.add(recruit);
 
+        recruit = new Recruit();
+        recruit.setId(1);;
+        recruit.setTitle("园区安全巡查");
+        recruit.setImgId(R.drawable.recruit05);
+        recruit.setDistance("30km");
+        recruit.setRegion("西湖区");
+        recruit.setNumber("1/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(2);;
+        recruit.setTitle("浙商国际中心区园区安全消防巡查");
+        recruit.setImgId(R.drawable.recruit01);
+        recruit.setDistance("40km");
+        recruit.setRegion("富阳区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(3);;
+        recruit.setTitle("5.1无痕杭州");
+        recruit.setImgId(R.drawable.recruit02);
+        recruit.setDistance("60km");
+        recruit.setRegion("西湖区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(4);;
+        recruit.setTitle("临安站点义剪+敬老活动");
+        recruit.setImgId(R.drawable.recruit03);
+        recruit.setDistance("30km");
+        recruit.setRegion("临安区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
+
+        recruit = new Recruit();
+        recruit.setId(5);;
+        recruit.setTitle("兰园销控安全参观");
+        recruit.setImgId(R.drawable.recruit04);
+        recruit.setDistance("70km");
+        recruit.setRegion("市辖区");
+        recruit.setNumber("9/20");
+        Datas.add(recruit);
     }
 
 

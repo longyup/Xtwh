@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 
 public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.ViewHolder> {
@@ -61,7 +62,7 @@ public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.Vi
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            ButterKnife.bind(this,itemView);
             otherView = itemView;
 //            tv_otherTitle = itemView.findViewById(R.id.my_msg_other_tv_title);
 //            iv_otherImg = itemView.findViewById(R.id.my_msg_other_iv_icon);

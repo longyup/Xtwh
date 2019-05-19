@@ -7,76 +7,132 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="4dp">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/btn_recruit_back"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/back"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="4dp"
+                android:paddingTop="12dp"
+                android:paddingRight="4dp"
+                android:paddingBottom="8dp"
+                android:text="活动详情"
+                android:layout_gravity="center"
+                android:textColor="#666"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:id="@+id/btn_recruit_back"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/back"/>
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/iv_recruit_dails"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="4dp"
-            android:paddingTop="12dp"
-            android:paddingRight="4dp"
-            android:paddingBottom="8dp"
-            android:text="活动详情"
-            android:layout_gravity="center"
-            android:textColor="#666"
-            android:textSize="20sp" />
+            android:layout_marginTop="10dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:text="活动标题 : "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_title_recruit_dails"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:text="活动距离 : "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_distance_recruit_dails"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:text="活动地区 : "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_region_recruit_dails"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:text="活动人数 : "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_number_recruit_dails"
+                />
+        </LinearLayout>
     </LinearLayout>
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/iv_recruit_dails"
-        android:scaleType="centerCrop"/>
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_title_recruit_dails"
-        android:layout_marginLeft="10dp"
-        android:textSize="18sp"
-        android:layout_marginTop="5dp"
-        android:text="活动标题"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_distance_recruit_dails"
-        android:layout_marginLeft="10dp"
-        android:textSize="18sp"
-        android:layout_marginTop="5dp"
-        android:text="活动距离"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_region_recruit_dails"
-        android:layout_marginLeft="10dp"
-        android:textSize="18sp"
-        android:layout_marginTop="5dp"
-        android:text="活动地区"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_number_recruit_dails"
-        android:text="活动人数"
-        android:textSize="18sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"/>
-
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="加入活动"
+    android:gravity="center"
+    android:id="@+id/btnDelete"
+    android:layout_marginTop="10dp"
+    android:textSize="18sp"/>
 
 </LinearLayout>

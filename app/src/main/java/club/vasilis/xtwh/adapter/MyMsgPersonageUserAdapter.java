@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.activity.BaseActivity;
 
@@ -142,6 +143,8 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            ButterKnife.bind(this,itemView);
             userView = itemView;
 //            tv_userMsg = itemView.findViewById(R.id.my_msg_personage_user_frame_user_msg);
 //            iv_userHead = itemView.findViewById(R.id.my_msg_personage_user_frame_head_img);
