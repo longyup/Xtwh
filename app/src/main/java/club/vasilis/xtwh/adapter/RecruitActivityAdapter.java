@@ -1,34 +1,31 @@
 package club.vasilis.xtwh.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.activity.RecruitContentActivity;
 import club.vasilis.xtwh.domain.Recruit;
 
 public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivityAdapter.ViewHolder> {
     private List<Recruit> Datas;
-//    private List<String> distanceDatas;
-//    private List<String> regionActivityDatas;
-//    private List<String> numberDatas;
     private Context mContext;
     private LayoutInflater inflater;
 
 
     public RecruitActivityAdapter(List<Recruit> Datas, Context mContext) {
         this.Datas = Datas;
-//        this.distanceDatas = distanceDatas;
-//        this.regionActivityDatas = regionActivityDatas;
-//        this.numberDatas = numberDatas;
         this.mContext = mContext;
         inflater=LayoutInflater. from(mContext);
     }
@@ -70,20 +67,22 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.recurit_iv)
         ImageView resuritIv;
+        @BindView(R.id.recruit_title)
         TextView titletv;
+        @BindView(R.id.recurit_distance_tv)
         TextView distancetv;
+        @BindView(R.id.recurit_region_tv)
         TextView regiontv;
+        @BindView(R.id.recurit_peoplenumber_tv)
         TextView numbertv;
+
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            titletv = itemView.findViewById(R.id.recruit_title);
-            distancetv = itemView.findViewById(R.id.recurit_distance_tv);
-            regiontv = itemView.findViewById(R.id.recurit_region_tv);
-            numbertv = itemView.findViewById(R.id.recurit_peoplenumber_tv);
-            resuritIv = itemView.findViewById(R.id.recurit_iv);
-
+            ButterKnife.bind(this,itemView);
         }
     }
 
