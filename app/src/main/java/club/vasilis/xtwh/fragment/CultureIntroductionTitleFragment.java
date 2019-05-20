@@ -34,7 +34,6 @@ public class CultureIntroductionTitleFragment extends Fragment {
 
     private ViewPager vp_main;
     private ArrayList<ImageView> imageViews;
-    //private TabLayout tabCultureIntroduction;
 
     @BindView(R.id.rv_culture_introduction_title)
     RecyclerView cultureIntroductionTitleRecyclerView;
@@ -48,14 +47,12 @@ public class CultureIntroductionTitleFragment extends Fragment {
 
     private List<CultureIntroduction> mCultureIntroductionList = new ArrayList<>();
     private CultureIntroductionAdapter adapter;
-    //private RecyclerView cultureIntroductionTitleRecyclerView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //垂直滚动
         View view = inflater.inflate(R.layout.culture_introduction_title_frag, container, false);
-        //cultureIntroductionTitleRecyclerView = view.findViewById(R.id.rv_culture_introduction_title);
         ButterKnife.bind(this,view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         cultureIntroductionTitleRecyclerView.setLayoutManager(layoutManager);
@@ -92,7 +89,6 @@ public class CultureIntroductionTitleFragment extends Fragment {
         }
 
         //tablayout实现水平滚动
-        //tabCultureIntroduction = view.findViewById(R.id.tabCultureIntroduction);
         tabCultureIntroduction.addTab(tabCultureIntroduction.newTab().setText("文化遗产"));
         tabCultureIntroduction.addTab(tabCultureIntroduction.newTab().setText("特色美食"));
         tabCultureIntroduction.addTab(tabCultureIntroduction.newTab().setText("名人趣事"));

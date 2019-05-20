@@ -55,7 +55,6 @@ public class CultureIntroductionAdapter extends RecyclerView.Adapter<CultureIntr
             super(itemView);
 
             ButterKnife.bind(this,itemView);
-            //tvCultureIntroductionTitle = itemView.findViewById(R.id.tvCultureIntroductionTitle);
         }
     }
 

@@ -24,8 +24,6 @@ import club.vasilis.xtwh.R;
  */
 public class CultureIntroductionContentFragment extends Fragment {
     private View view;
-    /*@BindView(R.id.btn_content_back)
-    Button btnContentBack;*/
 
     @BindView(R.id.tv_cultureIntroduction_content)
     TextView tvCultureIntroductionContent;
@@ -36,9 +34,6 @@ public class CultureIntroductionContentFragment extends Fragment {
     private Unbinder unbinder;
 
 
-    /*private ImageView btn_content_back;
-
-    private TextView tv_cultureIntroduction_content;*/
 
     @Nullable
     @Override
@@ -51,15 +46,7 @@ public class CultureIntroductionContentFragment extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         tvCultureIntroductionContent.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        /*tv_cultureIntroduction_content = view.findViewById(R.id.tv_cultureIntroduction_content);
-        tv_cultureIntroduction_content.setMovementMethod(ScrollingMovementMethod.getInstance());
-        btn_content_back = view.findViewById(R.id.btn_content_back);
-        btn_content_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });*/
         return view;
     }
 
@@ -71,8 +58,6 @@ public class CultureIntroductionContentFragment extends Fragment {
     public void refresh(String Title, String Content) {
         View ll_cultureIntroduction_visibility_layout = view.findViewById(R.id.ll_cultureIntroduction_visibility_layout);
         ll_cultureIntroduction_visibility_layout.setVisibility(View.VISIBLE);
-        /*TextView tv_cultureIntroduction_title = view.findViewById(R.id.tv_cultureIntroduction_title);
-        TextView tv_cultureIntroduction_content = view.findViewById(R.id.tv_cultureIntroduction_content);*/
         //刷新标题
         tvCultureIntroductionTitle.setText(Title);
         //刷新内容
