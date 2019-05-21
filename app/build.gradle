@@ -38,4 +38,9 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.1.71.android'
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    // 刷新功能
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-9'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    // banner
+    implementation 'com.youth.banner:banner:1.4.10'
 }

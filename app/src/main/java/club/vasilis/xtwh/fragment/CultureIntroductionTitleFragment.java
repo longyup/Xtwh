@@ -3,19 +3,21 @@ package club.vasilis.xtwh.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,11 +35,13 @@ public class CultureIntroductionTitleFragment extends Fragment {
     private ArrayList<ImageView> imageViews;
     private TabLayout tab_culture_introduction;
 
-
     private List<CultureIntroduction> CultureMainTitle = new ArrayList<>();
     private List<CultureIntroduction> mCultureIntroductionList = new ArrayList<>();
     private CultureIntroductionAdapter adapter;
     private RecyclerView cultureIntroductionTitleRecyclerView;
+
+
+
 
     @Nullable
     @Override

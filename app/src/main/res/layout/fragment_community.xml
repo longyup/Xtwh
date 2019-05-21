@@ -13,10 +13,10 @@
             android:id="@+id/community_refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#888888"
-            app:srlAccentColor="@android:color/white"
-            app:srlEnablePreviewInEditMode="true"
-            app:srlPrimaryColor="#888888">
+            android:background="#888888">
+           <!-- app:srlAccentColor="@android:color/white"-->
+           <!-- app:srlEnablePreviewInEditMode="true"
+            app:srlPrimaryColor="#888888"-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/community_rv"

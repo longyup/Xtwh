@@ -128,7 +128,6 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     }
 
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.community_item_iv_head)
         ImageView ivHead;
