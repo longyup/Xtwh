@@ -10,15 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -90,14 +87,16 @@ public class ShowActivityDails extends AppCompatActivity{
 
                             try {
                                 JSONArray jsonArray = new JSONArray(body);
-                                final List<Activity> activityList = new ArrayList<>();
-                                for (Activity activity : activityList){
-                                    JSONObject obj = new JSONObject();
-                                    obj.put("name",activity.getName());
-                                    obj.put("info",activity.getInfo());
-                                    obj.put("launchTime",activity.getLaunchTime());
-                                    jsonArray.put(obj);
-
+                                List<Activity> activityList = new ArrayList<>();
+                                for (int i =0;i<jsonArray.length();i++){
+                                    Activity activity = new Activity();
+                                    JSONObject obj = jsonArray.getJSONObject(i);
+                                    activity.setName(obj.getString("name"));
+                                    activity.setInfo(obj.getString("info"));
+                                    activity.setLaunchTime(obj.getString("launchTime"));
+                                    activity.setId(obj.getString("id"));
+                                    activityList.add(activity);
+                                    Log.e("123",""+obj);
                                 }
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -137,6 +136,8 @@ public class ShowActivityDails extends AppCompatActivity{
                  holder.tvName.setText(activity.getName());
                  holder.tvInfo.setText(activity.getInfo());
                  holder.tvLaunchTime.setText(activity.getLaunchTime());
+                 holder.tvId.setText(activity.getId());
+
              }
          }
 
@@ -169,6 +170,8 @@ public class ShowActivityDails extends AppCompatActivity{
              TextView tvInfo;
              @BindView(R.id.activity_json_launchTime)
              TextView tvLaunchTime;
+             @BindView(R.id.activity_json_id)
+             TextView tvId;
 
              public Holder(View view) {
                  super(view);
