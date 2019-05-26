@@ -1,51 +1,64 @@
 package club.vasilis.xtwh.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
 
 /**
  * 文化详情页
  */
 public class CultureIntroductionContentFragment extends Fragment {
-
-    private ImageView btn_content_back;
     private View view;
-    private TextView tv_cultureIntroduction_content;
+
+    @BindView(R.id.tv_cultureIntroduction_content)
+    TextView tvCultureIntroductionContent;
+
+    @BindView(R.id.tv_cultureIntroduction_title)
+    TextView tvCultureIntroductionTitle;
+
+    private Unbinder unbinder;
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+
+
         view = inflater.inflate(R.layout.culture_introduction_content_frag, container, false);
-        tv_cultureIntroduction_content = view.findViewById(R.id.tv_cultureIntroduction_content);
-        tv_cultureIntroduction_content.setMovementMethod(ScrollingMovementMethod.getInstance());
-        btn_content_back = view.findViewById(R.id.btn_content_back);
-        btn_content_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
+        unbinder = ButterKnife.bind(this, view);
+        tvCultureIntroductionContent.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+
         return view;
+    }
+
+    @OnClick(R.id.btn_content_back)
+    void show(){
+        getActivity().finish();
     }
 
     public void refresh(String Title, String Content) {
         View ll_cultureIntroduction_visibility_layout = view.findViewById(R.id.ll_cultureIntroduction_visibility_layout);
         ll_cultureIntroduction_visibility_layout.setVisibility(View.VISIBLE);
-        TextView tv_cultureIntroduction_title = view.findViewById(R.id.tv_cultureIntroduction_title);
-        TextView tv_cultureIntroduction_content = view.findViewById(R.id.tv_cultureIntroduction_content);
         //刷新标题
-        tv_cultureIntroduction_title.setText(Title);
+        tvCultureIntroductionTitle.setText(Title);
         //刷新内容
-        tv_cultureIntroduction_content.setText(Content);
+        tvCultureIntroductionContent.setText(Content);
     }
 }

@@ -4,7 +4,8 @@ package club.vasilis.xtwh.domain;
  * @author Vasilis
  * @date 2019/3/29 * 21:11
  */
-public class Phrase {
+public class
+Phrase {
     private int phraseId;// phrase表的主键ID
     private String phraseDate;// 点赞的时间
     private String uuid;// 点赞者的名字
