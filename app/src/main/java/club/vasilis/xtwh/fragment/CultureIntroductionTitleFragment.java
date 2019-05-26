@@ -24,6 +24,7 @@ import java.util.List;
 
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.activity.CultureIntroductionContentActivity;
+import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.CultureIntroduction;
 
 /**
@@ -238,8 +239,10 @@ public class CultureIntroductionTitleFragment extends Fragment {
 
     //特色美食
     private List<CultureIntroduction> getCultureIntroduction2() {
-        List<CultureIntroduction> mCultureIntroductionList = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
+        List<CultureIntroduction> CultureIntroductionList = new ArrayList<>();
+        String url = MyApplication.HOST +"/product?method=findbytype&id=T004";
+        
+       /* for (int i = 1; i <= 5; i++) {
             CultureIntroduction cultureIntroduction = new CultureIntroduction();
             if (i == 1) {
                 cultureIntroduction.setTitle("东坡肉");
@@ -263,7 +266,7 @@ public class CultureIntroductionTitleFragment extends Fragment {
                         "\n");
             }
             mCultureIntroductionList.add(cultureIntroduction);
-        }
+        }*/
         return mCultureIntroductionList;
     }
 
