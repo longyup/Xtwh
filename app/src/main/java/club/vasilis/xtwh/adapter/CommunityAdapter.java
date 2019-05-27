@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.BaseActivity;
+import club.vasilis.xtwh.ui.activity.BaseActivity;
 import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
 import club.vasilis.xtwh.domain.Phrase;

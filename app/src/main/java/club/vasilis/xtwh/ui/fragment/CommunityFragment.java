@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.ui.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.BaseActivity;
+import club.vasilis.xtwh.ui.activity.BaseActivity;
 import club.vasilis.xtwh.adapter.CommunityAdapter;
 import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;

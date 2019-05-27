@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.MyMsgPersonageActivity;
+import club.vasilis.xtwh.ui.activity.MyMsgPersonageActivity;
 import club.vasilis.xtwh.adapter.MyMsgOtherAdapter;
 
 /*

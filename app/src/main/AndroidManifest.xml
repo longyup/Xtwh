@@ -16,18 +16,18 @@
         <activity android:name=".web.ShowActivityDails">
 
         </activity>
-        <activity android:name=".activity.MyMsgPersonageActivity" />
-        <activity android:name=".activity.WelcomeActivity" />
-        <activity android:name=".activity.GuideActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".ui.activity.MyMsgPersonageActivity" />
+        <activity android:name=".ui.activity.WelcomeActivity" />
+        <activity android:name=".ui.activity.GuideActivity" />
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CultureIntroductionContentActivity" />
-        <activity android:name=".activity.RecruitContentActivity" />
+        <activity android:name=".ui.activity.CultureIntroductionContentActivity" />
+        <activity android:name=".ui.activity.RecruitContentActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.activity;
+package club.vasilis.xtwh.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.fragment.CultureIntroductionContentFragment;
+import club.vasilis.xtwh.ui.fragment.CultureIntroductionContentFragment;
 
 public class CultureIntroductionContentActivity extends AppCompatActivity {
 

@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.CultureIntroductionContentActivity;
+import club.vasilis.xtwh.ui.activity.CultureIntroductionContentActivity;
 import club.vasilis.xtwh.domain.CultureIntroduction;
 
 //CultureIntroduction的适配器

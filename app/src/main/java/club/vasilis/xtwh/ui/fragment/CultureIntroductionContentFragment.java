@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.ui.fragment;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
