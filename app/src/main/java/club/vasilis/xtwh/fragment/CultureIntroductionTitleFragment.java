@@ -3,11 +3,11 @@ package club.vasilis.xtwh.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,18 +19,26 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.CultureIntroductionContentActivity;
+import club.vasilis.xtwh.adapter.CultureIntroductionAdapter;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.CultureIntroduction;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 首页
  */
 public class CultureIntroductionTitleFragment extends Fragment {
+
 
     private ViewPager vp_main;
     private ArrayList<ImageView> imageViews;
@@ -41,9 +49,6 @@ public class CultureIntroductionTitleFragment extends Fragment {
     private CultureIntroductionAdapter adapter;
     private RecyclerView cultureIntroductionTitleRecyclerView;
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class CultureIntroductionTitleFragment extends Fragment {
         cultureIntroductionTitleRecyclerView = view.findViewById(R.id.rv_culture_introduction_title);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         cultureIntroductionTitleRecyclerView.setLayoutManager(layoutManager);
-        adapter = new CultureIntroductionAdapter(getCultureIntroduction());
+        adapter = new CultureIntroductionAdapter(getContext(),getCultureIntroduction());
         cultureIntroductionTitleRecyclerView.setAdapter(adapter);
 
         vp_main = view.findViewById(R.id.vp_main);
@@ -97,27 +102,28 @@ public class CultureIntroductionTitleFragment extends Fragment {
                 if (tab.getText() == "文化遗产") {
                     mCultureIntroductionList.clear();
                     adapter.notifyDataSetChanged();
-                    adapter = new CultureIntroductionAdapter(getCultureIntroduction());
+                    adapter = new CultureIntroductionAdapter(getContext(),getCultureIntroduction());
                     cultureIntroductionTitleRecyclerView.setAdapter(adapter);
                 }
                 if (tab.getText() == "特色美食") {
-                    mCultureIntroductionList.clear();
+                    getCultureIntroduction2();
+                  /*  mCultureIntroductionList.clear();
                     adapter.notifyDataSetChanged();
-                    adapter = new CultureIntroductionAdapter(getCultureIntroduction2());
-                    cultureIntroductionTitleRecyclerView.setAdapter(adapter);
+                    adapter = new CultureIntroductionAdapter(getContext(),getCultureIntroduction2());
+                    cultureIntroductionTitleRecyclerView.setAdapter(adapter);*/
                 }
 
                 if (tab.getText() == "名人趣事") {
                     mCultureIntroductionList.clear();
                     adapter.notifyDataSetChanged();
-                    adapter = new CultureIntroductionAdapter(getCultureIntroduction3());
+                    adapter = new CultureIntroductionAdapter(getContext(),getCultureIntroduction3());
                     cultureIntroductionTitleRecyclerView.setAdapter(adapter);
                 }
 
                 if (tab.getText() == "民俗风情") {
                     mCultureIntroductionList.clear();
                     adapter.notifyDataSetChanged();
-                    adapter = new CultureIntroductionAdapter(getCultureIntroduction4());
+                    adapter = new CultureIntroductionAdapter(getContext(),getCultureIntroduction4());
                     cultureIntroductionTitleRecyclerView.setAdapter(adapter);
                 }
             }
@@ -146,51 +152,7 @@ public class CultureIntroductionTitleFragment extends Fragment {
 
     }
 
-    //CultureIntroduction的适配器
-    class CultureIntroductionAdapter extends RecyclerView.Adapter<CultureIntroductionAdapter.ViewHolder> {
 
-
-        @NonNull
-        @Override
-        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.culture_introduction_item, viewGroup, false);
-            final ViewHolder holder = new ViewHolder(view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CultureIntroduction cultureIntroductions = mCultureIntroductionList.get(holder.getAdapterPosition());
-                    CultureIntroductionContentActivity.actionStart(getActivity(), cultureIntroductions.getTitle(), cultureIntroductions.getContent());
-                }
-            });
-            return holder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            CultureIntroduction cultureIntroductions = mCultureIntroductionList.get(i);
-            viewHolder.tv_culture_introduction_title.setText(cultureIntroductions.getTitle());
-        }
-
-        @Override
-        public int getItemCount() {
-            return mCultureIntroductionList.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            TextView tv_culture_introduction_title;
-
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
-                tv_culture_introduction_title = itemView.findViewById(R.id.tv_culture_introduction_title);
-            }
-        }
-
-        public CultureIntroductionAdapter(List<CultureIntroduction> CultureIntroductionList) {
-            mCultureIntroductionList = CultureIntroductionList;
-        }
-    }
 
     //文化遗产数据
     private List<CultureIntroduction> getCultureIntroduction() {
@@ -238,10 +200,50 @@ public class CultureIntroductionTitleFragment extends Fragment {
 
 
     //特色美食
-    private List<CultureIntroduction> getCultureIntroduction2() {
-        List<CultureIntroduction> CultureIntroductionList = new ArrayList<>();
-        String url = MyApplication.HOST +"/product?method=findbytype&id=T004";
-        
+    private void getCultureIntroduction2() {
+
+        List<CultureIntroduction> cultureIntroductionList = new ArrayList<>();
+        new Thread(() -> {
+            String url = MyApplication.HOST + "/product?method=findbytype&id=T004";
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            try {
+                Response response = MyApplication.client.newCall(request).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.e("test", "response.isSuccessful");
+                    String json = response.body().string();
+
+                    try {
+                        JSONArray array = new JSONArray(json);
+                        for (int i = 0; i < array.length(); i++) {
+                            JSONObject object = array.getJSONObject(i);
+                            String name = object.getString("name");
+                            CultureIntroduction cultureIntroduction = new CultureIntroduction();
+                            cultureIntroduction.setTitle(name);
+                            cultureIntroductionList.add(cultureIntroduction);
+
+                        }
+                        cultureIntroductionTitleRecyclerView.post(()->{
+                                adapter.refresh(cultureIntroductionList);
+                            }
+                        );
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        ).start();
+
+
+
        /* for (int i = 1; i <= 5; i++) {
             CultureIntroduction cultureIntroduction = new CultureIntroduction();
             if (i == 1) {
@@ -267,7 +269,7 @@ public class CultureIntroductionTitleFragment extends Fragment {
             }
             mCultureIntroductionList.add(cultureIntroduction);
         }*/
-        return mCultureIntroductionList;
+
     }
 
     //名人趣事

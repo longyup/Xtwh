@@ -63,4 +63,8 @@ public class CultureIntroductionAdapter extends RecyclerView.Adapter<CultureIntr
         this.context = context;
         mCultureIntroductionList = CultureIntroductionList;
     }
+    public void refresh(List<CultureIntroduction> cultureIntroductionList){
+        mCultureIntroductionList = cultureIntroductionList;
+        notifyDataSetChanged();
+    }
 }
