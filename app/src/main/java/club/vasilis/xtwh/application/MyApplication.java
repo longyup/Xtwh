@@ -13,8 +13,8 @@ import okhttp3.OkHttpClient;
 public class MyApplication extends Application {
     public static final String HOST = "http://120.76.62.29:8080/10_NULL";
     public static OkHttpClient client = new OkHttpClient.Builder()
-            .readTimeout(2000L, TimeUnit.MILLISECONDS)
-            .callTimeout(2000L, TimeUnit.MILLISECONDS)
+            .readTimeout(20000L, TimeUnit.MILLISECONDS)
+            .callTimeout(20000L, TimeUnit.MILLISECONDS)
             .build();
 
     @Override

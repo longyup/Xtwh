@@ -18,7 +18,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.BaseActivity;
+import club.vasilis.xtwh.ui.activity.BaseActivity;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 

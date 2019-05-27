@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/my_msg_fragment"
-        android:name="club.vasilis.xtwh.fragment.MyMsgFragment"
+        android:name="club.vasilis.xtwh.ui.fragment.MyMsgFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

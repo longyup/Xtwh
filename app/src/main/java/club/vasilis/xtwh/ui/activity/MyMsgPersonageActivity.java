@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.activity;
+package club.vasilis.xtwh.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;

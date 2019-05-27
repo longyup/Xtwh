@@ -22,7 +22,7 @@
             android:textSize="16sp" />
 
 
-        <club.vasilis.xtwh.view.CustomViewPager
+        <club.vasilis.xtwh.ui.view.CustomViewPager
             android:id="@+id/main_viewpager"
             android:layout_width="match_parent"
             android:layout_height="0dp"

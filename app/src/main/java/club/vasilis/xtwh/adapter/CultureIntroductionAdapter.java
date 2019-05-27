@@ -14,7 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.CultureIntroductionContentActivity;
+import club.vasilis.xtwh.ui.activity.CultureIntroductionContentActivity;
 import club.vasilis.xtwh.domain.CultureIntroduction;
 
 //CultureIntroduction的适配器
@@ -62,5 +62,9 @@ public class CultureIntroductionAdapter extends RecyclerView.Adapter<CultureIntr
     public CultureIntroductionAdapter(Context context,List<CultureIntroduction> CultureIntroductionList) {
         this.context = context;
         mCultureIntroductionList = CultureIntroductionList;
+    }
+    public void refresh(List<CultureIntroduction> cultureIntroductionList){
+        mCultureIntroductionList = cultureIntroductionList;
+        notifyDataSetChanged();
     }
 }

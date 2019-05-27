@@ -15,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.RecruitContentActivity;
+import club.vasilis.xtwh.ui.activity.RecruitContentActivity;
 import club.vasilis.xtwh.domain.Recruit;
 
 public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivityAdapter.ViewHolder> {
