@@ -31,7 +31,7 @@ public class MyMsgPersonageUseContentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.my_msg_personage_user_frag,container,false);
+        view = inflater.inflate(R.layout.fragment_my_msg_personage_user,container,false);
 //        tv_accountId = view.findViewById(R.id.my_msg_personage_account_id);
 //        tv_accountId.setText(BaseActivity.myUser.getAccount());//显示账户信息
         unbinder = ButterKnife.bind(this,view);
