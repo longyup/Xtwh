@@ -9,10 +9,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.viewpager.widget.ViewPager
+        <com.youth.banner.Banner
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="145dp" />
+        <!--<androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_main_1"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="150dp" />-->
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_culture_introduction"
