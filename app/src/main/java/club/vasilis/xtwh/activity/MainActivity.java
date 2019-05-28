@@ -2,15 +2,19 @@ package club.vasilis.xtwh.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.MenuItem;
+
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +33,7 @@ import club.vasilis.xtwh.fragment.RecruitFragment;
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
     private TabLayout mainTab;
+    private TextView tvTitleBar;
 
     private ViewPager viewPager;
 
@@ -37,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     private List<Fragment> fragmentList;
 
-
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +83,14 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                        startActivity(intent);
                         break;
                    }
+                    case R.id.nav_mine_acitity:{
+                        mainTab.getTabAt(1).select();
+                        break;
+                    }
+                    case R.id.nav_setting:{
+                        mainTab.getTabAt(3).select();
+                        break;
+                    }
                     default:
                 }
 
@@ -97,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         mainTab.addTab(mainTab.newTab().setText("社区").setIcon(R.drawable.community));
         mainTab.addTab(mainTab.newTab().setText("我的").setIcon(R.drawable.mine));
 
+        mainTab.addOnTabSelectedListener(this);
+
         viewPager = findViewById(R.id.main_viewpager);
         //
 
@@ -109,12 +124,35 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         drawerLayout = findViewById(R.id.main_drawer_layout);
 
         navigationView = findViewById(R.id.main_navigation_view);
+
+        tvTitleBar = findViewById(R.id.main_titlebar);
     }
 
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
         //添加选中Tab的逻辑
+        Log.e(TAG, "onTabSelected: "+tab.getPosition() );
+        switch (tab.getPosition()){
+            case 0:{
+                tvTitleBar.setText("文化信息");
+                break;
+            }
+            case 1:{
+                tvTitleBar.setText("活动一览");
+                break;
+            }
+            case 2:{
+                tvTitleBar.setText("社区交流");
+                break;
+            }
+            case 3:{
+                tvTitleBar.setText("个人中心");
+                break;
+            }
+            default:
+        }
+
     }
 
     @Override

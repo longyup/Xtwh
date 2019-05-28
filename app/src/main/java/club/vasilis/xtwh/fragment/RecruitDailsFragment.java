@@ -40,12 +40,12 @@ public class RecruitDailsFragment extends Fragment {
         return view;
     }
 
-    @OnClick({R.id.btn_recruit_back,R.id.btnDelete})
+    @OnClick({R.id.btn_recruit_back,R.id.btn_join_activity})
     public void onClick(Button button){
         switch (button.getId()){
             case R.id.btn_recruit_back:
                 break;
-            case R.id.btnDelete:
+            case R.id.btn_join_activity:
                 Intent intent = new Intent();
                 intent.setClass(getContext(), ShowActivityDails.class);
                 startActivity(intent);

@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.web;
+package club.vasilis.xtwh.domain;
 
 public class Activity {
     private String id;
