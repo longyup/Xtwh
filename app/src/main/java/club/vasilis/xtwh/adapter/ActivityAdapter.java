@@ -20,11 +20,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.domain.Activity;
-import club.vasilis.xtwh.ui.activity.ActivityDailsActivity;
+import club.vasilis.xtwh.listener.OnItemClickListener;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder> {
     private List<Activity> activityList;
     Context context;
+    public OnItemClickListener listener;
 
     public ActivityAdapter() {
     }
@@ -53,12 +54,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder
             Glide.with(holder.ivImg).load(activity.getImg()).into(holder.ivImg);
 
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               
-            }
-        });
+
 
     }
 
@@ -70,7 +66,11 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder
         return 0;
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
+    public void AddOnItemListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
+    public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.activity_json_name)
         TextView tvName;
         @BindView(R.id.activity_json_startTime)
@@ -85,6 +85,14 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder
         public Holder(View view) {
             super(view);
             ButterKnife.bind(this,view);
+            if (listener != null) {
+                itemView.setOnClickListener(this);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v,getLayoutPosition());
         }
     }
 }

@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -25,14 +27,14 @@ import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.ActivityAdapter;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.Activity;
-import club.vasilis.xtwh.ui.activity.ActivityDailsActivity;
+import club.vasilis.xtwh.listener.OnItemClickListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ActivityFragment extends Fragment {
+public class ActivityFragment extends Fragment implements OnItemClickListener {
 
     private static final String TAG = "ShowActivityDails";
 
@@ -48,19 +50,19 @@ public class ActivityFragment extends Fragment {
     @BindView(R.id.rv_show_activity)
     RecyclerView rv;
     private ActivityAdapter activityAdapter;
-
+    View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_show_dails,container,false);
+        view = inflater.inflate(R.layout.activity_show_dails,container,false);
         ButterKnife.bind(this,view);
         rv.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         activityAdapter = new ActivityAdapter();
+        activityAdapter.AddOnItemListener(this);
         rv.setAdapter(activityAdapter);
         inntData();
         return view;
     }
-
 
 
     private void inntData() {
@@ -119,4 +121,9 @@ public class ActivityFragment extends Fragment {
                     }
                 });
         }
+
+    @Override
+    public void onClick(View v, int position) {
+        Toast.makeText(getContext(), "onClick:"+position, Toast.LENGTH_SHORT).show();
+    }
 }
