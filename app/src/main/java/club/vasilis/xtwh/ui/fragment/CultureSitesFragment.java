@@ -1,7 +1,6 @@
 package club.vasilis.xtwh.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,6 @@ public class CultureSitesFragment extends Fragment {
     public void refreshHttp(String param) {
         new Thread(() -> {
             String url = MyApplication.HOST + param;
-            Log.e(TAG, "refreshHttp: " + url);
             Request request = new Request.Builder()
                     .url(url)
                     .build();

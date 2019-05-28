@@ -23,13 +23,14 @@ import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.ProductAdapter;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.Product;
+import club.vasilis.xtwh.listener.OnItemClickListener;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
  * 乡土特产信息
  */
-public class ProductFragment extends Fragment {
+public class ProductFragment extends Fragment implements OnItemClickListener {
 
     @BindView(R.id.rv_titlelist)
     RecyclerView rvtitlelist;
@@ -56,6 +57,7 @@ public class ProductFragment extends Fragment {
         rvtitlelist.setLayoutManager(layoutManager);
 
         adapter = new ProductAdapter();
+        adapter.AddOnItemListener(this);
         rvtitlelist.setAdapter(adapter);
         refreshHttp("product?method=findbytype&id=T004");
     }
@@ -92,4 +94,8 @@ public class ProductFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View v, int position) {
+        Toast.makeText(getContext(), "onclick"+position, Toast.LENGTH_SHORT).show();
+    }
 }

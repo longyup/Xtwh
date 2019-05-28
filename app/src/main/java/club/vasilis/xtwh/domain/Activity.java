@@ -1,7 +1,9 @@
-package club.vasilis.xtwh.web;
+package club.vasilis.xtwh.domain;
 
-public class Activity {
-    private int id;
+import java.io.Serializable;
+
+public class Activity implements Serializable {
+    private String id;
     private String name;
     private String info;
     private String launchTime;
@@ -11,7 +13,7 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(int id, String name, String info, String launchTime, String startTime, String img) {
+    public Activity(String id, String name, String info, String launchTime, String startTime, String img) {
         this.id = id;
         this.name = name;
         this.info = info;
@@ -20,11 +22,12 @@ public class Activity {
         this.img = img;
     }
 
-    public int getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

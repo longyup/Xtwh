@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.Product;
+import club.vasilis.xtwh.listener.OnItemClickListener;
 
 /**
  * 乡土特产用的adapter
@@ -28,7 +29,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private List<Product> productList;
     private Context context;
-
+    private OnItemClickListener listener;
     public ProductAdapter() {
     }
 
@@ -68,8 +69,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.productList = productList;
         notifyDataSetChanged();
     }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public void AddOnItemListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.item_tv_product_name)
         TextView tvProductName;
 
@@ -82,6 +85,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             super(itemView);
             ButterKnife.bind(this, itemView);
             cardView = (CardView) itemView;
+            if (listener != null) {
+                itemView.setOnClickListener(this);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v,getLayoutPosition());
         }
     }
 }
