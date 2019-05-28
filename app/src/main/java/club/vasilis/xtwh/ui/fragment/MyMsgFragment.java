@@ -2,21 +2,22 @@ package club.vasilis.xtwh.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.ui.activity.MyMsgPersonageActivity;
 import club.vasilis.xtwh.adapter.MyMsgOtherAdapter;
+import club.vasilis.xtwh.ui.activity.MyMsgPersonageActivity;
 
 /*
 展示我的信息界面
@@ -30,7 +31,7 @@ public class MyMsgFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.my_msg_frag,container,false);
+        view = inflater.inflate(R.layout.fragment_my_msg,container,false);
         unbinder = ButterKnife.bind(this,view);
 
 //        //进入个人信息更改界面

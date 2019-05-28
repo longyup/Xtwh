@@ -1,7 +1,6 @@
 package club.vasilis.xtwh.ui.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,30 +20,31 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.adapter.CultureSitesAdapter;
+import club.vasilis.xtwh.adapter.ProductAdapter;
 import club.vasilis.xtwh.application.MyApplication;
-import club.vasilis.xtwh.domain.CultureSites;
+import club.vasilis.xtwh.domain.Product;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 文化遗址信息
+ * 乡土特产信息
  */
+public class ProductFragment extends Fragment {
 
-public class CultureSitesFragment extends Fragment {
     @BindView(R.id.rv_titlelist)
     RecyclerView rvtitlelist;
-    private static final String TAG = "CultureSitesFragment";
-    private CultureSitesAdapter adapter;
+    private static final String TAG = "ProductFragment";
+    private ProductAdapter adapter;
 
-    public static CultureSitesFragment getInstance() {
-        return new CultureSitesFragment();
+    public static ProductFragment getInstance() {
+        return new ProductFragment();
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_culture_sites, container, false);
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
         ButterKnife.bind(this, view);
         init();
 
@@ -55,11 +55,12 @@ public class CultureSitesFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         rvtitlelist.setLayoutManager(layoutManager);
 
-        adapter = new CultureSitesAdapter();
+        adapter = new ProductAdapter();
         rvtitlelist.setAdapter(adapter);
-        refreshHttp("cultureSites?method=getJsonCultureSitesAll");
-        //refreshHttp("product?method=findbytype&id=T004");
+        refreshHttp("product?method=findbytype&id=T004");
     }
+
+
     /**
      * 通过网络刷新,然后调用adapter去刷新
      *
@@ -68,7 +69,7 @@ public class CultureSitesFragment extends Fragment {
     public void refreshHttp(String param) {
         new Thread(() -> {
             String url = MyApplication.HOST + param;
-            Log.e(TAG, "refreshHttp: " + url);
+
             Request request = new Request.Builder()
                     .url(url)
                     .build();
@@ -76,9 +77,9 @@ public class CultureSitesFragment extends Fragment {
                 Response response = MyApplication.client.newCall(request).execute();
                 if (response.isSuccessful() && response.body() != null) {
                     String json = response.body().string();
-                    List<CultureSites> cultureSitesList = JSON.parseArray(json, CultureSites.class);
+                    List<Product> productList = JSON.parseArray(json, Product.class);
                     rvtitlelist.post(() -> {
-                        adapter.refresh(cultureSitesList);
+                        adapter.refresh(productList);
                     });
                 }
             } catch (IOException e) {
@@ -89,4 +90,6 @@ public class CultureSitesFragment extends Fragment {
             }
         }).start();
     }
+
+
 }

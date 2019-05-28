@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.listener.OnItemClickListener;
 import club.vasilis.xtwh.ui.activity.BaseActivity;
 import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
@@ -33,6 +34,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     private List<Comment> commentList;
     private int size;
 
+    private OnItemClickListener listener;
 
     public CommunityAdapter(List<Community> communityList, List<User> userList, List<Comment> commentList) {
         this.communityList = communityList;
@@ -45,11 +47,13 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         this.userList = userList;
         size = communityList.size();
     }
-
+    public void addOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.community_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_community, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -128,7 +132,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @BindView(R.id.community_item_iv_head)
         ImageView ivHead;
         @BindView(R.id.community_item_tv_name)
@@ -155,7 +159,15 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            if (listener != null) {
+                itemView.setOnClickListener(this);
+            }
 
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v,getLayoutPosition());
         }
     }
 

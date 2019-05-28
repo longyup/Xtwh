@@ -29,7 +29,7 @@ import club.vasilis.xtwh.R;
 /**
  * 首页
  */
-public class IndexFragment extends Fragment implements TabLayout.OnTabSelectedListener {
+public class IndexFragment extends Fragment{
 
 
     @BindView(R.id.vp_main_1)
@@ -44,16 +44,15 @@ public class IndexFragment extends Fragment implements TabLayout.OnTabSelectedLi
     private List<Fragment> fragmentList;
     private Unbinder bind;
 
-    private TitleFragment titleFragment1 = new TitleFragment();
-    private TitleFragment titleFragment2 = new TitleFragment();
-    private TitleFragment titleFragment3 = new TitleFragment();
-    private TitleFragment titleFragment4 = new TitleFragment();
+    private ProductFragment titleFragment1 = new ProductFragment();
+    private ProductFragment titleFragment3 = new ProductFragment();
+    private ProductFragment titleFragment4 = new ProductFragment();
     private static final String TAG = "IndexFragment";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //垂直滚动
-        View view = inflater.inflate(R.layout.culture_introduction_title_frag, container, false);
+        View view = inflater.inflate(R.layout.fragment_index, container, false);
         bind = ButterKnife.bind(this, view);
 
         initBanner();
@@ -99,8 +98,8 @@ public class IndexFragment extends Fragment implements TabLayout.OnTabSelectedLi
      */
     private void initView() {
         fragmentList = new ArrayList<>();
-        fragmentList.add(titleFragment1);
-        fragmentList.add(titleFragment2);
+        fragmentList.add(CultureSitesFragment.getInstance());
+        fragmentList.add(ProductFragment.getInstance());
         fragmentList.add(titleFragment3);
         fragmentList.add(titleFragment4);
         List<String> titleList = new ArrayList<>();
@@ -127,72 +126,14 @@ public class IndexFragment extends Fragment implements TabLayout.OnTabSelectedLi
             }
         });
         tabCultureIntroduction.setupWithViewPager(vpMain);
-        tabCultureIntroduction.addOnTabSelectedListener(this);
+
 
     }
 
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        switch (tab.getPosition()) {
-            case 0: {
-                break;
-            }
-            case 1: {
-                titleFragment2.getCultureIntroduction2();
-                break;
-            }
-            case 2: {
-                break;
-            }
-            case 3: {
-                break;
-            }
-            default:
-        }
-        /*  if (tab.getPosition() == 1) {
-         *//*mCultureIntroductionList.clear();
-            adapter.notifyDataSetChanged();
-            adapter = new CultureIntroductionAdapter(getContext(), getCultureIntroduction());
-        //    cultureIntroductionTitleRecyclerView.setAdapter(adapter);*//*
-        }
-        if (tab.getText() == "特色美食") {
-            titleFragment.getCultureIntroduction2();
-                  *//*  mCultureIntroductionList.clear();
-                    adapter.notifyDataSetChanged();
-                    adapter = new CultureIntroductionAdapter(getContext(),getCultureIntroduction2());
-                    cultureIntroductionTitleRecyclerView.setAdapter(adapter);*//*
-        }
 
-        if (tab.getText() == "名人趣事") {
-           *//* mCultureIntroductionList.clear();
-            adapter.notifyDataSetChanged();
-            adapter = new CultureIntroductionAdapter(getContext(), getCultureIntroduction3());
-          //  cultureIntroductionTitleRecyclerView.setAdapter(adapter);*//*
-        }
 
-        if (tab.getText() == "民俗风情") {
-          *//*  mCultureIntroductionList.clear();
-            adapter.notifyDataSetChanged();
-            adapter = new CultureIntroductionAdapter(getContext(), getCultureIntroduction4());
-          //  cultureIntroductionTitleRecyclerView.setAdapter(adapter);*//*
-        }*/
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
 
     //vp_main适配器
     class MyPagerAdapter extends PagerAdapter {

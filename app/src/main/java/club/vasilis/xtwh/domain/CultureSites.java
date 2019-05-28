@@ -4,14 +4,17 @@ package club.vasilis.xtwh.domain;
  * 文化遗址
  */
 public class CultureSites {
-    private int id;
+    private String id;
     private String title;
     private String content;
     private String img;
     private String onlinetime;
     private String locationid;
 
-    public CultureSites(int id, String title, String content, String img, String onlinetime, String locationid) {
+    public CultureSites() {
+    }
+
+    public CultureSites(String id, String title, String content, String img, String onlinetime, String locationid) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -20,14 +23,11 @@ public class CultureSites {
         this.locationid = locationid;
     }
 
-    public CultureSites() {
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -74,7 +74,7 @@ public class CultureSites {
     @Override
     public String toString() {
         return "CultureSites{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", img='" + img + '\'' +

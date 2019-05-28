@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_menu_home"
+        android:icon="@drawable/home"
+        android:title="首页"
+        />
+    <item
+        android:id="@+id/tab_menu_acivity"
+        android:icon="@drawable/home"
+        android:title="活动"
+        />
+    <item
+        android:id="@+id/tab_menu_community"
+        android:icon="@drawable/community"
+        android:title="社区"
+        />
+    <item
+        android:id="@+id/tab_menu_mine"
+        android:icon="@drawable/mine"
+        android:title="我的"
+        />
+</menu>
