@@ -18,7 +18,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.BaseActivity;
+import club.vasilis.xtwh.ui.activity.BaseActivity;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 
@@ -34,7 +34,7 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,final int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_msg_personage_use_content_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_msg_personage_use_content,viewGroup,false);
         final ViewHolder holder = new ViewHolder(view);
         //点击事件
 

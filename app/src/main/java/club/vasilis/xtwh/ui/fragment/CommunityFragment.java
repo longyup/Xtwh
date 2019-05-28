@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.ui.fragment;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -26,14 +26,16 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.BaseActivity;
 import club.vasilis.xtwh.adapter.CommunityAdapter;
 import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
 import club.vasilis.xtwh.domain.Phrase;
 import club.vasilis.xtwh.domain.User;
+import club.vasilis.xtwh.listener.OnItemClickListener;
+import club.vasilis.xtwh.ui.activity.BaseActivity;
 import club.vasilis.xtwh.utils.Util;
 
 /**
@@ -42,7 +44,7 @@ import club.vasilis.xtwh.utils.Util;
  * @author Vasilis
  * @date 2019/4/25 * 12:49
  */
-public class CommunityFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
+public class CommunityFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener, OnItemClickListener {
 
 
     private List<User> userList = new ArrayList<>();
@@ -76,13 +78,7 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
         // 评论功能暂未实现
         adapter = new CommunityAdapter(communityList, userList);
         recyclerView.setAdapter(adapter);
-        // 发送按钮
-        fabSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-            }
-        });
+
 
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
@@ -93,15 +89,13 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
 
     private void showDialog() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_send_community, null, false);
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(view);
         final AlertDialog dialog = builder.create();
         dialog.show();
         final EditText etSend = view.findViewById(R.id.send_community_ed);
         Button btnSend = view.findViewById(R.id.send_community_btn);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnSend.setOnClickListener((v)-> {
                 String text = etSend.getText().toString();
                 Community community = new Community();
                 community.setContent(text);
@@ -122,7 +116,7 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
                 dialog.cancel();
 
             }
-        });
+        );
 
     }
 
@@ -251,5 +245,15 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
     public void onDestroy() {
         super.onDestroy();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onClick(View v, int position) {
+
+    }
+
+    @OnClick(R.id.community_fab_send)
+    public void onViewClicked() {
+        showDialog();
     }
 }

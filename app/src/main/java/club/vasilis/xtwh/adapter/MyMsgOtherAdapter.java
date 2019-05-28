@@ -22,7 +22,7 @@ public class MyMsgOtherAdapter extends RecyclerView.Adapter<MyMsgOtherAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_msg_other_content_item,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_msg_other_content,viewGroup,false);
         final ViewHolder holder = new ViewHolder(view);
         //点击事件
         holder.otherView.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.ui.fragment;
 
 import androidx.fragment.app.Fragment;
 
@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.web.ShowActivityDails;
+
 
 public class RecruitDailsFragment extends Fragment {
     @BindView(R.id.iv_recruit_dails)
@@ -47,7 +47,7 @@ public class RecruitDailsFragment extends Fragment {
                 break;
             case R.id.btn_join_activity:
                 Intent intent = new Intent();
-                intent.setClass(getContext(), ShowActivityDails.class);
+                intent.setClass(getContext(), ActivityFragment.class);
                 startActivity(intent);
                 break;
                 default:

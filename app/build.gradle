@@ -25,9 +25,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
@@ -35,7 +36,8 @@ dependencies {
     // butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-
+    // 实用小工具
+    implementation 'com.youth.xframe:xframe:1.1.2'
     // OkHttp
     implementation 'com.squareup.okhttp3:okhttp:3.14.1'
     // 这个是阿里的fastJSON, 性能OK, Apache 2.0 license
@@ -49,9 +51,7 @@ dependencies {
     // 轮播图框架
     implementation 'com.youth.banner:banner:1.4.10'
 
-    // Glide显示图片
+    // Glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    //工具材料包
-    implementation 'com.google.android.material:material:1.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 }

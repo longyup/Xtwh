@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.view;
+package club.vasilis.xtwh.ui.view;
 
 import android.content.Context;
 import androidx.annotation.NonNull;

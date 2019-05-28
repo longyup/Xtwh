@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.activity.MyMsgPersonageActivity;
+import club.vasilis.xtwh.ui.activity.MyMsgPersonageActivity;
 import club.vasilis.xtwh.adapter.MyMsgOtherAdapter;
 
 /*
@@ -30,7 +30,7 @@ public class MyMsgFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.my_msg_frag,container,false);
+        view = inflater.inflate(R.layout.fragment_my_msg,container,false);
         unbinder = ButterKnife.bind(this,view);
 
 //        //进入个人信息更改界面

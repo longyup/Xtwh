@@ -1,4 +1,4 @@
-package club.vasilis.xtwh.fragment;
+package club.vasilis.xtwh.ui.fragment;
 
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -40,7 +40,7 @@ public class CultureIntroductionContentFragment extends Fragment {
 
 
 
-        view = inflater.inflate(R.layout.culture_introduction_content_frag, container, false);
+        view = inflater.inflate(R.layout.fragment_product_infor, container, false);
         unbinder = ButterKnife.bind(this, view);
         tvCultureIntroductionContent.setMovementMethod(ScrollingMovementMethod.getInstance());
 

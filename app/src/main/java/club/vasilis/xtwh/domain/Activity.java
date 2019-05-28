@@ -1,6 +1,8 @@
 package club.vasilis.xtwh.domain;
 
-public class Activity {
+import java.io.Serializable;
+
+public class Activity implements Serializable {
     private String id;
     private String name;
     private String info;
