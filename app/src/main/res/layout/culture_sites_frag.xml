@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_titlelist"
+        android:id="@+id/rv_culture_sites_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

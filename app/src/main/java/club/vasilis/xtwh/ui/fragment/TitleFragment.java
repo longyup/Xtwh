@@ -50,7 +50,7 @@ public class TitleFragment extends Fragment {
     }
 
     //文化遗产数据
-    private List<CultureIntroduction> getCultureIntroduction() {
+    private List<CultureIntroduction> getCultureIntroduction3() {
         List<CultureIntroduction> mCultureIntroductionList = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
             CultureIntroduction cultureIntroduction = new CultureIntroduction();
@@ -168,7 +168,7 @@ public class TitleFragment extends Fragment {
     }
 
     //名人趣事
-    private List<CultureIntroduction> getCultureIntroduction3() {
+    private List<CultureIntroduction> getCultureIntroduction() {
         List<CultureIntroduction> mCultureIntroductionList = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
             CultureIntroduction cultureIntroduction = new CultureIntroduction();

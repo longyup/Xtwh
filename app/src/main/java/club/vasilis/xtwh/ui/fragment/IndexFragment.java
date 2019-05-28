@@ -57,6 +57,7 @@ public class IndexFragment extends Fragment implements TabLayout.OnTabSelectedLi
         bind = ButterKnife.bind(this, view);
 
         initBanner();
+
         initView();
 
         return view;
