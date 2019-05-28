@@ -97,9 +97,9 @@ public class ActivityFragment extends Fragment {
                                     activity.setId(obj.getString("id"));
                                     activity.setImg(MyApplication.HOST + obj.getString("img"));
                                     activityList.add(activity);
-                                    Intent intent = new Intent(getContext(), ActivityDailsActivity.class);
-                                    intent.putExtra("activity_data",activity);
-                                    getContext().startActivity(intent);
+//                                    Intent intent = new Intent(getContext(), ActivityDailsActivity.class);
+//                                    intent.putExtra("activity_data",activity);
+//                                    getContext().startActivity(intent);
                                     Log.e("123",""+obj);
                                 }
 

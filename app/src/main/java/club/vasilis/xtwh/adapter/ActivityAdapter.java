@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.domain.Activity;
+import club.vasilis.xtwh.ui.activity.ActivityDailsActivity;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder> {
     private List<Activity> activityList;
@@ -54,7 +56,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+               
             }
         });
 
