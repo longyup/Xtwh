@@ -20,32 +20,30 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.adapter.ProductAdapter;
+import club.vasilis.xtwh.adapter.CultureSitesAdapter;
 import club.vasilis.xtwh.application.MyApplication;
-import club.vasilis.xtwh.domain.Product;
-import club.vasilis.xtwh.listener.OnItemClickListener;
+import club.vasilis.xtwh.domain.CultureSites;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 乡土特产信息
+ * 文化遗址信息
  */
-public class ProductFragment extends Fragment implements OnItemClickListener {
 
+public class CultureSitesFragment extends Fragment {
     @BindView(R.id.rv_titlelist)
     RecyclerView rvtitlelist;
-    private static final String TAG = "ProductFragment";
-    private ProductAdapter adapter;
+    private static final String TAG = "CultureSitesFragment";
+    private CultureSitesAdapter adapter;
 
-    public static ProductFragment getInstance() {
-        return new ProductFragment();
+    public static CultureSitesFragment getInstance() {
+        return new CultureSitesFragment();
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
+        View view = inflater.inflate(R.layout.fragment_culture_sites, container, false);
         ButterKnife.bind(this, view);
         init();
 
@@ -56,13 +54,11 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         rvtitlelist.setLayoutManager(layoutManager);
 
-        adapter = new ProductAdapter();
-        adapter.AddOnItemListener(this);
+        adapter = new CultureSitesAdapter();
         rvtitlelist.setAdapter(adapter);
-        refreshHttp("product?method=findbytype&id=T004");
+        refreshHttp("cultureSites?method=getJsonCultureSitesAll");
+        //refreshHttp("product?method=findbytype&id=T004");
     }
-
-
     /**
      * 通过网络刷新,然后调用adapter去刷新
      *
@@ -71,7 +67,6 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
     public void refreshHttp(String param) {
         new Thread(() -> {
             String url = MyApplication.HOST + param;
-
             Request request = new Request.Builder()
                     .url(url)
                     .build();
@@ -79,9 +74,9 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
                 Response response = MyApplication.client.newCall(request).execute();
                 if (response.isSuccessful() && response.body() != null) {
                     String json = response.body().string();
-                    List<Product> productList = JSON.parseArray(json, Product.class);
+                    List<CultureSites> cultureSitesList = JSON.parseArray(json, CultureSites.class);
                     rvtitlelist.post(() -> {
-                        adapter.refresh(productList);
+                        adapter.refresh(cultureSitesList);
                     });
                 }
             } catch (IOException e) {
@@ -91,11 +86,5 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
                 });
             }
         }).start();
-    }
-
-
-    @Override
-    public void onClick(View v, int position) {
-        Toast.makeText(getContext(), "onclick"+position, Toast.LENGTH_SHORT).show();
     }
 }

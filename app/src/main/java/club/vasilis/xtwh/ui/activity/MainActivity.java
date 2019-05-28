@@ -20,10 +20,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.ui.fragment.ActivityFragment;
 import club.vasilis.xtwh.ui.fragment.CommunityFragment;
 import club.vasilis.xtwh.ui.fragment.IndexFragment;
 import club.vasilis.xtwh.ui.fragment.MyMsgFragment;
-import club.vasilis.xtwh.ui.fragment.RecruitFragment;
 import club.vasilis.xtwh.ui.view.CustomViewPager;
 
 
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         fragmentList = new ArrayList<>();
         fragmentList.add(new IndexFragment());
-        fragmentList.add(new RecruitFragment());
+        fragmentList.add(new ActivityFragment());
         fragmentList.add(new CommunityFragment());
         fragmentList.add(new MyMsgFragment());
 
@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 // 防止点击跳页切换时显示期间的内容，去除了滑动的动画
                 viewPager.setCurrentItem(0,false);
                 tvTitleBar.setText("文化信息");
+
                 break;
             }
             case R.id.tab_menu_acivity: {

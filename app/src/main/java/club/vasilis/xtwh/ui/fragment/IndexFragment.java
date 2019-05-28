@@ -56,6 +56,7 @@ public class IndexFragment extends Fragment{
         bind = ButterKnife.bind(this, view);
 
         initBanner();
+
         initView();
 
         return view;
@@ -97,7 +98,7 @@ public class IndexFragment extends Fragment{
      */
     private void initView() {
         fragmentList = new ArrayList<>();
-        fragmentList.add(titleFragment1);
+        fragmentList.add(CultureSitesFragment.getInstance());
         fragmentList.add(ProductFragment.getInstance());
         fragmentList.add(titleFragment3);
         fragmentList.add(titleFragment4);
