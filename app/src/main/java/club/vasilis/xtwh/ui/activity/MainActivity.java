@@ -136,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 // 防止点击跳页切换时显示期间的内容，去除了滑动的动画
                 viewPager.setCurrentItem(0,false);
                 tvTitleBar.setText("文化信息");
+
                 break;
             }
             case R.id.tab_menu_acivity: {
