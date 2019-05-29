@@ -38,8 +38,8 @@ public class RecruitActivityAdapter extends RecyclerView.Adapter<RecruitActivity
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Recruit recruit = Datas.get(holder.getAdapterPosition());
-                RecruitContentActivity.actionStart(mContext,recruit.getImgId(),recruit.getTitle(),recruit.getDistance(),recruit.getRegion(),recruit.getNumber());
+//                Recruit recruit = Datas.get(holder.getAdapterPosition());
+//                RecruitContentActivity.actionStart(mContext,recruit.getImgId(),recruit.getTitle(),recruit.getDistance(),recruit.getRegion(),recruit.getNumber());
             }
         });
 
