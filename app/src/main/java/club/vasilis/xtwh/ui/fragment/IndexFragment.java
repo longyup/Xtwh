@@ -101,7 +101,7 @@ public class IndexFragment extends Fragment {
         fragmentList.add(CultureSitesFragment.getInstance());
         fragmentList.add(ProductFragment.getInstance());
         fragmentList.add(titleFragment3);
-        fragmentList.add(titleFragment4);
+        fragmentList.add(FolkCustomFragment.getInstance());
         List<String> titleList = new ArrayList<>();
         titleList.add("文化遗址");
         titleList.add("特色美食");

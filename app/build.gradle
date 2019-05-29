@@ -41,7 +41,7 @@ dependencies {
     // 实用小工具
     implementation 'com.youth.xframe:xframe:1.1.2'
     // OkHttp
-    implementation 'com.squareup.okhttp3:okhttp:3.14.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.2'
     // 这个是阿里的fastJSON, 性能OK, Apache 2.0 license
     implementation 'com.alibaba:fastjson:1.1.71.android'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
