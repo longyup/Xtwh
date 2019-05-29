@@ -25,6 +25,9 @@ import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.RecruitActivityAdapter;
 import club.vasilis.xtwh.domain.Recruit;
 
+/**
+ * 活动一览
+ */
 public class RecruitFragment extends Fragment {
     private List<Recruit> Datas = new ArrayList<>();
     @BindView(R.id.recycler_view_Recruit_activity)

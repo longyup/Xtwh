@@ -1,25 +1,25 @@
 package club.vasilis.xtwh.ui.fragment;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.BuildConfig;
@@ -46,7 +46,7 @@ public class ActivityFragment extends Fragment implements OnItemClickListener {
             .build();
 
 
-    //黄油刀
+
     @BindView(R.id.rv_show_activity)
     RecyclerView rv;
     private ActivityAdapter activityAdapter;

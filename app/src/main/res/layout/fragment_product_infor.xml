@@ -20,7 +20,7 @@
                 android:layout_height="22dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
-                android:background="@drawable/back1"/>
+                android:background="@drawable/ic_back"/>
             <TextView
                 android:id="@+id/tv_cultureIntroduction_title"
                 android:layout_width="match_parent"
