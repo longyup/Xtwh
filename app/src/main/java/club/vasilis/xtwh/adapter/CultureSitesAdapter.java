@@ -20,12 +20,14 @@ import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.CultureSites;
+import club.vasilis.xtwh.listener.OnItemClickListener;
 
 //CultureSitesAdapter的适配器
 public class CultureSitesAdapter extends RecyclerView.Adapter<CultureSitesAdapter.ViewHolder> {
 
     private List<CultureSites> cultureSitesList;
     private Context context;
+    private OnItemClickListener listener;
 
     public CultureSitesAdapter() {
     }
@@ -67,7 +69,11 @@ public class CultureSitesAdapter extends RecyclerView.Adapter<CultureSitesAdapte
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public void AddOnItemListener(OnItemClickListener listener){
+        this.listener = listener;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.item_tv_culture_sites_name)
         TextView tvCultureSitesName;
@@ -81,6 +87,14 @@ public class CultureSitesAdapter extends RecyclerView.Adapter<CultureSitesAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             cardView = (CardView) itemView;
+            if (listener != null) {
+                itemView.setOnClickListener(this);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v,getLayoutPosition());
         }
     }
 }
