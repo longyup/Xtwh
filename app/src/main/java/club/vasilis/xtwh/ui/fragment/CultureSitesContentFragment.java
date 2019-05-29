@@ -24,18 +24,15 @@ import club.vasilis.xtwh.R;
 /**
  * 文化详情页
  */
-public class CultureIntroductionContentFragment extends Fragment {
+public class CultureSitesContentFragment extends Fragment {
     private View view;
 
-    @BindView(R.id.tv_cultureIntroduction_content)
-    TextView tvCultureIntroductionContent;
+    @BindView(R.id.tv_culture_sites_content)
+    TextView tvCultureSitesContent;
 
-    @BindView(R.id.tb_cultureSites_infor)
+    @BindView(R.id.tb_culture_sites_infor)
     Toolbar tbCultureSitesInfor;
 
-
-    /*@BindView(R.id.tv_cultureIntroduction_title)
-    TextView tvCultureIntroductionTitle;*/
 
     private Unbinder unbinder;
 
@@ -45,9 +42,9 @@ public class CultureIntroductionContentFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.fragment_product_infor, container, false);
+        view = inflater.inflate(R.layout.fragment_culture_sites_infor, container, false);
         unbinder = ButterKnife.bind(this, view);
-        tvCultureIntroductionContent.setMovementMethod(ScrollingMovementMethod.getInstance());
+        tvCultureSitesContent.setMovementMethod(ScrollingMovementMethod.getInstance());
         ((AppCompatActivity) getActivity()).setSupportActionBar(tbCultureSitesInfor);
         setHasOptionsMenu(true);
         return view;
@@ -55,19 +52,15 @@ public class CultureIntroductionContentFragment extends Fragment {
 
     }
 
-   /* @OnClick(R.id.btn_content_back)
-    void show(){
-        getActivity().finish();
-    }*/
 
     public void refresh(String Title, String Content) {
-        View ll_cultureIntroduction_visibility_layout = view.findViewById(R.id.ll_cultureIntroduction_visibility_layout);
+        View ll_cultureIntroduction_visibility_layout = view.findViewById(R.id.ll_culture_sites_visibility_layout);
         ll_cultureIntroduction_visibility_layout.setVisibility(View.VISIBLE);
         //刷新标题
         //tvCultureIntroductionTitle.setText(Title);
         tbCultureSitesInfor.setTitle(Title);
         //刷新内容
-        tvCultureIntroductionContent.setText(Content);
+        tvCultureSitesContent.setText(Content);
     }
 
     @Override
