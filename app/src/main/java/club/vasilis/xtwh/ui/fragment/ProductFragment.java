@@ -19,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.ProductAdapter;
 import club.vasilis.xtwh.application.MyApplication;
@@ -36,7 +37,7 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
     @BindView(R.id.rv_titlelist)
     RecyclerView rvtitlelist;
     private ProductAdapter adapter;
-
+    private  Unbinder bind;
     private List<Product> productList;
 
     public static ProductFragment getInstance() {
@@ -48,7 +49,7 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-        ButterKnife.bind(this, view);
+        bind = ButterKnife.bind(this, view);
         init();
 
         return view;
@@ -60,6 +61,7 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
 
         adapter = new ProductAdapter();
         adapter.AddOnItemListener(this);
+       // rvtitlelist.setNestedScrollingEnabled(false);
         rvtitlelist.setAdapter(adapter);
         refreshHttp("product?method=findAll");
     }
@@ -104,5 +106,11 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
         Product product = productList.get(position);
         ProductInfoActivity.actionStart(getContext(), product.getId());
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
     }
 }
