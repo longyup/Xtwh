@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".ui.activity.CultureIntroductionContentActivity" />
         <activity android:name=".ui.activity.RecruitContentActivity" />
+        <activity android:name=".ui.activity.ActivityDailsActivity" />
     </application>
 
 </manifest>

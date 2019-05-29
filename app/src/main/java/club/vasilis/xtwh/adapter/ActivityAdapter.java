@@ -28,8 +28,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder
 
     public ActivityAdapter() {
     }
-    public ActivityAdapter(List<Activity> activityList) {
+    public ActivityAdapter(List<Activity> activityList,Context context) {
         this.activityList = activityList;
+        this.context = context;
     }
     public void setActivity(List<Activity> activityList) {
         this.activityList = activityList;
@@ -39,7 +40,17 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder
     @NonNull
     @Override
     public ActivityAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.show_web_activity_list_data,parent,false));
+        Holder holder = new Holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.show_web_activity_list_data,parent,false));
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View v) {
+//               Activity activity = activityList.get(holder.getAdapterPosition());
+//               ActivityDailsActivity dailsActivity = new ActivityDailsActivity();
+//               dailsActivity.actionStart(context,activity.getImg(),activity.getName(),activity.getStartTime(),activity.getLaunchTime(),activity.getInfo());
+
+//           }
+//       });
+        return holder;
     }
 
     @Override
@@ -68,7 +79,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Holder
     public void AddOnItemListener(OnItemClickListener listener){
         this.listener = listener;
     }
-
+//implements View.OnClickListener
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.activity_json_name)
         TextView tvName;
