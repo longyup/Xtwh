@@ -14,13 +14,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.RegisteredActivity">
+        </activity>
         <activity android:name=".ui.activity.ProductInfoActivity" />
         <activity android:name=".ui.activity.MyMsgPersonageActivity" />
         <activity android:name=".ui.activity.WelcomeActivity" />
         <activity android:name=".ui.activity.GuideActivity" />
         <activity android:name=".ui.activity.CultureSitesContentActivity" />
         <activity android:name=".ui.activity.MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

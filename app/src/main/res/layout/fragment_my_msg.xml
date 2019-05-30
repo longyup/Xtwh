@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:gravity="center_vertical"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/my_msg_person_iv_head_photo"
@@ -25,8 +25,9 @@
                 android:layout_marginStart="20dp" />
             <TextView
                 android:id="@+id/my_msg_person_id"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/demo"
                 android:layout_marginLeft="20dp"
                 android:textColor="#000"
@@ -36,16 +37,15 @@
                 android:id="@+id/my_msg_person_id_iv_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="200dp"
-                android:src="@drawable/main_listitem_arrow"
-                android:layout_marginStart="200dp" />
+                android:src="@drawable/main_listitem_arrow"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/my_msg_person_unlogin"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="60dp"
