@@ -3,7 +3,7 @@ package club.vasilis.xtwh.domain;
 /**
  * 文化遗址
  */
-public class CultureSites {
+public class   CultureSites {
     private String id;
     private String title;
     private String content;

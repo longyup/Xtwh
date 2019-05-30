@@ -13,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.ProductInfoActivity" />
         <activity android:name=".ui.activity.MyMsgPersonageActivity" />
         <activity android:name=".ui.activity.WelcomeActivity" />
         <activity android:name=".ui.activity.GuideActivity" />
@@ -26,6 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.RecruitContentActivity" />
+        <activity android:name=".ui.activity.ActivityDailsActivity" />
     </application>
 
 </manifest>

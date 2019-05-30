@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.Window;
 
 import club.vasilis.xtwh.ActivityCollector;
 import club.vasilis.xtwh.domain.User;
@@ -21,7 +21,6 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
     }
 

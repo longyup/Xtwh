@@ -11,16 +11,19 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/main_titlebar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:background="#A0A5A3"
-            android:text="活动"
-            android:textColor="#333"
-            android:textSize="16sp" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="5dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="测试"
+            app:titleTextColor="@color/XFrame_loading_dialog_message">
 
+
+        </androidx.appcompat.widget.Toolbar>
 
         <club.vasilis.xtwh.ui.view.CustomViewPager
             android:id="@+id/main_viewpager"
@@ -29,11 +32,11 @@
             android:layout_weight="1" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/tab_menu"
             android:id="@+id/main_tab"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/tab_menu" />
 
     </LinearLayout>
 
@@ -43,7 +46,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
