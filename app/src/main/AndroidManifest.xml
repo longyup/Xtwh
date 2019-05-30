@@ -13,18 +13,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.activity.LoginActivity"/>
-        <activity android:name=".ui.activity.ProductInfoActivity" />
-        <activity android:name=".ui.activity.MyMsgPersonageActivity" />
-        <activity android:name=".ui.activity.WelcomeActivity" />
-        <activity android:name=".ui.activity.GuideActivity" />
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.RegisteredActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.ProductInfoActivity" />
+        <activity android:name=".ui.activity.MyMsgPersonageActivity" />
+        <activity android:name=".ui.activity.WelcomeActivity" />
+        <activity android:name=".ui.activity.GuideActivity" />
+        <activity android:name=".ui.activity.MainActivity">
+
         </activity>
         <activity android:name=".ui.activity.CultureIntroductionContentActivity" />
         <activity android:name=".ui.activity.RecruitContentActivity" />
