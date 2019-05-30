@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.tv_reg)
     public void onClick() {
         Intent intent = new Intent();
-
+        intent.setClass(this,RegisteredActivity.class);
         startActivity(intent);
         finish();
     }
