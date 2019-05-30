@@ -9,17 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
-import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.FolkCustom;
 import club.vasilis.xtwh.listener.OnItemClickListener;
-import club.vasilis.xtwh.ui.fragment.FolkCustomFragment;
 
 public class FolkCustomAdapter extends RecyclerView.Adapter<FolkCustomAdapter.ViewHolder> {
 
@@ -36,7 +32,7 @@ public class FolkCustomAdapter extends RecyclerView.Adapter<FolkCustomAdapter.Vi
 
     @NonNull
     @Override
-    public FolkCustomAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (context == null){
             context = parent.getContext();
         }
@@ -46,7 +42,7 @@ public class FolkCustomAdapter extends RecyclerView.Adapter<FolkCustomAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FolkCustomAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FolkCustom folkCustom = folkCustoms.get(position);
         holder.tv_passage_title.setText(folkCustom.getName());
 

@@ -3,10 +3,13 @@ package club.vasilis.xtwh.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -20,10 +23,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.ui.fragment.ActivityFragment;
 import club.vasilis.xtwh.ui.fragment.CommunityFragment;
 import club.vasilis.xtwh.ui.fragment.IndexFragment;
 import club.vasilis.xtwh.ui.fragment.MyMsgFragment;
+import club.vasilis.xtwh.ui.fragment.UnLoginFragment;
 import club.vasilis.xtwh.ui.view.CustomViewPager;
 
 
@@ -33,9 +38,6 @@ import club.vasilis.xtwh.ui.view.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-
-    @BindView(R.id.main_titlebar)
-    TextView tvTitleBar;
 
     @BindView(R.id.main_viewpager)
     CustomViewPager viewPager;
@@ -47,7 +49,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     NavigationView navigationView;
     @BindView(R.id.main_drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.main_toolbar)
+    Toolbar mainToolbar;
 
+    private ImageView ivHead;
+    private TextView tvName;
+    private TextView tvEmail;
 
     private List<Fragment> fragmentList;
 
@@ -59,19 +66,44 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initBottomView();
         initView();
+    }
+
+    private void initBottomView() {
+        // 对tablayout增加控件
+        mainTab.setOnNavigationItemSelectedListener(this);
+        //系统默认选中第一个,但是系统选中第一个不执行onNavigationItemSelected(MenuItem)方法
+        // 如果要求刚进入页面就执行clickTabOne()方法,则手动调用选中第一个
+        mainTab.setSelectedItemId(R.id.tab_menu_home);
+
+        fragmentList = new ArrayList<>();
+        fragmentList.add(new IndexFragment());
+        fragmentList.add(new ActivityFragment());
+        if (MyApplication.myUser !=null){
+            fragmentList.add(new CommunityFragment());
+        }else {
+            fragmentList.add(new UnLoginFragment());
+        }
+        fragmentList.add(new MyMsgFragment());
+
+        //为viewpager设置adapter
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public int getCount() {
+                return fragmentList.size();
+            }
+
+            @NonNull
+            @Override
+            public Fragment getItem(int i) {
+                return fragmentList.get(i);
+            }
+        });
+    }
 
 
-
-       /* // tablayoutb联动viewpager
-        mainTab.setupWithViewPager(viewPager);
-
-        // TabLayout设置关联viewpager后，会清空所有tab栏，所以在此后重新
-        mainTab.getTabAt(0).setText("首页").setIcon(R.drawable.home);
-        mainTab.getTabAt(1).setText("活动").setIcon(R.drawable.home);
-        mainTab.getTabAt(2).setText("社区").setIcon(R.drawable.community);
-        mainTab.getTabAt(3).setText("我的").setIcon(R.drawable.mine);*/
-
+    private void initView() {
         //侧滑栏的监听事件
         navigationView.setNavigationItemSelectedListener(menuItem -> {
                     switch (menuItem.getItemId()) {
@@ -96,35 +128,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 }
         );
 
-    }
-
-
-    private void initView() {
-        // 对tablayout增加控件
-        mainTab.setOnNavigationItemSelectedListener(this);
-        //系统默认选中第一个,但是系统选中第一个不执行onNavigationItemSelected(MenuItem)方法
-        // 如果要求刚进入页面就执行clickTabOne()方法,则手动调用选中第一个
-        mainTab.setSelectedItemId(R.id.tab_menu_home);
-
-        fragmentList = new ArrayList<>();
-        fragmentList.add(new IndexFragment());
-        fragmentList.add(new ActivityFragment());
-        fragmentList.add(new CommunityFragment());
-        fragmentList.add(new MyMsgFragment());
-
-        //为viewpager设置adapter
-        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public int getCount() {
-                return fragmentList.size();
-            }
-
-            @NonNull
-            @Override
-            public Fragment getItem(int i) {
-                return fragmentList.get(i);
-            }
+        View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
+        ivHead = headerView.findViewById(R.id.nav_header_iv_icon);
+        tvName = headerView.findViewById(R.id.nav_head_tv_username);
+        tvEmail = headerView.findViewById(R.id.nav_head_tv_mail);
+        headerView.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         });
+
     }
 
 
@@ -134,24 +146,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (itemId) {
             case R.id.tab_menu_home: {
                 // 防止点击跳页切换时显示期间的内容，去除了滑动的动画
-                viewPager.setCurrentItem(0,false);
-                tvTitleBar.setText("文化信息");
-
+                viewPager.setCurrentItem(0, false);
+                mainToolbar.setTitle("文化信息");
                 break;
             }
             case R.id.tab_menu_acivity: {
-                viewPager.setCurrentItem(1,false);
-                tvTitleBar.setText("活动一览");
+                viewPager.setCurrentItem(1, false);
+                mainToolbar.setTitle("活动一览");
                 break;
             }
             case R.id.tab_menu_community: {
-                viewPager.setCurrentItem(2,false);
-                tvTitleBar.setText("社区交流");
+                viewPager.setCurrentItem(2, false);
+                mainToolbar.setTitle("社区交流");
                 break;
             }
             case R.id.tab_menu_mine: {
-                viewPager.setCurrentItem(3,false);
-                tvTitleBar.setText("个人中心");
+                viewPager.setCurrentItem(3, false);
+                mainToolbar.setTitle("个人中心");
                 break;
             }
             default:

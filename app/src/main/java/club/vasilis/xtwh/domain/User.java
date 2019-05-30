@@ -5,8 +5,8 @@ package club.vasilis.xtwh.domain;
  * @date 2019/3/27 * 14:35
  */
 public class User {
-
-    private int account;//账号
+    private String UUID;
+    private String account;//账号
     private String headImg;//头像
     private String nickName;//昵称
     private String name;//姓名
@@ -19,11 +19,7 @@ public class User {
     private String profile;//个人简历
     private String localPalace;//常住地
 
-    public User(int account, String nickName, String password) {
-        this.account = account;
-        this.nickName = nickName;
-        this.password = password;
-    }
+
 
     public User(String nickName, String name, String password, String sex, String phoneNumber, String e_mail, String birthday, String signature, String profile, String localPalace) {
         this.nickName = nickName;
@@ -38,7 +34,7 @@ public class User {
         this.localPalace = localPalace;
     }
 
-    public User(int account, String nickName, String name, String password, String sex, String phoneNumber, String e_mail, String birthday, String signature, String profile, String localPalace) {
+    public User(String account, String nickName, String name, String password, String sex, String phoneNumber, String e_mail, String birthday, String signature, String profile, String localPalace) {
         this.account = account;
         this.nickName = nickName;
         this.name = name;
@@ -69,11 +65,25 @@ public class User {
                 '}';
     }
 
-    public int getAccount() {
+    public User(String account, String nickName, String password) {
+        this.account = account;
+        this.nickName = nickName;
+        this.password = password;
+    }
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public String getAccount() {
         return account;
     }
 
-    public void setAccount(int account) {
+    public void setAccount(String account) {
         this.account = account;
     }
 

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.ui.activity.BaseActivity;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
@@ -85,28 +86,28 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 break;
 
             case 1:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getNickName());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getNickName());
                 break;
             case 2:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getName());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getName());
                 break;
             case 3:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getSex());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getSex());
                 break;
             case 4:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getPhoneNumber());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getPhoneNumber());
                 break;
             case 5:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getE_mail());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getE_mail());
             break;case 6:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getBirthday());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getBirthday());
             break;case 7:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getSignature());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getSignature());
                 break;
             case 8:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getProfile());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getProfile());
             break;case 9:
-                viewHolder.tv_userMsg.setText(BaseActivity.myUser.getLocalPalace());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getLocalPalace());
                 break;
         }
 

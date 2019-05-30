@@ -1,23 +1,24 @@
 package club.vasilis.xtwh.ui.fragment;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.BuildConfig;
@@ -29,7 +30,6 @@ import club.vasilis.xtwh.listener.OnItemClickListener;
 import club.vasilis.xtwh.ui.activity.ActivityDailsActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 //implements OnItemClickListener
@@ -37,19 +37,11 @@ public class ActivityFragment extends Fragment implements OnItemClickListener {
 
     private static final String TAG = "ShowActivityDails";
 
-
-
-    private static OkHttpClient client = new OkHttpClient.Builder()
-            .readTimeout(2000, TimeUnit.MILLISECONDS)
-            .callTimeout(2000,TimeUnit.MILLISECONDS)
-            .build();
-
-
-    //黄油刀
     @BindView(R.id.rv_show_activity)
     RecyclerView rv;
     @BindView(R.id.activity_swip)
     SwipeRefreshLayout swip;
+
     private ActivityAdapter activityAdapter;
     List<Activity> activityList;
     View view;
@@ -81,7 +73,7 @@ public class ActivityFragment extends Fragment implements OnItemClickListener {
                 .get()
                 .build();
 
-        client.newCall(request)
+       MyApplication.client.newCall(request)
                 .enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {

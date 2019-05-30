@@ -4,37 +4,69 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/my_msg_person"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:gravity="center_vertical">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/my_msg_person_iv_head_photo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/head"
-            android:layout_marginLeft="20dp"
-            android:scaleType="fitXY"
-            android:layout_marginStart="20dp" />
-        <TextView
-            android:id="@+id/my_msg_person_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/demo"
-            android:layout_marginLeft="20dp"
-            android:textColor="#000"
-            android:textSize="25sp"
-            android:layout_marginStart="20dp" />
-        <ImageView
-            android:id="@+id/my_msg_person_id_iv_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
-            android:src="@drawable/main_listitem_arrow"
-            android:layout_marginStart="200dp" />
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/my_msg_person"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/my_msg_person_iv_head_photo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/head"
+                android:layout_marginLeft="20dp"
+                android:scaleType="fitXY"
+                android:layout_marginStart="20dp" />
+            <TextView
+                android:id="@+id/my_msg_person_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/demo"
+                android:layout_marginLeft="20dp"
+                android:textColor="#000"
+                android:textSize="25sp"
+                android:layout_marginStart="20dp" />
+            <ImageView
+                android:id="@+id/my_msg_person_id_iv_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp"
+                android:src="@drawable/main_listitem_arrow"
+                android:layout_marginStart="200dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/my_msg_person_unlogin"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_head"
+                android:layout_marginStart="20dp" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/un_login"
+                android:textColor="#000"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </FrameLayout>
+    
 
     <View
         android:layout_width="match_parent"

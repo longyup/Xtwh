@@ -19,11 +19,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.ProductAdapter;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.Product;
 import club.vasilis.xtwh.listener.OnItemClickListener;
+import club.vasilis.xtwh.ui.activity.ProductInfoActivity;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -34,8 +36,9 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
 
     @BindView(R.id.rv_titlelist)
     RecyclerView rvtitlelist;
-    private static final String TAG = "ProductFragment";
     private ProductAdapter adapter;
+    private  Unbinder bind;
+    private List<Product> productList;
 
     public static ProductFragment getInstance() {
         return new ProductFragment();
@@ -46,7 +49,7 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-        ButterKnife.bind(this, view);
+        bind = ButterKnife.bind(this, view);
         init();
 
         return view;
@@ -58,8 +61,9 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
 
         adapter = new ProductAdapter();
         adapter.AddOnItemListener(this);
+       // rvtitlelist.setNestedScrollingEnabled(false);
         rvtitlelist.setAdapter(adapter);
-        refreshHttp("product?method=findbytype&id=T004");
+        refreshHttp("product?method=findAll");
     }
 
 
@@ -79,10 +83,13 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
                 Response response = MyApplication.client.newCall(request).execute();
                 if (response.isSuccessful() && response.body() != null) {
                     String json = response.body().string();
-                    List<Product> productList = JSON.parseArray(json, Product.class);
-                    rvtitlelist.post(() -> {
-                        adapter.refresh(productList);
-                    });
+                    if (!"".equals(json)) {
+                        List<Product> productList = JSON.parseArray(json, Product.class);
+                        rvtitlelist.post(() -> {
+                            adapter.refresh(productList);
+                            this.productList = productList;
+                        });
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -96,6 +103,14 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onClick(View v, int position) {
-        Toast.makeText(getContext(), "onclick"+position, Toast.LENGTH_SHORT).show();
+        Product product = productList.get(position);
+        ProductInfoActivity.actionStart(getContext(), product.getId());
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
     }
 }

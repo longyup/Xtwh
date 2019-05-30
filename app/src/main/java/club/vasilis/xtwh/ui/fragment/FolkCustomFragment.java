@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
@@ -30,9 +30,9 @@ import okhttp3.Response;
 public class FolkCustomFragment extends Fragment implements OnItemClickListener {
     @BindView(R.id.frag_folk_custom_rv)
     RecyclerView fragFolkCustomRv;
-    private View view;
+
     private FolkCustomAdapter adapter;
-    private static final String TAG = "FolkCustomFragment";
+
 
     public static FolkCustomFragment getInstance() {
         return new FolkCustomFragment();
@@ -41,7 +41,7 @@ public class FolkCustomFragment extends Fragment implements OnItemClickListener 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_folk_custom, container, false);
+        View view = inflater.inflate(R.layout.fragment_folk_custom, container, false);
         ButterKnife.bind(this, view);
         init();
         return view;
@@ -49,7 +49,7 @@ public class FolkCustomFragment extends Fragment implements OnItemClickListener 
     }
 
     private void init() {
-        GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
         fragFolkCustomRv.setLayoutManager(manager);
 
         adapter = new FolkCustomAdapter();
@@ -90,6 +90,6 @@ public class FolkCustomFragment extends Fragment implements OnItemClickListener 
 
     @Override
     public void onClick(View v, int position) {
-        Toast.makeText(getContext(), "onclick"+position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "onclick" + position, Toast.LENGTH_SHORT).show();
     }
 }

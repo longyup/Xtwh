@@ -9,6 +9,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.application.MyApplication;
 
 public class MyMsgPersonageActivity extends BaseActivity {
 
@@ -38,7 +39,7 @@ public class MyMsgPersonageActivity extends BaseActivity {
 //        });
 
 //        tv_resetPed = findViewById(R.id.my_msg_personage_account_id);
-        tv_resetPed.setText(String.valueOf(BaseActivity.myUser.getAccount()));
+        tv_resetPed.setText(MyApplication.myUser.getAccount());
     }
 
     @OnClick({R.id.my_msg_personage_user_content_fragment,R.id.my_msg_personage_user_reset_pwd})
