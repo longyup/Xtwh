@@ -4,50 +4,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
-        android:id="@+id/ll_cultureIntroduction_visibility_layout"
+        android:id="@+id/ll_culture_sites_visibility_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="invisible">
 
+
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tb_product_infor"
+            android:id="@+id/tb_culture_sites_infor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/Theme.AppCompat.Light">
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            app:title="aaa"
+            app:titleTextColor="#000">
 
         </androidx.appcompat.widget.Toolbar>
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/btn_content_back"
-                android:layout_width="28dp"
-                android:layout_height="22dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/ic_back"/>
-            <TextView
-                android:id="@+id/tv_cultureIntroduction_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textSize="20sp" />
-        </LinearLayout>-->
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000" />
+        
 
         <TextView
-            android:id="@+id/tv_cultureIntroduction_content"
+            android:id="@+id/tv_culture_sites_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
