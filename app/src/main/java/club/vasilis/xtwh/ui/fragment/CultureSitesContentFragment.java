@@ -56,11 +56,11 @@ public class CultureSitesContentFragment extends Fragment {
     public void refresh(String Title, String Content) {
         View ll_cultureIntroduction_visibility_layout = view.findViewById(R.id.ll_culture_sites_visibility_layout);
         ll_cultureIntroduction_visibility_layout.setVisibility(View.VISIBLE);
-        //刷新标题
-        //tvCultureIntroductionTitle.setText(Title);
-        tbCultureSitesInfor.setTitle(Title);
         //刷新内容
         tvCultureSitesContent.setText(Content);
+        //刷新标题
+        tbCultureSitesInfor.setTitle(Title);
+
     }
 
     @Override

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
         android:id="@+id/ll_culture_sites_visibility_layout"
         android:layout_width="match_parent"
@@ -11,17 +12,17 @@
         android:orientation="vertical"
         android:visibility="invisible">
 
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_culture_sites_infor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/Theme.AppCompat.Light">
+            app:popupTheme="@style/Theme.AppCompat.Light"
+            app:title="aaa">
 
         </androidx.appcompat.widget.Toolbar>
-
-
 
         <View
             android:layout_width="match_parent"
