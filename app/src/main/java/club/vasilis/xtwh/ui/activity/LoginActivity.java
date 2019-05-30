@@ -10,6 +10,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.application.MyApplication;
+import club.vasilis.xtwh.domain.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -35,5 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         String account = etName.getText().toString();
         String password = etPassword.getText().toString();
 
+    }
+
+    @OnClick(R.id.text_log)
+    public void onClick() {
+        MyApplication.myUser = new User("2017002442","null_demo","demo","demo","男","17326080001",
+                "17326080001@163.com","1998-1-1","个性签名demo","个性简历demo","杭州");
+        finish();
     }
 }

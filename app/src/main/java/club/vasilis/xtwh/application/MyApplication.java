@@ -6,6 +6,7 @@ import com.youth.xframe.XFrame;
 
 import java.util.concurrent.TimeUnit;
 
+import club.vasilis.xtwh.domain.User;
 import okhttp3.OkHttpClient;
 
 /**
@@ -13,6 +14,10 @@ import okhttp3.OkHttpClient;
  * @date 2019/5/26 * 19:16
  */
 public class MyApplication extends Application {
+    //= new User(2017002442,"null_demo","demo","demo","男","17326080001",
+    //            "17326080001@163.com","1998-1-1","个性签名demo","个性简历demo","杭州")
+    public static User myUser ;
+
     public static final String HOST = "http://120.76.62.29:8080/10_NULL/";
 
     public static OkHttpClient client = new OkHttpClient.Builder()

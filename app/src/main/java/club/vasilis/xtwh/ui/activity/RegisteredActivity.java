@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +40,7 @@ public class RegisteredActivity extends AppCompatActivity {
     EditText reregister_passwd;
     @BindView(R.id.register_submit)
     Button register_submit;
-
+    UUID uuid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,9 +97,9 @@ public class RegisteredActivity extends AppCompatActivity {
                 if(!checkEdit()){
                     return;
                 }
-                String name =  register_username.getText().toString().trim();
+                String account =  register_username.getText().toString().trim();
                 String pwd = register_passwd.getText().toString().trim();
-                postRequest(name,pwd);
+                postRequest(account,pwd);
 
             }
         });
@@ -121,16 +122,17 @@ public class RegisteredActivity extends AppCompatActivity {
 
     /**
      * post 请求后台
-     * @param name
+     * @param account
      * @param pwd
      */
-    private void postRequest(String name, String pwd) {
+    private void postRequest(String account, String pwd) {
 
-        String url = MyApplication.HOST + "user?";
+        String url = MyApplication.HOST + "user";
         //建立请求表单，添加上传服务器的数据
         RequestBody formBody = new FormBody.Builder()
                 .add("method","registerA")
-                .add("username",name)
+                .add("UUID",getUUID())
+                .add("account",account)
                 .add("password",pwd)
                 .build();
         //添加请求
@@ -147,7 +149,7 @@ public class RegisteredActivity extends AppCompatActivity {
                     response = MyApplication.client.newCall(request).execute();
                     if (response.isSuccessful()){
                         String json = response.body().string().trim();
-                        int code = JSON.parseObject(json).getInteger("");
+                        int code = JSON.parseObject(json).getInteger("");//获得服务器端的响应数据
                         if (code == 0){
                             Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
                         }
@@ -164,6 +166,13 @@ public class RegisteredActivity extends AppCompatActivity {
             }
         }).start();
 
+    }
+
+    private String getUUID() {
+        uuid = UUID.randomUUID();
+        String str = uuid.toString();
+        String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
+         return str+","+temp;
     }
 
     private boolean checkEdit(){

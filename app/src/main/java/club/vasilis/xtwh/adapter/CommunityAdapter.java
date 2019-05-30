@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.listener.OnItemClickListener;
 import club.vasilis.xtwh.ui.activity.BaseActivity;
 import club.vasilis.xtwh.domain.Comment;
@@ -105,7 +106,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
                             .append(date)
                             .append(" ")
                             .append(time);
-                    Phrase phrase = new Phrase(1, sb.toString(), BaseActivity.myUser.getNickName(), community.getId());
+                    Phrase phrase = new Phrase(1, sb.toString(), MyApplication.myUser.getNickName(), community.getId());
                     viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
                     community.setPhraseNum(community.getPhraseNum() + 1);
                     viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()));

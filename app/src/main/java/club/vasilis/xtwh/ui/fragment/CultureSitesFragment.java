@@ -24,7 +24,7 @@ import club.vasilis.xtwh.adapter.CultureSitesAdapter;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.CultureSites;
 import club.vasilis.xtwh.listener.OnItemClickListener;
-import club.vasilis.xtwh.ui.activity.CultureIntroductionContentActivity;
+import club.vasilis.xtwh.ui.activity.CultureSitesContentActivity;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -100,6 +100,6 @@ public class CultureSitesFragment extends Fragment implements OnItemClickListene
     @Override
     public void onClick(View v, int position) {
         CultureSites cultureSites = cultureSitesList.get(position);
-        CultureIntroductionContentActivity.actionStart(getContext(),cultureSites.getTitle(),cultureSites.getContent());
+        CultureSitesContentActivity.actionStart(getContext(),cultureSites.getTitle(),cultureSites.getContent());
     }
 }

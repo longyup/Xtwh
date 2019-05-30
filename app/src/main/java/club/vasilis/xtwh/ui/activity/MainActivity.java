@@ -23,10 +23,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
+import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.ui.fragment.ActivityFragment;
 import club.vasilis.xtwh.ui.fragment.CommunityFragment;
 import club.vasilis.xtwh.ui.fragment.IndexFragment;
 import club.vasilis.xtwh.ui.fragment.MyMsgFragment;
+import club.vasilis.xtwh.ui.fragment.UnLoginFragment;
 import club.vasilis.xtwh.ui.view.CustomViewPager;
 
 
@@ -78,7 +80,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         fragmentList = new ArrayList<>();
         fragmentList.add(new IndexFragment());
         fragmentList.add(new ActivityFragment());
-        fragmentList.add(new CommunityFragment());
+        if (MyApplication.myUser !=null){
+            fragmentList.add(new CommunityFragment());
+        }else {
+            fragmentList.add(new UnLoginFragment());
+        }
         fragmentList.add(new MyMsgFragment());
 
         //为viewpager设置adapter

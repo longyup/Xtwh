@@ -13,8 +13,6 @@ import club.vasilis.xtwh.domain.User;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public static User myUser = new User(2017002442,"null_demo","demo","demo","男","17326080001",
-            "17326080001@163.com","1998-1-1","个性签名demo","个性简历demo","杭州");
 
     private ForceOfflineReceiver receiver;
     @Override

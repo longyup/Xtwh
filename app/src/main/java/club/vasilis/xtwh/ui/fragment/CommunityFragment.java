@@ -30,6 +30,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.CommunityAdapter;
+import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
 import club.vasilis.xtwh.domain.Phrase;
@@ -110,7 +111,7 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
                 community.setId(2);
                 community.setPhrase(false);
                 community.setPhraseNum(0);
-                community.setUUID(BaseActivity.myUser.getNickName());
+                community.setUUID(MyApplication.myUser.getNickName());
                 adapter.update(community);
                 // 关闭对话框
                 dialog.cancel();
@@ -122,9 +123,9 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
 
     private void testInit() {
         communityList.clear();
-        User admin = new User(123456789, "admin", "admin");
+        User admin = new User("123456789", "admin", "admin");
         userList.add(admin);
-        userList.add(BaseActivity.myUser);
+        userList.add(MyApplication.myUser);
         Community community = new Community();
         community.setContent("测试测试啊实打实的");
         community.setDate("03.30 13:52");
@@ -209,7 +210,7 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
         for (Community community : communityList) {
             for (Phrase phrase : phraseList) {
                 if (phrase.getCommunityId() == community.getId()) {
-                    if (phrase.getUuid().equals(BaseActivity.myUser.getNickName())) {
+                    if (phrase.getUuid().equals(MyApplication.myUser.getNickName())) {
                         community.setPhrase(true);
                     } else {
                         community.setPhrase(false);
