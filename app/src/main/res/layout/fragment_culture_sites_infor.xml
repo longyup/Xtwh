@@ -20,14 +20,11 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/Theme.AppCompat.Light"
-            app:title="aaa">
+            app:title="aaa"
+            app:titleTextColor="#000">
 
         </androidx.appcompat.widget.Toolbar>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000" />
+        
 
         <TextView
             android:id="@+id/tv_culture_sites_content"
