@@ -1,6 +1,8 @@
 package club.vasilis.xtwh.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -43,7 +45,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
+        loginToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @OnClick(R.id.login)
@@ -78,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         MyApplication.myUser.setNickName(account);
                         MyApplication.myUser.setPassword(password);
                         MyApplication.myUser.setE_mail("Vasilis.long@outlook.com");
-                        
+
                         etName.post(() -> {
                             Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                             XLog.e(MyApplication.myUser.toString());
@@ -99,6 +106,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.tv_reg)
     public void onClick() {
+        Intent intent = new Intent();
 
+        startActivity(intent);
+        finish();
     }
 }
