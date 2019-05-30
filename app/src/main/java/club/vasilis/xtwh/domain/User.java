@@ -12,58 +12,43 @@ public class User {
     private String name;//姓名
     private String password;//密码
     private String sex;//性别
-    private String phoneNumber;//手机号
+    private String phone;//手机号
     private String e_mail;//电子邮件
     private String birthday;//生日
     private String signature;//个性签名
+    private String localPlace;//常住地
     private String profile;//个人简历
-    private String localPalace;//常住地
+    private String idCard;
 
 
 
-    public User(String nickName, String name, String password, String sex, String phoneNumber, String e_mail, String birthday, String signature, String profile, String localPalace) {
+    public User(String nickName, String name, String password, String sex, String phone, String e_mail, String birthday, String signature, String profile, String localPlace) {
         this.nickName = nickName;
         this.name = name;
         this.password = password;
         this.sex = sex;
-        this.phoneNumber = phoneNumber;
+        this.phone = phone;
         this.e_mail = e_mail;
         this.birthday = birthday;
         this.signature = signature;
         this.profile = profile;
-        this.localPalace = localPalace;
+        this.localPlace = localPlace;
     }
 
-    public User(String account, String nickName, String name, String password, String sex, String phoneNumber, String e_mail, String birthday, String signature, String profile, String localPalace) {
+    public User(String account, String nickName, String name, String password, String sex, String phone, String e_mail, String birthday, String signature, String profile, String localPlace) {
         this.account = account;
         this.nickName = nickName;
         this.name = name;
         this.password = password;
         this.sex = sex;
-        this.phoneNumber = phoneNumber;
+        this.phone = phone;
         this.e_mail = e_mail;
         this.birthday = birthday;
         this.signature = signature;
         this.profile = profile;
-        this.localPalace = localPalace;
+        this.localPlace = localPlace;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "headImg='" + headImg + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", sex='" + sex + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", e_mail='" + e_mail + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", signature='" + signature + '\'' +
-                ", profile='" + profile + '\'' +
-                ", localPalace='" + localPalace + '\'' +
-                '}';
-    }
 
     public User(String account, String nickName, String password) {
         this.account = account;
@@ -127,12 +112,12 @@ public class User {
         this.sex = sex;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phoneNumber) {
+        this.phone = phoneNumber;
     }
 
     public String getE_mail() {
@@ -167,14 +152,34 @@ public class User {
         this.profile = profile;
     }
 
-    public String getLocalPalace() {
-        return localPalace;
+    public String getLocalPlace() {
+        return localPlace;
     }
 
-    public void setLocalPalace(String localPalace) {
-        this.localPalace = localPalace;
+    public void setLocalPlace(String localPlace) {
+        this.localPlace = localPlace;
     }
 
     public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "UUID='" + UUID + '\'' +
+                ", account='" + account + '\'' +
+                ", headImg='" + headImg + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", e_mail='" + e_mail + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", signature='" + signature + '\'' +
+                ", localPlace='" + localPlace + '\'' +
+                ", profile='" + profile + '\'' +
+                ", idCard='" + idCard + '\'' +
+                '}';
     }
 }

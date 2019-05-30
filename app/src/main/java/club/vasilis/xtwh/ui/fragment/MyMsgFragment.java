@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,9 @@ public class MyMsgFragment extends Fragment {
     LinearLayout myMsgPerson;
     @BindView(R.id.my_msg_person_unlogin)
     LinearLayout myMsgPersonUnlogin;
+    @BindView(R.id.my_msg_person_id)
+    TextView myMsgPersonId;
+
 
     private Unbinder unbinder;
     private View view;
@@ -43,13 +47,7 @@ public class MyMsgFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_my_msg, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        if (MyApplication.myUser != null) {
-            myMsgPerson.setVisibility(View.VISIBLE);
-            myMsgPersonUnlogin.setVisibility(View.GONE);
-        }else {
-            myMsgPerson.setVisibility(View.GONE);
-            myMsgPersonUnlogin.setVisibility(View.VISIBLE);
-        }
+
 
 
         //其他内容
@@ -67,7 +65,8 @@ public class MyMsgFragment extends Fragment {
         if (MyApplication.myUser != null) {
             myMsgPerson.setVisibility(View.VISIBLE);
             myMsgPersonUnlogin.setVisibility(View.GONE);
-        }else {
+            myMsgPersonId.setText(MyApplication.myUser.getNickName());
+        } else {
             myMsgPerson.setVisibility(View.GONE);
             myMsgPersonUnlogin.setVisibility(View.VISIBLE);
         }
