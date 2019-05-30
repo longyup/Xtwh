@@ -20,7 +20,8 @@
                 android:layout_height="22dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="8dp"
-                android:background="@drawable/back1"/>
+                android:background="@drawable/back1"
+                android:layout_marginStart="8dp" />
             <TextView
                 android:id="@+id/tv_cultureIntroduction_title"
                 android:layout_width="match_parent"
@@ -43,12 +44,13 @@
             android:layout_weight="1"
             android:padding="15dp"
             android:scrollbars="vertical"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
-        android:background="#000" />
+        android:background="#000"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
