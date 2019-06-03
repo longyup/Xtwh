@@ -6,13 +6,17 @@
     android:orientation="vertical">"
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/register_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:title="注册"
-        app:navigationIcon="@drawable/ic_back">
+        android:background="@color/white"
+        android:elevation="5dp"
+        app:title="@string/register"
+        app:titleTextColor="@color/black"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/ic_back"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    </androidx.appcompat.widget.Toolbar>
 
 
     <EditText
@@ -67,6 +71,6 @@
         android:layout_marginTop="5dp"
         android:id="@+id/register_prompt"
         android:gravity="center"
-        android:text="已有账号请登录"/>
+        android:text="已有账号?返回登录"/>
 
 </LinearLayout>

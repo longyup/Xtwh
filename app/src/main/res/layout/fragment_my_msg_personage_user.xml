@@ -107,6 +107,7 @@
         android:layout_weight="1">
 
         <TextView
+            android:id="@+id/exit"
             android:gravity="center"
             android:background="#ff0000"
             android:layout_width="match_parent"

@@ -136,6 +136,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         });
+        if(MyApplication.myUser == null){
+            tvName.setText("");
+            tvEmail.setText("您还未登陆");
+            ivHead.setBackgroundResource(R.drawable.ic_head);
+        }else {
+            tvName.setText(MyApplication.myUser.getNickName());
+            tvEmail.setText(MyApplication.myUser.getE_mail());
+
+        }
 
     }
 

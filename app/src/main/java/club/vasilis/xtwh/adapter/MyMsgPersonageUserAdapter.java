@@ -3,8 +3,6 @@ package club.vasilis.xtwh.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
-import club.vasilis.xtwh.ui.activity.BaseActivity;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 
@@ -95,7 +94,7 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getSex());
                 break;
             case 4:
-                viewHolder.tv_userMsg.setText(MyApplication.myUser.getPhoneNumber());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getPhone());
                 break;
             case 5:
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getE_mail());
@@ -107,7 +106,7 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
             case 8:
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getProfile());
             break;case 9:
-                viewHolder.tv_userMsg.setText(MyApplication.myUser.getLocalPalace());
+                viewHolder.tv_userMsg.setText(MyApplication.myUser.getLocalPlace());
                 break;
         }
 

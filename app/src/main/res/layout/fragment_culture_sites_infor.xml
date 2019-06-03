@@ -24,7 +24,7 @@
             app:titleTextColor="#000">
 
         </androidx.appcompat.widget.Toolbar>
-        
+
 
         <TextView
             android:id="@+id/tv_culture_sites_content"

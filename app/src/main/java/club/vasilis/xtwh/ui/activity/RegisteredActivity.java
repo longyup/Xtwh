@@ -1,21 +1,16 @@
 package club.vasilis.xtwh.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import org.json.JSONObject;
-import org.w3c.dom.Text;
+import com.alibaba.fastjson.JSON;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -26,7 +21,6 @@ import butterknife.OnClick;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
 import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -41,49 +35,57 @@ public class RegisteredActivity extends AppCompatActivity {
     @BindView(R.id.register_submit)
     Button register_submit;
     UUID uuid;
+
+    @BindView(R.id.register_toolbar)
+    Toolbar registerToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registered);
         ButterKnife.bind(this);
 
+        registerToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-        register_username.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
+
+        register_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 // TODO Auto-generated method stub
-                if(!hasFocus){
-                    if(register_username.getText().toString().trim().length()<4){
+                if (!hasFocus) {
+                    if (register_username.getText().toString().trim().length() < 4) {
                         Toast.makeText(RegisteredActivity.this, "用户名不能小于4个字符", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
         });
-        register_passwd.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
+        register_passwd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 // TODO Auto-generated method stub
-                if(!hasFocus){
-                    if(register_passwd.getText().toString().trim().length()<6){
+                if (!hasFocus) {
+                    if (register_passwd.getText().toString().trim().length() < 6) {
                         Toast.makeText(RegisteredActivity.this, "密码不能小于8个字符", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
 
         });
-        reregister_passwd.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
+        reregister_passwd.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 // TODO Auto-generated method stub
-                if(!hasFocus){
-                    if(!reregister_passwd.getText().toString().trim().equals(register_passwd.getText().toString().trim())){
+                if (!hasFocus) {
+                    if (!reregister_passwd.getText().toString().trim().equals(register_passwd.getText().toString().trim())) {
                         Toast.makeText(RegisteredActivity.this, "两次密码输入不一致", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -94,12 +96,12 @@ public class RegisteredActivity extends AppCompatActivity {
         register_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!checkEdit()){
+                if (!checkEdit()) {
                     return;
                 }
-                String account =  register_username.getText().toString().trim();
+                String account = register_username.getText().toString().trim();
                 String pwd = register_passwd.getText().toString().trim();
-                postRequest(account,pwd);
+                postRequest(account, pwd);
 
             }
         });
@@ -109,19 +111,19 @@ public class RegisteredActivity extends AppCompatActivity {
 
     /**
      * 已有账号，返回登录界面
-     * @param button
+     *
      */
     @OnClick(R.id.register_prompt)
-        public void onClick(Button button){
-            switch (button.getId()){
-                case R.id.register_prompt:
-
-                    break;
-            }
+    public void onClick() {
+        Intent intent = new Intent();
+        intent.setClass(this,LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     /**
      * post 请求后台
+     *
      * @param account
      * @param pwd
      */
@@ -130,10 +132,10 @@ public class RegisteredActivity extends AppCompatActivity {
         String url = MyApplication.HOST + "user";
         //建立请求表单，添加上传服务器的数据
         RequestBody formBody = new FormBody.Builder()
-                .add("method","registerA")
-                .add("UUID",getUUID())
-                .add("account",account)
-                .add("password",pwd)
+                .add("method", "registerA")
+                .add("UUID", getUUID())
+                .add("account", account)
+                .add("password", pwd)
                 .build();
         //添加请求
         Request request = new Request.Builder()
@@ -147,15 +149,16 @@ public class RegisteredActivity extends AppCompatActivity {
                 Response response = null;
                 try {
                     response = MyApplication.client.newCall(request).execute();
-                    if (response.isSuccessful()){
+                    if (response.isSuccessful()) {
                         String json = response.body().string().trim();
-                        int code = JSON.parseObject(json).getInteger("");//获得服务器端的响应数据
-                        if (code == 0){
-                            Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
-                        }
+//                        int code = JSON.parseObject(json).getInteger("");//获得服务器端的响应数据
+//                        if (code == 0) {
+//                            Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
+//                        }
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         });
@@ -172,17 +175,17 @@ public class RegisteredActivity extends AppCompatActivity {
         uuid = UUID.randomUUID();
         String str = uuid.toString();
         String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
-         return str+","+temp;
+        return str + "," + temp;
     }
 
-    private boolean checkEdit(){
-        if(register_username.getText().toString().trim().equals("")){
+    private boolean checkEdit() {
+        if (register_username.getText().toString().trim().equals("")) {
             Toast.makeText(RegisteredActivity.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
-        }else if(register_passwd.getText().toString().trim().equals("")){
+        } else if (register_passwd.getText().toString().trim().equals("")) {
             Toast.makeText(RegisteredActivity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
-        }else if(!register_passwd.getText().toString().trim().equals(reregister_passwd.getText().toString().trim())){
+        } else if (!register_passwd.getText().toString().trim().equals(reregister_passwd.getText().toString().trim())) {
             Toast.makeText(RegisteredActivity.this, "两次密码输入不一致", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             return true;
         }
         return false;
