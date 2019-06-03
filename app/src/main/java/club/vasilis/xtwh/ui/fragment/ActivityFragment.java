@@ -54,10 +54,10 @@ public class ActivityFragment extends Fragment implements OnItemClickListener {
         activityAdapter = new ActivityAdapter();
         activityAdapter.AddOnItemListener(this);
         rv.setAdapter(activityAdapter);
+        inntData();
         swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                inntData();
                 swip.setRefreshing(false);
             }
         });

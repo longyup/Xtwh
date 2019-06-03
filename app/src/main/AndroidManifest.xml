@@ -15,11 +15,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.RegisteredActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".ui.activity.ProductInfoActivity" />
         <activity android:name=".ui.activity.MyMsgPersonageActivity" />

@@ -3,9 +3,7 @@ package club.vasilis.xtwh.ui.activity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
