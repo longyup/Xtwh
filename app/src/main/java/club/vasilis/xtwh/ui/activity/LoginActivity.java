@@ -2,7 +2,6 @@ package club.vasilis.xtwh.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -45,11 +44,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        loginToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        loginToolbar.setNavigationOnClickListener(v -> {
+            finish();
         });
     }
 
@@ -101,13 +97,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @OnClick(R.id.tv_reg)
     public void onClick() {
         Intent intent = new Intent();
-        intent.setClass(this,RegisteredActivity.class);
+        intent.setClass(this, RegisteredActivity.class);
         startActivity(intent);
         finish();
     }
