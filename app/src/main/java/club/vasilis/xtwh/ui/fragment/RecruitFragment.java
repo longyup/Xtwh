@@ -64,7 +64,9 @@ public class RecruitFragment extends Fragment {
                 refresh();
             }
         });
+        refresh();
         return view;
+
     }
 
     /**

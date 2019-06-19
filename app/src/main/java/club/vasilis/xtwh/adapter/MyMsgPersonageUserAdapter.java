@@ -57,6 +57,8 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context,"设置"+userContextTitle[position]+"成功!",Toast.LENGTH_SHORT).show();
+                        String msg = v.getContext().toString();
+                        System.err.println(msg);
 //                        BaseActivity.myUser
                     }
                 });
