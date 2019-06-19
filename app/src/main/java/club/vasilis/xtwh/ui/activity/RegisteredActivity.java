@@ -10,8 +10,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.alibaba.fastjson.JSON;
-
 import java.io.IOException;
 import java.util.UUID;
 
@@ -151,13 +149,14 @@ public class RegisteredActivity extends AppCompatActivity {
                     response = MyApplication.client.newCall(request).execute();
                     if (response.isSuccessful()) {
                         String json = response.body().string().trim();
-                        int code = JSON.parseObject(json).getInteger("");//获得服务器端的响应数据
-                        if (code == 0) {
-                            Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
-                        }
+//                        int code = JSON.parseObject(json).getInteger("");//获得服务器端的响应数据
+//                        if (code == 0) {
+//                            Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
+//                        }
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         });

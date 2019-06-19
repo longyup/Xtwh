@@ -19,8 +19,7 @@
             android:elevation="5dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="测试"
-            app:titleTextColor="@color/XFrame_loading_dialog_message">
+            app:title="测试">
 
 
         </androidx.appcompat.widget.Toolbar>

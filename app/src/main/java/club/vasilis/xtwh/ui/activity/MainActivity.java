@@ -14,7 +14,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -32,6 +33,7 @@ import club.vasilis.xtwh.ui.fragment.IndexFragment;
 import club.vasilis.xtwh.ui.fragment.MyMsgFragment;
 import club.vasilis.xtwh.ui.fragment.UnLoginFragment;
 import club.vasilis.xtwh.ui.view.CustomViewPager;
+import club.vasilis.xtwh.viewmodel.MainActivityViewModel;
 
 
 /**
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private View headerView;
 
     private List<Fragment> fragmentList;
-
+    private MyViewPagerAdapter adapter;
     private static final String TAG = "MainActivity";
 
     @Override
@@ -69,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        MainActivityViewModel viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+
+
 
         initBottomView();
         initView();
@@ -133,7 +139,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         fragmentList.add(new MyMsgFragment());
 
         //为viewpager设置adapter
-        viewPager.setAdapter(new MyViewPagerAdapter(getSupportFragmentManager()));
+        adapter = new MyViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
 
     }
 
@@ -150,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             tvName.setText("");
             tvEmail.setText("您还未登陆");
             ivHead.setImageResource(R.drawable.ic_head);
+            fragmentList.set(2,new UnLoginFragment());
         } else {
             tvName.setText(MyApplication.myUser.getNickName());
             tvEmail.setText(MyApplication.myUser.getE_mail());
@@ -158,7 +166,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 Intent intent = new Intent(this, MyMsgPersonageActivity.class);
                 startActivity(intent);
             });
+            fragmentList.set(2,new CommunityFragment());
         }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -191,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return true;
     }
 
-    class MyViewPagerAdapter extends FragmentPagerAdapter {
+    class MyViewPagerAdapter extends FragmentStatePagerAdapter {
         public MyViewPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
         }
@@ -201,10 +211,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return fragmentList.size();
         }
 
+
+
         @NonNull
         @Override
         public Fragment getItem(int i) {
             return fragmentList.get(i);
         }
+
     }
 }
