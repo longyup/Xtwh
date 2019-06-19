@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    android:layout_marginBottom="5dp">
+    app:cardCornerRadius="4dp">
     <!-- 发表动态的个人信息-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
         <!--头像 -->
         <ImageView
             android:id="@+id/community_item_iv_head"
@@ -56,8 +58,8 @@
             android:id="@+id/community_item_tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="3dp"
             android:paddingTop="5dp"
+            android:paddingBottom="3dp"
             android:text="测试用的+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
             android:textSize="15sp" />
 
@@ -91,10 +93,10 @@
                 android:id="@+id/community_item_phrase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
                 android:paddingLeft="15dp"
+                android:paddingTop="5dp"
                 android:paddingRight="15dp"
-                android:paddingTop="5dp">
+                android:paddingBottom="5dp">
 
                 <ImageView
                     android:id="@+id/community_item_iv_phrase"
@@ -107,12 +109,13 @@
                     android:id="@+id/community_item_tv_phrase"
                     android:layout_width="28dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_marginLeft="4dp"
+                    android:gravity="center"
                     android:text="点赞"
                     android:textSize="12sp" />
             </LinearLayout>
+
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
@@ -122,10 +125,10 @@
                 android:id="@+id/community_item_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
                 android:paddingLeft="15dp"
+                android:paddingTop="5dp"
                 android:paddingRight="15dp"
-                android:paddingTop="5dp">
+                android:paddingBottom="5dp">
 
                 <ImageView
                     android:id="@+id/community_item_iv_comment"

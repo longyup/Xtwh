@@ -100,7 +100,10 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         size = communityList.size();
         notifyDataSetChanged();
     }
-
+    public void refreshItem(int position ,Community community){
+        communityList.set(position,community);
+        notifyItemChanged(position);
+    }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.community_item_iv_head)
         ImageView ivHead;
@@ -128,7 +131,9 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
+          //  itemView.setOnClickListener(this);
+            phrase.setOnClickListener(this);
+            comment.setOnClickListener(this);
         }
 
         @Override

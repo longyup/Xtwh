@@ -37,7 +37,7 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
     @BindView(R.id.rv_titlelist)
     RecyclerView rvtitlelist;
     private ProductAdapter adapter;
-    private  Unbinder bind;
+    private Unbinder bind;
     private List<Product> productList;
 
     public static ProductFragment getInstance() {
@@ -61,7 +61,7 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
 
         adapter = new ProductAdapter();
         adapter.AddOnItemListener(this);
-       // rvtitlelist.setNestedScrollingEnabled(false);
+        // rvtitlelist.setNestedScrollingEnabled(false);
         rvtitlelist.setAdapter(adapter);
         refreshHttp("product?method=findAll");
     }
@@ -75,21 +75,20 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
     public void refreshHttp(String param) {
         new Thread(() -> {
             String url = MyApplication.HOST + param;
-
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    try {
-                        Response response = MyApplication.client.newCall(request).execute();
-                        if (response.isSuccessful() && response.body() != null) {
-                            String json = response.body().string();
-                            if (!"".equals(json)) {
-                                List<Product> productList = JSON.parseArray(json, Product.class);
-                                rvtitlelist.post(() -> {
-                                    adapter.refresh(productList);
-                                    this.productList = productList;
-                                });
-                            }
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            try {
+                Response response = MyApplication.client.newCall(request).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    String json = response.body().string();
+                    if (!"".equals(json)) {
+                        List<Product> productList = JSON.parseArray(json, Product.class);
+                        rvtitlelist.post(() -> {
+                            adapter.refresh(productList);
+                            this.productList = productList;
+                        });
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

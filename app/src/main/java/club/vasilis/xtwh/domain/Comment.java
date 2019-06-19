@@ -6,11 +6,11 @@ package club.vasilis.xtwh.domain;
  */
 public class Comment {
     private int id; // comment表对应的主键Id
+    private int communityId;// 评论在哪个动态下
     private String commentA; // 评论的一方
     private String commentB; // 被评论的一方
-    private String commentContent; // 评论的内容
-    private String commentDate;// 评论的日期
-    private int communityId;// 评论在哪个动态下
+    private String content; // 评论的内容
+    private long date;// 评论的日期
 
     public int getId() {
         return id;
@@ -18,6 +18,14 @@ public class Comment {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(int communityId) {
+        this.communityId = communityId;
     }
 
     public String getCommentA() {
@@ -36,27 +44,31 @@ public class Comment {
         this.commentB = commentB;
     }
 
-    public String getCommentContent() {
-        return commentContent;
+    public String getContent() {
+        return content;
     }
 
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getCommentDate() {
-        return commentDate;
+    public long getDate() {
+        return date;
     }
 
-    public void setCommentDate(String commentDate) {
-        this.commentDate = commentDate;
+    public void setDate(long date) {
+        this.date = date;
     }
 
-    public int getCommunityId() {
-        return communityId;
-    }
-
-    public void setCommunityId(int communityId) {
-        this.communityId = communityId;
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", communityId=" + communityId +
+                ", commentA='" + commentA + '\'' +
+                ", commentB='" + commentB + '\'' +
+                ", content='" + content + '\'' +
+                ", date=" + date +
+                '}';
     }
 }
