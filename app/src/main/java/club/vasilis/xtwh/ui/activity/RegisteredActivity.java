@@ -151,13 +151,13 @@ public class RegisteredActivity extends AppCompatActivity {
                         User user = new User();
                         user.setUUID(uuid);
                         user.setNickName(account);
+                        user.setAccount(account);
+                        user.setPassword(pwd);
                         MyApplication.myUser = user;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
                                 Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
-
                                 finish();
                             }
                         });
