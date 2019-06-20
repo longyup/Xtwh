@@ -10,19 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
-import club.vasilis.xtwh.listener.OnItemClickListener;
-import club.vasilis.xtwh.ui.activity.BaseActivity;
-import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
-import club.vasilis.xtwh.domain.Phrase;
 import club.vasilis.xtwh.domain.User;
-import club.vasilis.xtwh.utils.Util;
+import club.vasilis.xtwh.listener.OnItemClickListener;
+import club.vasilis.xtwh.utils.TimeUtils;
 
 /**
  * @author Vasilis
@@ -31,26 +30,15 @@ import club.vasilis.xtwh.utils.Util;
 public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.ViewHolder> {
 
     private List<Community> communityList;
-    private List<User> userList;
-    private List<Comment> commentList;
     private int size;
 
     private OnItemClickListener listener;
 
-    public CommunityAdapter(List<Community> communityList, List<User> userList, List<Comment> commentList) {
-        this.communityList = communityList;
-        this.userList = userList;
-        this.commentList = commentList;
-    }
 
-    public CommunityAdapter(List<Community> communityList, List<User> userList) {
-        this.communityList = communityList;
-        this.userList = userList;
-        size = communityList.size();
-    }
-    public void addOnItemClickListener(OnItemClickListener listener){
+    public void addOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -61,59 +49,30 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
-        final Community community = communityList.get(size - i - 1);
-
+        Community community = communityList.get(i);
         //获取发表动态的用户
-        User user = Util.getUser(community.getUUID(), userList);
-        // 头像应该从网上下载
-        //viewHolder.ivHead.setImageBitmap();
-        // viewHolder.tvName.setText(user.getName());
-        viewHolder.tvDate.setText(community.getDate());
-        viewHolder.tvContent.setText(community.getContent());
-        if (community.isPhrase()) {
-            viewHolder.ivPhrase.setBackgroundResource(R.drawable.phrase);
+        User user = community.getUser();
+        // 设置头像
+        String headImg = user.getHeadImg();
+        if (headImg != null && !"".equals(headImg)) {
+            Glide.with(viewHolder.itemView.getContext()).load(MyApplication.HOST + headImg).into(viewHolder.ivHead);
         } else {
-            viewHolder.ivPhrase.setBackgroundResource(R.drawable.unphrase);
+            viewHolder.ivHead.setImageResource(R.drawable.head);
         }
-
+        // 设置用户名
+        viewHolder.tvName.setText(user.getNickName());
+        //设置时间
+        viewHolder.tvDate.setText(TimeUtils.stampToDate(community.getDate()));
+        viewHolder.tvContent.setText(community.getContent());
+        // 设置点赞图标
         if (community.isPhrase()) {
             viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
-            viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()));
+            viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseList().size()));
         } else {
             viewHolder.ivPhrase.setImageResource(R.drawable.unphrase);
             viewHolder.tvPhrase.setText("点赞");
         }
 
-
-        viewHolder.phrase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (community.isPhrase()) {
-                    //从表中删除
-                    viewHolder.ivPhrase.setImageResource(R.drawable.unphrase);
-                    viewHolder.tvPhrase.setText("点赞");
-                    community.setPhraseNum(community.getPhraseNum() - 1);
-                    community.setPhrase(false);
-
-                } else {
-                    String year = Util.getNowYear();
-                    String date = Util.getNowDate();
-                    String time = Util.getNowTime();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(year)
-                            .append("-")
-                            .append(date)
-                            .append(" ")
-                            .append(time);
-                    Phrase phrase = new Phrase(1, sb.toString(), MyApplication.myUser.getNickName(), community.getId());
-                    viewHolder.ivPhrase.setImageResource(R.drawable.phrase);
-                    community.setPhraseNum(community.getPhraseNum() + 1);
-                    viewHolder.tvPhrase.setText(String.valueOf(community.getPhraseNum()));
-                    community.setPhrase(true);
-                }
-            }
-        });
     }
 
 
@@ -122,18 +81,27 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         return size;
     }
 
+    /**
+     * 添加说说
+     * @param community
+     */
     public void update(Community community) {
-        this.communityList.add(community);
+        this.communityList.add(0, community);
         size = communityList.size();
         notifyDataSetChanged();
-        // 重新获取数据
-        /*communityList
-
-        notifyDataSetChanged();*/
     }
 
+    /**
+     * 下拉刷新
+     * @param communityList
+     */
+    public void refresh(List<Community> communityList) {
+        this.communityList = communityList;
+        size = communityList.size();
+        notifyDataSetChanged();
+    }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.community_item_iv_head)
         ImageView ivHead;
         @BindView(R.id.community_item_tv_name)
@@ -160,15 +128,14 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            if (listener != null) {
-                itemView.setOnClickListener(this);
-            }
-
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            listener.onClick(v,getLayoutPosition());
+            if (listener != null) {
+                listener.onClick(v, getLayoutPosition());
+            }
         }
     }
 

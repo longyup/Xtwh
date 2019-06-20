@@ -11,7 +11,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/head" />
+        android:src="@drawable/head" />
 
     <TextView
         android:id="@+id/nav_head_tv_mail"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="vasilis.long@outlook.com"
-        android:textColor="#fff"
+
         android:textSize="14sp" />
 
     <TextView
@@ -28,6 +28,6 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/nav_head_tv_mail"
         android:text="Vasilis"
-        android:textColor="#fff"
+
         android:textSize="14sp" />
 </RelativeLayout>

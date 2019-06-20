@@ -2,7 +2,6 @@ package club.vasilis.xtwh.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -11,7 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.youth.xframe.utils.log.XLog;
+import com.alibaba.fastjson.JSONObject;
+import com.orhanobut.logger.Logger;
 
 import java.io.IOException;
 
@@ -45,11 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        loginToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        loginToolbar.setNavigationOnClickListener(v -> {
+            finish();
         });
     }
 
@@ -79,35 +76,29 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
                     String result = response.body().string();
-                    if ("1".equals(result)) {
-                        MyApplication.myUser = new User();
-                        MyApplication.myUser.setAccount(account);
-                        MyApplication.myUser.setNickName(account);
-                        MyApplication.myUser.setPassword(password);
-                        MyApplication.myUser.setE_mail("Vasilis.long@outlook.com");
-
-                        etName.post(() -> {
-                            Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-                            XLog.e(MyApplication.myUser.toString());
-                            finish();
-                        });
-                    } else if ("0".equals(result)) {
+                    if ("0".equals(result)) {
                         etName.post(() -> {
                             Toast.makeText(LoginActivity.this, "登陆失败，请检查账号密码", Toast.LENGTH_SHORT).show();
                             etPassword.setText("");
+                        });
+                    } else {
+                        MyApplication.myUser = JSONObject.parseObject(result, User.class);
+                        etName.post(() -> {
+                            Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                            Logger.d(MyApplication.myUser.toString());
+                            finish();
                         });
                     }
                 }
             }
         });
 
-
     }
 
     @OnClick(R.id.tv_reg)
     public void onClick() {
         Intent intent = new Intent();
-        intent.setClass(this,RegisteredActivity.class);
+        intent.setClass(this, RegisteredActivity.class);
         startActivity(intent);
         finish();
     }

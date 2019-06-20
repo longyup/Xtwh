@@ -15,7 +15,8 @@
 
     <EditText
         android:id="@+id/send_community_ed"
-
+        android:gravity="top"
+        android:minLines="5"
         android:layout_width="350dp"
         android:layout_height="100dp" />
 

@@ -76,20 +76,20 @@ public class ProductFragment extends Fragment implements OnItemClickListener {
         new Thread(() -> {
             String url = MyApplication.HOST + param;
 
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-            try {
-                Response response = MyApplication.client.newCall(request).execute();
-                if (response.isSuccessful() && response.body() != null) {
-                    String json = response.body().string();
-                    if (!"".equals(json)) {
-                        List<Product> productList = JSON.parseArray(json, Product.class);
-                        rvtitlelist.post(() -> {
-                            adapter.refresh(productList);
-                            this.productList = productList;
-                        });
-                    }
+                    Request request = new Request.Builder()
+                            .url(url)
+                            .build();
+                    try {
+                        Response response = MyApplication.client.newCall(request).execute();
+                        if (response.isSuccessful() && response.body() != null) {
+                            String json = response.body().string();
+                            if (!"".equals(json)) {
+                                List<Product> productList = JSON.parseArray(json, Product.class);
+                                rvtitlelist.post(() -> {
+                                    adapter.refresh(productList);
+                                    this.productList = productList;
+                                });
+                            }
                 }
             } catch (IOException e) {
                 e.printStackTrace();

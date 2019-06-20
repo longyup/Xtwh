@@ -24,6 +24,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/XFrame_text_gray"
+        android:background="#2C2C2C"
         />
 </LinearLayout>

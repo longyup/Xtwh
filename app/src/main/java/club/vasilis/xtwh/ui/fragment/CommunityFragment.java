@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSON;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -21,6 +24,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +35,12 @@ import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.CommunityAdapter;
 import club.vasilis.xtwh.application.MyApplication;
-import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
 import club.vasilis.xtwh.domain.Phrase;
-import club.vasilis.xtwh.domain.User;
 import club.vasilis.xtwh.listener.OnItemClickListener;
-import club.vasilis.xtwh.ui.activity.BaseActivity;
-import club.vasilis.xtwh.utils.Util;
+import club.vasilis.xtwh.utils.TimeUtils;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 社区页的fragment
@@ -46,12 +49,7 @@ import club.vasilis.xtwh.utils.Util;
  * @date 2019/4/25 * 12:49
  */
 public class CommunityFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener, OnItemClickListener {
-
-
-    private List<User> userList = new ArrayList<>();
     private List<Community> communityList = new ArrayList<>();
-    private List<Phrase> phraseList = new ArrayList<>();
-    private List<Comment> commentList = new ArrayList<>();
 
     @BindView(R.id.community_fab_send)
     FloatingActionButton fabSend;
@@ -61,25 +59,24 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
 
     private CommunityAdapter adapter;
     private Unbinder unbinder;
+    //当前加载的条数
+    private int offset = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_community, container, false);
         unbinder = ButterKnife.bind(this, view);
 
-        // 初始化数据,后期会换成网络
-        testInit();
-        // 对每项的动态进行判断是否点赞，放在json数据解析后
-        setIsPhrase();
         // 初始化控件
         RecyclerView recyclerView = view.findViewById(R.id.community_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         // 评论功能暂未实现
-        adapter = new CommunityAdapter(communityList, userList);
+        adapter = new CommunityAdapter();
+        adapter.addOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
-
+        refreshHttp("community?method=getInfo");
 
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
@@ -96,130 +93,45 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
         dialog.show();
         final EditText etSend = view.findViewById(R.id.send_community_ed);
         Button btnSend = view.findViewById(R.id.send_community_btn);
-        btnSend.setOnClickListener((v)-> {
-                String text = etSend.getText().toString();
-                Community community = new Community();
-                community.setContent(text);
-                // 获取时间
-                String date = Util.getNowDate();
-                String time = Util.getNowTime();
-                StringBuilder sb = new StringBuilder();
-                sb.append(date)
-                        .append(" ")
-                        .append(time);
-                community.setDate(sb.toString());
-                community.setId(2);
-                community.setPhrase(false);
-                community.setPhraseNum(0);
-                community.setUUID(MyApplication.myUser.getNickName());
-                adapter.update(community);
-                // 关闭对话框
-                dialog.cancel();
+        btnSend.setOnClickListener((v) -> {
+                    String text = etSend.getText().toString();
+                    Community community = new Community();
+                    community.setContent(text);
+                    // 获取时间
+                    String date = TimeUtils.getNowDate();
+                    String time = TimeUtils.getNowTime();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(date)
+                            .append(" ")
+                            .append(time);
+                    community.setDate(sb.toString());
+                    community.setId(2);
+                    community.setPhrase(false);
+                    community.setUUID(MyApplication.myUser.getNickName());
+                    adapter.update(community);
+                    // 关闭对话框
+                    dialog.cancel();
 
-            }
+                }
         );
-
-    }
-
-    private void testInit() {
-        communityList.clear();
-        User admin = new User("123456789", "admin", "admin");
-        userList.add(admin);
-        userList.add(MyApplication.myUser);
-        Community community = new Community();
-        community.setContent("测试测试啊实打实的");
-        community.setDate("03.30 13:52");
-        community.setId(1);
-        community.setPhraseNum(2);
-        community.setUUID("admin");
-        communityList.add(community);
-
-        community = new Community();
-        community.setContent("1111测试测试啊实打实的");
-        community.setDate("03.30 13:56");
-        community.setId(2);
-        community.setPhraseNum(0);
-        community.setUUID("demo");
-        communityList.add(community);
-
-        community = new Community();
-        community.setContent("1111测试测1试啊实打实的");
-        community.setDate("04.01 13:56");
-        community.setId(3);
-        community.setPhraseNum(0);
-        community.setUUID("demo");
-        communityList.add(community);
-
-        community = new Community();
-        community.setContent("1111测试测1试啊实打实的");
-        community.setDate("04.10 13:56");
-        community.setId(4);
-        community.setPhraseNum(0);
-        community.setUUID("demo");
-        communityList.add(community);
-
-
-        community = new Community();
-        community.setContent("22测试测试啊实打实的");
-        community.setDate("04.11 13:56");
-        community.setId(5);
-        community.setPhraseNum(0);
-        community.setUUID("demo");
-        communityList.add(community);
-
-        community = new Community();
-        community.setContent("33测试测试啊实打实的");
-        community.setDate("04.14 13:56");
-        community.setId(6);
-        community.setPhraseNum(0);
-        community.setUUID("demo");
-        communityList.add(community);
-
-
-        community = new Community();
-        community.setContent("55测试测试啊实打实的");
-        community.setDate("04.21 13:56");
-        community.setId(7);
-        community.setPhraseNum(0);
-        community.setUUID("demo");
-        communityList.add(community);
-
-        community = new Community();
-        community.setContent("66测试测试啊实打实的");
-        community.setDate("04.25 13:56");
-        community.setId(8);
-        community.setPhraseNum(11);
-        community.setUUID("demo");
-        communityList.add(community);
-
-        community = new Community();
-        community.setContent("20测试测试啊实打实的");
-        community.setDate("04.27 13:56");
-        community.setId(9);
-        community.setPhraseNum(6);
-        community.setUUID("demo");
-        communityList.add(community);
-
 
     }
 
     /**
      * 对每项的动态进行判断是否点赞
      */
-    private void setIsPhrase() {
+    private void setIsPhrase(List<Community> communityList) {
         for (Community community : communityList) {
+            List<Phrase> phraseList = community.getPhraseList();
             for (Phrase phrase : phraseList) {
-                if (phrase.getCommunityId() == community.getId()) {
-                    if (phrase.getUuid().equals(MyApplication.myUser.getNickName())) {
-                        community.setPhrase(true);
-                    } else {
-                        community.setPhrase(false);
-                    }
+                if (phrase.getUUID().equals(MyApplication.myUser.getUUID())) {
+                    community.setPhrase(true);
                     break;
                 }
             }
         }
     }
+
 
     /**
      * 下拉刷新
@@ -238,8 +150,72 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
      */
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-        refreshLayout.finishLoadMore(2000/*,false*/);//传入false表示加载失败
+       /* String url = MyApplication.HOST + param;
 
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        try {
+            Response response = MyApplication.client.newCall(request).execute();
+            if (response.isSuccessful() && response.body() != null) {
+                String json = response.body().string();
+                if (!"".equals(json)) {
+                    List<Product> productList = JSON.parseArray(json, Product.class);
+                    rvtitlelist.post(() -> {
+                        adapter.refresh(productList);
+                        this.productList = productList;
+                    });
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            rvtitlelist.post(() -> {
+                Toast.makeText(getContext(), "请检查网络是否正常", Toast.LENGTH_SHORT).show();
+            });
+        }
+    }).start();*/
+        refreshLayout.finishLoadMore(2000);//传入false表示加载失败
+
+    }
+
+    /**
+     * 单纯第一次加载用吧
+     *
+     * @param param
+     */
+    public void refreshHttp(String param) {
+        new Thread(() -> {
+            String url = MyApplication.HOST + param;
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+            try {
+                Response response = MyApplication.client.newCall(request).execute();
+                if (response.isSuccessful() && response.body() != null) {
+                    String json = response.body().string();
+                    if (!"".equals(json)) {
+                        communityList = JSON.parseArray(json, Community.class);
+                        setIsPhrase(communityList);
+                        Logger.d(communityList);
+                        Logger.d(MyApplication.myUser);
+                        fabSend.post(() -> {
+
+                            adapter.refresh(communityList);
+                        });
+                    }
+                } else {
+                    fabSend.post(() -> {
+                        Toast.makeText(getContext(), "请检查网络是否正常", Toast.LENGTH_SHORT).show();
+                    });
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                fabSend.post(() -> {
+                    Toast.makeText(getContext(), "请检查网络是否正常", Toast.LENGTH_SHORT).show();
+                });
+            }
+        }).start();
     }
 
     @Override

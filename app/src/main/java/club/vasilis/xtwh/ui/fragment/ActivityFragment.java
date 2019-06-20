@@ -54,10 +54,11 @@ public class ActivityFragment extends Fragment implements OnItemClickListener {
         activityAdapter = new ActivityAdapter();
         activityAdapter.AddOnItemListener(this);
         rv.setAdapter(activityAdapter);
-        inntData();
+        initData();
         swip.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                initData();
                 swip.setRefreshing(false);
             }
         });
@@ -66,7 +67,7 @@ public class ActivityFragment extends Fragment implements OnItemClickListener {
     }
 
 
-    private void inntData() {
+    private void initData() {
         String url = MyApplication.HOST + "activity?method=getJsonActivityAll";
         Request request = new Request.Builder()
                 .url(url)
