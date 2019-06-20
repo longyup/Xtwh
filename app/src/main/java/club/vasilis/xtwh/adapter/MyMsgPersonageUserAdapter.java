@@ -154,7 +154,7 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
      * @return
      */
     private User refreshMsg() {
-        MyApplication.myUser.setAccount("xx");
+//        MyApplication.myUser.setAccount("xx");
         return MyApplication.myUser;
     }
 
