@@ -15,16 +15,38 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.RequestBuilder;
+
+import java.io.IOException;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
+import club.vasilis.xtwh.domain.User;
+import club.vasilis.xtwh.ui.activity.RegisteredActivity;
+import okhttp3.FormBody;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 
     private static final String TAG = "MyMsgPersonageUserAdapt";
+//    private final Context context;
 
-     private String[] userContextTitle;
+//    String
+
+    private String[] userContextTitle;
+
+//    private List<User> userMsgList = MyApplication.myUser;
+
+//    public MyMsgPersonageUserAdapter(String[] userContextTitle,Context context) {
+//        this.userContextTitle = userContextTitle;
+//        this.context = context;
+//
+//    }
 
     public MyMsgPersonageUserAdapter(String[] userContextTitle) {
         this.userContextTitle = userContextTitle;
@@ -49,15 +71,20 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 Toast.makeText(context,"You have clicked view"+userContextTitle[position],Toast.LENGTH_SHORT).show();
 
                 //修改数据
+                EditText et = new EditText(v.getContext());
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("设置"+ userContextTitle[position]);
                 builder.setCancelable(false);
-                builder.setView(new EditText(v.getContext()));
+                builder.setView(et);
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context,"设置"+userContextTitle[position]+"成功!",Toast.LENGTH_SHORT).show();
-//                        BaseActivity.myUser
+                        String msg = et.getText().toString();
+                        System.err.println(msg);
+                        holder.tv_userMsg.setText(msg);
+//                        MyApplication.myUser
+//                        userMsgList.set(userContextTitle[position],msg);
                     }
                 });
 
@@ -68,9 +95,67 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                     }
                 });
                 builder.show();
+                refreshMsg();
+                motifyRequest(refreshMsg());
             }
         });
         return holder;
+    }
+
+    /**
+     * 后台请求
+     * @param motifyUser
+     */
+    private void motifyRequest(User motifyUser) {
+        String url = MyApplication.HOST+"user";
+        //建立请求表单
+        FormBody formBody = new FormBody.Builder()
+                .add("method","motifyMsg")
+                .add("account",MyApplication.myUser.getAccount())
+                .add("nickName",MyApplication.myUser.getNickName())
+                .add("name",MyApplication.myUser.getName())
+                .add("password",MyApplication.myUser.getPassword())
+                .add("sex",MyApplication.myUser.getSex())
+                .add("phone",MyApplication.myUser.getPhone())
+                .add("e_mail",MyApplication.myUser.getE_mail())
+                .add("birthday",MyApplication.myUser.getBirthday())
+                .add("signature",MyApplication.myUser.getSignature())
+                .add("localPlace",MyApplication.myUser.getLocalPlace())
+                .build();
+
+        //添加请求
+        Request request = new Request.Builder()
+                .url(url)
+                .post(formBody)
+                .build();
+        //添加一个线程，用于得到服务器响应的数据
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Response response = null;
+//                try {
+//                    response = MyApplication.client.newCall(request).execute();
+//                    if (response.isSuccessful()) {
+//                        String json = response.body().string().trim();
+//                        int code = JSON.parseObject(json).getInteger("");//获得服务器端的响应数据
+//                        if (code == 1) {
+//                            Toast.makeText(context, "服务器已保存您修改的数据！", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+    }
+
+    /**
+     * 刷新个人信息
+     * @return
+     */
+    private User refreshMsg() {
+//        MyApplication.myUser.setAccount("xx");
+        return MyApplication.myUser;
     }
 
     @Override
