@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -13,6 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +38,8 @@ public class MyMsgFragment extends Fragment {
     LinearLayout myMsgPersonUnlogin;
     @BindView(R.id.my_msg_person_id)
     TextView myMsgPersonId;
+    @BindView(R.id.my_msg_person_iv_head_photo)
+    ImageView myMsgPersonIdIvImg;
 
 
     private Unbinder unbinder;
@@ -46,10 +51,6 @@ public class MyMsgFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_msg, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-
-
-
         //其他内容
 //        initOther();//初始化其他内容数据
         RecyclerView rv_other = view.findViewById(R.id.my_msg_other_rv_content);
@@ -66,6 +67,9 @@ public class MyMsgFragment extends Fragment {
             myMsgPerson.setVisibility(View.VISIBLE);
             myMsgPersonUnlogin.setVisibility(View.GONE);
             myMsgPersonId.setText(MyApplication.myUser.getNickName());
+            if (MyApplication.myUser.getHeadImg() != null && !"" .equals(MyApplication.myUser.getHeadImg())) {
+                Glide.with(this).load(MyApplication.HOST + MyApplication.myUser.getHeadImg()).into(myMsgPersonIdIvImg);
+            }
         } else {
             myMsgPerson.setVisibility(View.GONE);
             myMsgPersonUnlogin.setVisibility(View.VISIBLE);
