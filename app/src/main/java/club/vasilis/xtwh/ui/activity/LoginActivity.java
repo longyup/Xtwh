@@ -83,6 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                         });
                     } else {
                         MyApplication.myUser = JSONObject.parseObject(result, User.class);
+                        if (MyApplication.myUser.getNickName() == null || MyApplication.myUser.getNickName().equals("")){
+                            MyApplication.myUser.setNickName(MyApplication.myUser.getAccount());
+                        }
                         etName.post(() -> {
                             Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
                             Logger.d(MyApplication.myUser.toString());
