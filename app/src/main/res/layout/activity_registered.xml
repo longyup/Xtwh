@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">"
 
     <androidx.appcompat.widget.Toolbar
@@ -11,66 +11,72 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
         android:elevation="5dp"
-        app:title="@string/register"
-        app:titleTextColor="@color/black"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:navigationIcon="@drawable/ic_back"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/register"
+        app:titleTextColor="@color/black" />
 
 
-
-    <EditText
-        android:id="@+id/register_username"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:height="40dip"
-        android:hint="@string/prompt_email"
-        />
+        android:layout_marginTop="50dp">
 
-    <EditText
-        android:id="@+id/register_passwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:height="40dip"
-        android:hint="密码"
-        />
+        <EditText
+            android:id="@+id/register_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/please_input_useid"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/reregister_passwd"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:height="40dip"
-        android:hint="确认密码"
-        />
+        android:layout_marginTop="8dp">
+        <EditText
+            android:id="@+id/register_passwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/please_input_pwd" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/reregister_passwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/please_sure_pwd" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/register_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:height="40dp"
-        android:width="70dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dip"
-        android:text="确定"
-        android:background="?attr/colorPrimary"
-        android:textColor="#FFFFFF"
-        android:textSize="22dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="48dp"
+        android:text="@string/register" />
 
-        />
     <TextView
+        android:id="@+id/register_prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:id="@+id/register_prompt"
         android:gravity="center"
-        android:text="已有账号?返回登录"/>
+        android:text="已有账号?返回登录" />
 
 </LinearLayout>

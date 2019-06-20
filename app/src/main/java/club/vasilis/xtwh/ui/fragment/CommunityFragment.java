@@ -38,7 +38,9 @@ import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.Community;
 import club.vasilis.xtwh.domain.Phrase;
 import club.vasilis.xtwh.listener.OnItemClickListener;
-import club.vasilis.xtwh.utils.TimeUtils;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -97,23 +99,61 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
                     String text = etSend.getText().toString();
                     Community community = new Community();
                     community.setContent(text);
-                    // 获取时间
-                    String date = TimeUtils.getNowDate();
-                    String time = TimeUtils.getNowTime();
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(date)
-                            .append(" ")
-                            .append(time);
-                    community.setDate(sb.toString());
-                    community.setId(2);
-                    community.setPhrase(false);
-                    community.setUUID(MyApplication.myUser.getNickName());
-                    adapter.update(community);
+                    community.setUser(MyApplication.myUser);
+                    community.setDate(System.currentTimeMillis());
+                    updateItem(community);
                     // 关闭对话框
                     dialog.cancel();
-
                 }
         );
+
+    }
+
+    /**
+     * 发布说说的网络请求
+     * @param community
+     */
+    private void updateItem(Community community) {
+        //传JSON应该会更容易。。。
+        String url = MyApplication.HOST + "community";
+        FormBody body = new FormBody.Builder()
+                .add("method","updateItem")
+                .add("UUID",community.getUser().getUUID())
+                .add("date", String.valueOf(community.getDate()))
+                .add("content",community.getContent())
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        MyApplication.client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(getContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful() && response.body() != null) {
+                    int result = Integer.valueOf(response.body().string());
+                    if (result <1) {
+                        fabSend.post(() -> {
+                            Toast.makeText(getContext(), "发布失败，请检查网络", Toast.LENGTH_SHORT).show();
+
+                        });
+                    } else {
+                        community.setId(result);
+                        fabSend.post(() -> {
+                            adapter.update(community);
+                            Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+
+
+                }
+            }
+        });
 
     }
 
@@ -140,7 +180,8 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
      */
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-        refreshLayout.finishRefresh(2000/*,false*/);//传入false表示刷新失败
+        refreshLayout.finishRefresh(1000/*,false*/);//传入false表示刷新失败
+        refreshHttp("community?method=getInfo");
     }
 
     /**
@@ -174,7 +215,7 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
             });
         }
     }).start();*/
-        refreshLayout.finishLoadMore(2000);//传入false表示加载失败
+        refreshLayout.finishLoadMore(1000);//传入false表示加载失败
 
     }
 
@@ -226,8 +267,63 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
 
     @Override
     public void onClick(View v, int position) {
+        int id = v.getId();
+        Community community = communityList.get(position);
+        switch (id){
+            case R.id.community_item_phrase:{
+
+                List<Phrase> phraseList = community.getPhraseList();
+                if (community.isPhrase()){
+                    for (Phrase phrase : phraseList) {
+                        if (phrase.getUUID().equals(MyApplication.myUser.getUUID())){
+                            phraseList.remove(phrase);
+                            phraseItem(true,phrase);
+                            break;
+                        }
+                    }
+                    community.setPhrase(false);
+                    adapter.refreshItem(position,community);
+                }else {
+                    Phrase phrase = new Phrase();
+                    phrase.setCommunityId(community.getId());
+                    phrase.setUUID(MyApplication.myUser.getUUID());
+                    phraseItem(false,phrase);
+                    phraseList.add(phrase);
+                    community.setPhrase(true);
+                    adapter.refreshItem(position,community);
+                }
+                break;
+            }
+        }
+    }
+
+    private void phraseItem(boolean delete,Phrase phrase) {
+        //传JSON应该会更容易。。。
+        String url = MyApplication.HOST + "community";
+        FormBody body = new FormBody.Builder()
+                .add("method","phraseItem")
+                .add("delete",String.valueOf(delete))
+                .add("UUID",phrase.getUUID())
+                .add("communityId",String.valueOf(phrase.getCommunityId()))
+                .build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        MyApplication.client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(getContext(), "请检查网络连接", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+            }
+        });
 
     }
+
 
     @OnClick(R.id.community_fab_send)
     public void onViewClicked() {

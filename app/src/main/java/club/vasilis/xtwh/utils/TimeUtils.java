@@ -2,6 +2,7 @@ package club.vasilis.xtwh.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author Vasilis
@@ -29,9 +30,9 @@ public class TimeUtils {
     /*
      * 将时间戳转换为时间
      */
-    public static String stampToDate(String stamp) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date(Long.valueOf(stamp));
+    public static String stampToDate(long stamp) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ROOT);
+        Date date = new Date(stamp);
         return simpleDateFormat.format(date);
     }
 }

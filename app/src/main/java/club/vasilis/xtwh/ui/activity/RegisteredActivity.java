@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
+import club.vasilis.xtwh.domain.User;
 import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -32,7 +33,7 @@ public class RegisteredActivity extends AppCompatActivity {
     EditText reregister_passwd;
     @BindView(R.id.register_submit)
     Button register_submit;
-    UUID uuid;
+
 
     @BindView(R.id.register_toolbar)
     Toolbar registerToolbar;
@@ -109,12 +110,11 @@ public class RegisteredActivity extends AppCompatActivity {
 
     /**
      * 已有账号，返回登录界面
-     *
      */
     @OnClick(R.id.register_prompt)
     public void onClick() {
         Intent intent = new Intent();
-        intent.setClass(this,LoginActivity.class);
+        intent.setClass(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -126,12 +126,12 @@ public class RegisteredActivity extends AppCompatActivity {
      * @param pwd
      */
     private void postRequest(String account, String pwd) {
-
+        String uuid = getUUID();
         String url = MyApplication.HOST + "user";
         //建立请求表单，添加上传服务器的数据
         RequestBody formBody = new FormBody.Builder()
                 .add("method", "registerA")
-                .add("UUID", getUUID())
+                .add("UUID", uuid)
                 .add("account", account)
                 .add("password", pwd)
                 .build();
@@ -148,15 +148,16 @@ public class RegisteredActivity extends AppCompatActivity {
                 try {
                     response = MyApplication.client.newCall(request).execute();
                     if (response.isSuccessful()) {
-                        String json = response.body().string().trim();
-//                        int code = JSON.parseObject(json).getInteger("");//获得服务器端的响应数据
-//                        if (code == 0) {
-//                            Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
-//                        }
+                        User user = new User();
+                        user.setUUID(uuid);
+                        user.setNickName(account);
+                        MyApplication.myUser = user;
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 Toast.makeText(RegisteredActivity.this, "恭喜您注册成功！", Toast.LENGTH_SHORT).show();
+
                                 finish();
                             }
                         });
@@ -170,10 +171,9 @@ public class RegisteredActivity extends AppCompatActivity {
     }
 
     private String getUUID() {
-        uuid = UUID.randomUUID();
+        UUID uuid = UUID.randomUUID();
         String str = uuid.toString();
-        String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
-        return str + "," + temp;
+        return str.replaceAll("-", "");
     }
 
     private boolean checkEdit() {
