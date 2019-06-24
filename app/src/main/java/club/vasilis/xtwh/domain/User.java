@@ -18,6 +18,31 @@ public class User {
     private String signature;//个性签名
     private String localPlace;//常住地
     private String profile;//个人简历
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public User(String UUID, String account, String headImg, String nickName, String name, String password, String sex, String phone, String e_mail, String birthday, String signature, String localPlace, String idCard) {
+        this.UUID = UUID;
+        this.account = account;
+        this.headImg = headImg;
+        this.nickName = nickName;
+        this.name = name;
+        this.password = password;
+        this.sex = sex;
+        this.phone = phone;
+        this.e_mail = e_mail;
+        this.birthday = birthday;
+        this.signature = signature;
+        this.localPlace = localPlace;
+        this.idCard = idCard;
+    }
+
     private String idCard;
 
 
