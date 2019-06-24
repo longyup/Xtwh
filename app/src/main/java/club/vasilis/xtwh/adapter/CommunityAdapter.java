@@ -86,7 +86,7 @@ public class CommunityAdapter extends RecyclerView.Adapter<CommunityAdapter.View
      * @param community
      */
     public void update(Community community) {
-        this.communityList.add(0, community);
+       // this.communityList.add(0, community);
         size = communityList.size();
         notifyDataSetChanged();
     }

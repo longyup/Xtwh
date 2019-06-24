@@ -35,6 +35,7 @@ import butterknife.Unbinder;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.adapter.CommunityAdapter;
 import club.vasilis.xtwh.application.MyApplication;
+import club.vasilis.xtwh.domain.Comment;
 import club.vasilis.xtwh.domain.Community;
 import club.vasilis.xtwh.domain.Phrase;
 import club.vasilis.xtwh.listener.OnItemClickListener;
@@ -80,6 +81,8 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
         recyclerView.setAdapter(adapter);
         refreshHttp("community?method=getInfo");
 
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setOnLoadMoreListener(this);
         refreshLayout.setRefreshHeader(new ClassicsHeader(getContext()));
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()).setSpinnerStyle(SpinnerStyle.Scale));
 
@@ -101,7 +104,10 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
                     community.setContent(text);
                     community.setUser(MyApplication.myUser);
                     community.setDate(System.currentTimeMillis());
+                    community.setPhraseList(new ArrayList<Phrase>());
+                    community.setCommentList(new ArrayList<Comment>());
                     updateItem(community);
+
                     // 关闭对话框
                     dialog.cancel();
                 }
@@ -111,16 +117,17 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
 
     /**
      * 发布说说的网络请求
+     *
      * @param community
      */
     private void updateItem(Community community) {
         //传JSON应该会更容易。。。
         String url = MyApplication.HOST + "community";
         FormBody body = new FormBody.Builder()
-                .add("method","updateItem")
-                .add("UUID",community.getUser().getUUID())
+                .add("method", "updateItem")
+                .add("UUID", community.getUser().getUUID())
                 .add("date", String.valueOf(community.getDate()))
-                .add("content",community.getContent())
+                .add("content", community.getContent())
                 .build();
 
         Request request = new Request.Builder()
@@ -137,7 +144,7 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful() && response.body() != null) {
                     int result = Integer.valueOf(response.body().string());
-                    if (result <1) {
+                    if (result < 1) {
                         fabSend.post(() -> {
                             Toast.makeText(getContext(), "发布失败，请检查网络", Toast.LENGTH_SHORT).show();
 
@@ -145,6 +152,7 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
                     } else {
                         community.setId(result);
                         fabSend.post(() -> {
+                            communityList.add(0, community);
                             adapter.update(community);
                             Toast.makeText(getContext(), "发布成功", Toast.LENGTH_SHORT).show();
                         });
@@ -191,31 +199,47 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
      */
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-       /* String url = MyApplication.HOST + param;
-
+        Logger.d("上拉加载");
+        String url = MyApplication.HOST + "/community";
+        FormBody body = new FormBody.Builder()
+                .add("method", "getInfo")
+                .add("offset", String.valueOf(offset))
+                .build();
         Request request = new Request.Builder()
                 .url(url)
+                .post(body)
                 .build();
-        try {
-            Response response = MyApplication.client.newCall(request).execute();
-            if (response.isSuccessful() && response.body() != null) {
-                String json = response.body().string();
-                if (!"".equals(json)) {
-                    List<Product> productList = JSON.parseArray(json, Product.class);
-                    rvtitlelist.post(() -> {
-                        adapter.refresh(productList);
-                        this.productList = productList;
-                    });
+        MyApplication.client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                refreshLayout.finishLoadMore(false);//传入false表示加载失败
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful() && response.body() != null) {
+                    String json = response.body().string();
+                    if (!"" .equals(json)) {
+                        List<Community> temp = JSON.parseArray(json, Community.class);
+                        offset += temp.size();
+                        setIsPhrase(temp);
+                        communityList.addAll(temp);
+                        fabSend.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.refresh(communityList);
+                            }
+                        });
+                        refreshLayout.finishLoadMore(true);
+
+
+                    }
+                } else {
+                    refreshLayout.finishLoadMore(false);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            rvtitlelist.post(() -> {
-                Toast.makeText(getContext(), "请检查网络是否正常", Toast.LENGTH_SHORT).show();
-            });
-        }
-    }).start();*/
-        refreshLayout.finishLoadMore(1000);//传入false表示加载失败
+        });
+
 
     }
 
@@ -235,13 +259,13 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
                 Response response = MyApplication.client.newCall(request).execute();
                 if (response.isSuccessful() && response.body() != null) {
                     String json = response.body().string();
-                    if (!"".equals(json)) {
+                    if (!"" .equals(json)) {
                         communityList = JSON.parseArray(json, Community.class);
                         setIsPhrase(communityList);
                         Logger.d(communityList);
                         Logger.d(MyApplication.myUser);
                         fabSend.post(() -> {
-
+                            offset = 21;
                             adapter.refresh(communityList);
                         });
                     }
@@ -269,42 +293,47 @@ public class CommunityFragment extends Fragment implements OnRefreshListener, On
     public void onClick(View v, int position) {
         int id = v.getId();
         Community community = communityList.get(position);
-        switch (id){
-            case R.id.community_item_phrase:{
+        switch (id) {
+            case R.id.community_item_phrase: {
 
                 List<Phrase> phraseList = community.getPhraseList();
-                if (community.isPhrase()){
+                if (community.isPhrase()) {
                     for (Phrase phrase : phraseList) {
-                        if (phrase.getUUID().equals(MyApplication.myUser.getUUID())){
+                        if (phrase.getUUID().equals(MyApplication.myUser.getUUID())) {
                             phraseList.remove(phrase);
-                            phraseItem(true,phrase);
+                            phraseItem(true, phrase);
                             break;
                         }
                     }
                     community.setPhrase(false);
-                    adapter.refreshItem(position,community);
-                }else {
+                    adapter.refreshItem(position, community);
+                } else {
                     Phrase phrase = new Phrase();
                     phrase.setCommunityId(community.getId());
                     phrase.setUUID(MyApplication.myUser.getUUID());
-                    phraseItem(false,phrase);
+                    phraseItem(false, phrase);
                     phraseList.add(phrase);
                     community.setPhrase(true);
-                    adapter.refreshItem(position,community);
+                    adapter.refreshItem(position, community);
                 }
                 break;
             }
         }
     }
 
-    private void phraseItem(boolean delete,Phrase phrase) {
+    /**
+     * 点赞的网络请求
+     * @param delete
+     * @param phrase
+     */
+    private void phraseItem(boolean delete, Phrase phrase) {
         //传JSON应该会更容易。。。
         String url = MyApplication.HOST + "community";
         FormBody body = new FormBody.Builder()
-                .add("method","phraseItem")
-                .add("delete",String.valueOf(delete))
-                .add("UUID",phrase.getUUID())
-                .add("communityId",String.valueOf(phrase.getCommunityId()))
+                .add("method", "phraseItem")
+                .add("delete", String.valueOf(delete))
+                .add("UUID", phrase.getUUID())
+                .add("communityId", String.valueOf(phrase.getCommunityId()))
                 .build();
 
         Request request = new Request.Builder()
