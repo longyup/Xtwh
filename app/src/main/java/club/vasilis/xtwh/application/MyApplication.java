@@ -18,7 +18,7 @@ public class MyApplication extends Application {
     //
   //  public static User myUser;
     public static User myUser = new User("2017002442","null_demo","demo","demo","男","17326080001",
-                       "17326080001@163.com","1998-1-1","个性签名demo","个性简历demo","杭州");
+                       "17326080001@163.com","1998-1-1","个性签名demo","330324199901011234","杭州");
     public static final String HOST = "http://120.76.62.29:8080/10_NULL/";
 
     public static OkHttpClient client = new OkHttpClient.Builder()

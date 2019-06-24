@@ -73,14 +73,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/my_msg_personage_user_reset_pwd"
+            android:id="@+id/my_msg_personage_user_motify_msg"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="60dp"
             android:textSize="20sp"
             android:gravity="center_vertical"
             android:textColor="#000"
-            android:text="修改密码"
+            android:text="确认修改信息"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp" />
 

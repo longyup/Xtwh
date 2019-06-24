@@ -15,30 +15,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alibaba.fastjson.JSON;
-import com.bumptech.glide.RequestBuilder;
-
-import java.io.IOException;
-import java.util.List;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import club.vasilis.xtwh.R;
 import club.vasilis.xtwh.application.MyApplication;
 import club.vasilis.xtwh.domain.User;
-import club.vasilis.xtwh.ui.activity.RegisteredActivity;
 import okhttp3.FormBody;
 import okhttp3.Request;
-import okhttp3.Response;
 
 public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersonageUserAdapter.ViewHolder> {
 
     private static final String TAG = "MyMsgPersonageUserAdapt";
 //    private final Context context;
 
-//    String
+    String[] users = new String[]{MyApplication.myUser.getPassword(),MyApplication.myUser.getNickName(),MyApplication.myUser.getName(),
+                                    MyApplication.myUser.getSex(),MyApplication.myUser.getPhone(), MyApplication.myUser.getE_mail(),MyApplication.myUser.getBirthday(),
+                                    MyApplication.myUser.getSignature(),MyApplication.myUser.getIdCard(),
+                                    MyApplication.myUser.getLocalPlace()};
+
 
     private String[] userContextTitle;
+
+    private View view;
 
 //    private List<User> userMsgList = MyApplication.myUser;
 
@@ -56,7 +56,7 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,final int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_msg_personage_use_content,viewGroup,false);
+        view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_msg_personage_use_content,viewGroup,false);
         final ViewHolder holder = new ViewHolder(view);
         //点击事件
 
@@ -67,8 +67,8 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 final Context context = v.getContext();
                 final int position = holder.getAdapterPosition();
                 //测试
-                Log.e(TAG, "onClick: "+"You have clicked view"+userContextTitle[position]);
-                Toast.makeText(context,"You have clicked view"+userContextTitle[position],Toast.LENGTH_SHORT).show();
+//                Log.e(TAG, "onClick: "+"You have clicked view"+userContextTitle[position]);
+//                Toast.makeText(context,"You have clicked view"+userContextTitle[position]+position,Toast.LENGTH_SHORT).show();
 
                 //修改数据
                 EditText et = new EditText(v.getContext());
@@ -79,12 +79,13 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context,"设置"+userContextTitle[position]+"成功!",Toast.LENGTH_SHORT).show();
-                        String msg = et.getText().toString();
-                        System.err.println(msg);
-                        holder.tv_userMsg.setText(msg);
-//                        MyApplication.myUser
-//                        userMsgList.set(userContextTitle[position],msg);
+                        if (position != 0){
+                            Toast.makeText(context,position+"设置"+userContextTitle[position]+"成功!",Toast.LENGTH_SHORT).show();
+                            String msg = et.getText().toString();
+                            System.err.println(msg);
+                            holder.tv_userMsg.setText(msg);
+                            setMotifyMsg(position,msg,v);
+                        }
                     }
                 });
 
@@ -95,11 +96,65 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                     }
                 });
                 builder.show();
-                refreshMsg();
-                motifyRequest(refreshMsg());
+//                refreshMsg();
+//                motifyRequest(refreshMsg());
             }
         });
         return holder;
+    }
+
+
+    private void setMotifyMsg(int position, String msg, View v) {
+        switch (position){
+            case 0:
+                Toast.makeText(v.getContext(),"修改了头像",Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                MyApplication.myUser.setNickName(msg);
+                break;
+            case 2:
+                MyApplication.myUser.setName(msg);
+                break;
+            case 3:
+                MyApplication.myUser.setSex(msg);
+                break;
+            case 4:
+                MyApplication.myUser.setPhone(msg);
+                break;
+            case 5:
+                MyApplication.myUser.setE_mail(msg);
+                break;
+            case 6:
+                MyApplication.myUser.setBirthday(msg);
+                break;
+            case 7:
+                MyApplication.myUser.setSignature(msg);
+                break;
+            case 8:
+                MyApplication.myUser.setIdCard(msg);
+                break;
+            case 9:
+                MyApplication.myUser.setLocalPlace(msg);
+                break;
+            case 10:
+                MyApplication.myUser.setPassword(msg);
+                break;
+        }
+    }
+
+    private void printMyUser(User user) {
+        System.err.println("myuser的信息");
+        System.err.println("acc: "+user.getAccount());
+        System.err.println("nickname:"+user.getNickName());
+        System.err.println("name: "+user.getName());
+        System.err.println("pwd"+user.getPassword());
+        System.err.println("sex: "+user.getSex());
+        System.err.println("phone: "+user.getPhone());
+        System.err.println("e_mail: "+user.getE_mail());
+        System.err.println("birthday: "+user.getBirthday());
+        System.err.println("signa: "+user.getSignature());
+        System.err.println("idcard:"+user.getIdCard());
+        System.err.println("place"+user.getLocalPlace());
     }
 
     /**
@@ -120,6 +175,7 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 .add("e_mail",MyApplication.myUser.getE_mail())
                 .add("birthday",MyApplication.myUser.getBirthday())
                 .add("signature",MyApplication.myUser.getSignature())
+                .add("idcard",MyApplication.myUser.getIdCard())
                 .add("localPlace",MyApplication.myUser.getLocalPlace())
                 .build();
 
@@ -149,24 +205,21 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
 //        }).start();
     }
 
-    /**
-     * 刷新个人信息
-     * @return
-     */
-    private User refreshMsg() {
-//        MyApplication.myUser.setAccount("xx");
-        return MyApplication.myUser;
-    }
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
         //个人信息
         switch (i){
             case 0:
+                //如果没有头像，设置为默认头像
                 viewHolder.iv_userHead.setVisibility(View.VISIBLE);//显示头像
-                viewHolder.iv_userHead.setImageResource(R.drawable.head);
                 viewHolder.tv_userMsg.setVisibility(View.INVISIBLE);//隐藏tv
+                if (MyApplication.myUser.getHeadImg() != null){
+                    Glide.with(view).load(MyApplication.myUser.getHeadImg()).into(viewHolder.iv_userHead);
+                }else {
+                    viewHolder.iv_userHead.setImageResource(R.drawable.head);
+                }
+
                 break;
 
             case 1:
@@ -183,15 +236,22 @@ public class MyMsgPersonageUserAdapter extends RecyclerView.Adapter<MyMsgPersona
                 break;
             case 5:
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getE_mail());
-            break;case 6:
+                break;
+            case 6:
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getBirthday());
             break;case 7:
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getSignature());
                 break;
             case 8:
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getProfile());
-            break;case 9:
+                break;
+            case 9:
                 viewHolder.tv_userMsg.setText(MyApplication.myUser.getLocalPlace());
+                break;
+            case 10:
+//                viewHolder.tv_userMsg.setText("");
+                viewHolder.iv_userHead.setVisibility(View.INVISIBLE);//显示头像
+            //    viewHolder.tv_userMsg.setVisibility(View.INVISIBLE);//隐藏tv
                 break;
         }
 
